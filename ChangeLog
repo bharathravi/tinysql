@@ -1,0 +1,333 @@
+Changes to tinySQL
+
+2002-10-25: 
+    * Expression take care about operator precedence. Higher operator levels
+      are evaluated first.
+      AND, OR        = Level 0
+      EQUALS, GT, LT = Level 1
+      +,-            = Level 2
+      *,/            = Level 3
+
+2002-04-08:
+		* BUGFIX: Edson Alves Pereira discovered a bug in tinySQLPrepeared
+		  statement: when querying resultsets the old code throwed 
+			NullPointerExceptions. The local variable statement, which exists
+			in both tinySQLStatement and tinySQLPrepared statement was not
+			shared between the instances (was private in both classes).
+			Now this variable is declared as property with the getter-/setter
+			functions to share the variable among the instances. The testfile
+			tinySQL_tests.java covers this bug.
+
+2002-03-24:
+    * Fixed the bug in dbfFileDriver, which caused all inserts to fail
+      with a EOFException. The insertRow () function took the fileposition
+      of the insert row as the new insert row, causing all subsequent reads
+      for this (imaginary) row to fail.
+    * OPEN ISSUE: The function isDeleted() reads a row on select if it is not
+      known whether the row is deleted. If the row is not deleted, the
+      next call to getRow() reads the row again. This is not a crashing bug,
+      but it is a performance leak and considered buggy behaviour.
+    * OPEN ISSUE: If more than one connection accesses a datadirectory, there
+      will be clashes between the table-management of the connections. Only
+      one connection can have an open table at a certain time. To resolve this,
+      some locking mechanism or cooperation between the concurring connections
+      needs to be implemented.
+      
+2002-03-23:
+    * BugFix in Parser: The parser raised a NullPointerException if a 
+      numeric column definitions contained only a length-value.
+    * textFileTable does now throw exceptions on too large values in columns
+    * textFileTable has now quoting support, which is needed to use the HTML 
+      or CSV table capabilities introduced on 2002-03-23. See textTables.txt 
+      for more details.
+    * Inserting behaviour for dbfFileTable and textFileTable can now be 
+      customized. A insert does no longer create new rows, if the table 
+      contains enough deleted rows to overwrite.
+    * TextFileDriver has a new delete property. Deleting of rows can now be 
+      disabled using "config.delete=none" as property. The use of a physical 
+      delete-row can be suppressed using the property "config.delete=pack". 
+      All deleted rows will be cached and the table will be automaticly 
+      compressed using "COMPACT TABLE". "config.delete=default" restores
+      the old behaviour, which uses a delete column in every row. 
+      See textTables.txt for more details.
+    * The parser has been changed to support ORDER BY. BEWARE: This does 
+      only enable the parser to accept an ORDER BY in SELECT statements. 
+      There is no ORDER BY support implemented at this time.
+    * tinySQL.get_tinySQL() is replaced by two new functions 
+      "createDatabaseEngine" and "getDatabaseEngine". The old get_tinySQL 
+      created a new tinySQL-Object everytime it was called.
+    * tinySQLTables are now closed, when an exception is thrown on creation 
+       time.
+    * textFileDriver got support for readOnly tables using the property
+      "readonly=true".
+    * textFileDriver now uses an rowPrototype for creating insertRows.
+    * All tables opened by an connection are now closes on Connection.close().
+      The tinySQL-Engine of a connection now holds a reference to the
+      creating connection. 
+      
+2002-03-18:
+    * It seems that the March-16 version does not compile, because a
+      function in textFileConnection does now throw an tinySQLException.
+      Sometimes it seems wise to delete the bin-directory before checking
+      the correctness of a build.
+    * The documentation of textFileDriver has been updated to warn the
+      user of using the experimental features.
+
+2002-03-16:
+    * One bug made it through. textFile-table calculated a wrong row count
+      when it contains only one row. Its fixed now. A new test has been added
+      to reflect that case in file TestMDA.java . 
+    * DateConversion in dbfFile did not convert dates properly
+    * textFileDriver has now a DatabaseMetaData-Object that does return
+      information on tables and columns. The getColumns() function has been
+      moved from dbfFileDatabaseMetaData to tinySQLMetaData. tinySQLMetaData
+      is now abstract, as well as tinySQLConnection.getMetaData().
+      The tinySQLConverter has been declared abstract as well, tinySQL does
+      not make any assumtions of native data anymore.
+    * textFileDriver has a some new properties to configure the tables layout.
+      You may configure it as classical tinySQL-Table, as CSV or as
+      HTML table or as something else. 
+      Please see textTables.txt for more details.
+      
+
+2002-03-15:
+    * A couple of error resolved in textFileDriver. The driver uses now
+      a byte[] as working data. A converter is used to convert data into
+      the array.
+    * Uses Property encoding to support non-ascii charsets. "H‰gar Boﬂ" is
+      now stored correctly in the tables. The property defaults to Cp1252.
+    * There is a TestText example for testing the driver. It is a stripped
+      down version of TestDbf. For this version, it completes without any
+      problems. 
+    * insertRow and updateRow are changed to write a complete row into
+      the file for both dbfFileTable and textFileTable. The previous versions
+      wrote a inserted row 2 times, first they created an empty row and
+      then updated this row. Update copied the contents of tsRawRow into
+      a new byte array. As tsRawRow does contain a complete row as native data,
+      the row can be directly written to the file. 
+      
+    ! OpenIssues: 
+      - textFileDriver has no complete support for DatabaseMetaData.
+      - no date support for textFiles yet
+      - no support for AlterTableRenameColumn in textFile
+      - there no way to store encoding information in textFile
+
+2002-03-13:
+    * Error in TextFileDriver and dbfFileDriver: now throws exception
+      on invalid url
+    * Error in TextFileRow: error in nativeGet: byte array changed into
+      char array to resolve ArrayStoreException on first insert.
+      
+2002-03-06:
+    * Timestamp and Integer are now supported as datatypes.
+    * new Property for dbase tables: tabletype
+      see dbase.txt for details
+    * documentation for supported tabletypes and datatypes completed.
+      Not every tabletype supports all datatypes. TinySQL enforces 
+      correct datatypes by using the typeflag. See the documentation
+      which datatypes are supported for a particular table type.
+      Btw. the documentation may be not correct, it simple tells what
+      tinySQL (and me) believes in datatype support. It may be wrong,
+      but there almost no complete documentation at all. If there
+      is an error, report the bug to "tinysql@as220.com"
+    * BUG: the handling of update rows was not correct. At least dbfFileTable
+      assumed the updateRow to be in the same order as the physical row.
+      The bug is fixed now.
+
+2002-03-01:
+  Overview:
+  ----------------
+    * the JavaCUP parser for tinySQL has been replaced by a JavaCC model.
+      The new parser comes with support for all JDBC-Datatypes, the ODBC-
+      Minimum grammar is implemented. See the parser.txt for more informations
+      on the parser.
+    * tinySQL has changed the way a sql statement is parsed and executed.
+      The structure of tinySQL has been altered to distribute functionality
+      over the objects. 
+      see backend.txt has more details.
+    * The backend of the database has been rewritten to support objects
+      instead of strings. The standard JDBC-Objects are passed as data 
+      between the various Classes and Methods. Converter are introduced
+      to translate between JDBC and Native object-form.
+      See backend.txt for details
+    * The dbase driver has been updated to implement dbase-access in a more
+      standard-related way. see dbase.txt for more details.
+    * The textFileDriver has now support for all commands except rename column.  
+    * PreparedStatement does no longer create sql-strings. It uses precompiled
+      statement objects for execution.
+    * Statement and PreparedStatement support batch updates.
+    * new Packages: ORG.as220.tinySQL.sqlparser (tree elements for compiled
+      statements) and ORG.as220.tinySQL.parser (the JavaCC generated parser)
+    * Introduced a new Log-System wich uses the DriverManager to print 
+      log messages
+      
+2002-02-15:
+  Overview:
+  ----------------
+    * started a changelog
+    * created new test-file: MassInsertUpdate to show performance growth :)
+    * all tinySQL-Drivers are now capable to use properties.
+    * dbfFileDriver uses the encoding property to encode strings in a non-
+      static way
+    * dbfTable caches updates to columns
+    * restructured the dbf-parts of tinySQL to properly assign responsibilities
+      to the objects.
+    
+  Detailed report:
+  ----------------
+    * org.as220.tinySQL.Utils
+          o Removed the field encode.
+            Encoding is now defined in dbf-Properties in property "encoding"
+          o forceToSize-functions now get their encoding by parameter.
+    * org.as220.tinySQL.tsRow
+      changed class access modifier to public
+    * org.as220.tinySQL.tsResultSet
+          o added function close()
+            From now on resultsets are no longer implicitly closed when the
+            last row is read. if the result's row count is greater than the
+            defined fetchsize for the resultset, the resultset won't get closed
+            until it's garbage collected or fully read with ResultSet.nex ().
+            The open resultset will prevent writing/opening of the file using
+            an different dbfFileTable-object. ResultSet and all used tables
+            will now be closed when ResultSet.close() is called.
+          o forceToSize-functions now get their encoding by parameter.
+    * org.as220.tinySQL.tsColumn
+          o added accessor-functions for properties
+    * org.as220.tinySQL.tinySQLTable
+          o added function getColumnDefintion
+          o added function getColumnNames
+            needed for fucntion selectStatement.
+          o removed column_info hashtable
+            The beast contains tsColumn object in dbfFileTable and String[] in
+            textFileTable, so it can't be used securely in tinySQL-class. The
+            structure moved to textFileTable and into DBFHeader.
+    * org.as220.tinySQL.tinySQLStatement
+      Unchanged in code, added comments
+    * org.as220.tinySQL.tinySQLResultSetMetaData
+      Unchanged
+    * org.as220.tinySQL.tinySQLResultSet
+          o close()
+            Forwards the call to the internal tsResultSet to close all open
+            tables.
+    * org.as220.tinySQL.tinySQLPreparedStatement
+      Fixed: in static initialisation, the simpleDateFormat has not been
+      initialized.
+    * org.as220.tinySQL.tinySQLException
+      Field inner changed to private.
+    * org.as220.tinySQL.tinySQLDriver
+          o getConnection ()
+            Extended function to take an additional properties parameter.
+            Passes properties to the drivers and connections.
+          o made function acceptsURL(String) abstract.
+            Every class of driver has to create an own acceptsURL, as there may
+            be multiple drivers that inherit from tinySQLDriver without an own
+            acceptsURL implementation.
+    * org.as220.tinySQL.tinySQLDatabaseMetaData
+      Unchanged
+    * org.as220.tinySQL.tinySQLConnection
+          o Constructor
+            Takes an additional parameter (properties).
+          o new Function: getProperties ()
+            queries the properties for this connection.
+    * org.as220.tinySQL.tinySQL
+          o contSelectStatement
+            This function no longer closes resultsets when the last row is
+            read. ResultSet are closed when ResultSet.close () is called.
+          o changed functions to reflect removing of tinySQLTable-member
+            "column_info"
+          o sqlexec ()
+            declared this function as private and deprecated. should be
+            removed, as it will crash anyways.
+    * org.as220.tinySQL.textFileTable
+          o column_info
+            Changed the structure of column_info, it contains now tsColumn-
+            objects instead of an String[].
+          o from tinySQLTable: added Function: getColumnNames
+          o from tinySQLTable: added Function: getColumnDefinitions
+    * org.as220.tinySQL.textFileDriver
+          o acceptsURL
+            moved from tinySQLDriver into this class
+          o from tinySQLDriver: added Properties to getConnection
+    * org.as220.tinySQL.textFileDriver
+          o from tinySQLConnection: added Properties to getConnection
+    * org.as220.tinySQL.textFile
+      unchanged
+    * org.as220.tinySQL.testTextFile
+      unchanged
+    * org.as220.tinySQL.sym
+      unchanged
+    * org.as220.tinySQL.StreamFilter
+      unchanged
+    * org.as220.tinySQL.StatementParameter
+      unchanged
+    * org.as220.tinySQL.scanner.lex
+      unchanged
+    * org.as220.tinySQL.parser
+      manualy changed parser to support tsColumnAccessors
+    * org.as220.tinySQL.ParameterPosition
+      unchanged
+    * org.as220.tinySQL.DBFHeader
+      Responsibility for this class:
+      Create, write, read and change the dbase-header of an particular file.
+      This class is the only place where the header is maniplated.
+      There are 2 ways to create an header. If you have an existing dbase-file,
+      you will create an header-object by passing an RandomAccessFile to the
+      constructor. The header of the file is read in and the data is set up.
+      The header-structure is now unchangable. The only field to change is the
+      "number of records" (and in case of ALTER_TABLE_RENAME_COL the names of
+      the column definitons).
+      To change the number of records use the updateNumberOfRecords method. To
+      get the column definiton use getFields, getColumnInfo or the
+      getColumnDefiniton (String columnName) methods.
+      The second way to create an header, is to use the DBFHeader(int
+      numFields, int recordLength, String encoding) constructor, call the
+      create() function to create the file, set the column definitions and
+      write the header with both write*Header functions. Don't forget to close
+      the file. :)
+      To use the header in an dbfFileTable, you have to close the header
+      definition and open the newly created file as an regular empty dbase-file
+      (aka "Way 1").
+    * org.as220.tinySQL.dbfFileTable
+      Responsibility:
+      Read and update the data rows and columns of an particular table. This
+      object is not responsible for reading the header, or creating/querying
+      column definitions.
+      First, I cleaned up the structure of the file a bit. I removed all static
+      functions, as they were never needed. All functions had been called from
+      within the object, with parts of the object's state as parameters.
+      Everything code regarding column_info has been removed, as column
+      information is part of dbfHeaders responsibility.
+      ReadAccess is done in function _readUpdateRow () which reads the current
+      row (field currentRow contains the current row number). _readUpdateRow
+      reads a complete row into memory. _readUpdateRow reads in an byte array,
+      which is not really suitable for further processing. So _readRow
+      translates the bytes into an String using the current encoding.
+      There are 2 functions that will do write to the file: The first is in
+      writeUpdatedRow () - If the row has changed it is written back to disk
+      before the next row is read in. This simple caching cut writing times
+      down to a third compared to previous uncached writes. The second function
+      is in InsertRow(). InsertRow will append an empty record to the end of
+      the file and set the currentRecordNumber to that record.
+      If you create the table in readOnly mode or you have no write access to
+      the dbf-table-file every attemp to write will throw a tinySQLException.
+      ReadOnly mode is enabled in dbfFileConnection.
+    * org.as220.tinySQL.dbfFileDriver
+      Changed to support properties.
+    * org.as220.tinySQL.dbfFileDatabaseMetaData
+      Changed to reflect changes to tsColumn. Properties of tsColumn are no
+      longer set directly. Uses getter/setter functions instead.
+    * org.as220.tinySQL.dbfFileConnection
+      Changed to support properties. The property "encoding" specifies the used
+      encoding for dbase files. If the property is not set, it defaults to
+      "Cp1252" as this was the old value in Utils.encode.
+      You may put the whole database in readonly mode using the setReadOnly ()
+      function.
+    * org.as220.tinySQL.dbfFile
+      Responsibilities:
+      Execute sql-commands. Do not mess up dbfHeader :)
+      I changed the ALTER_TABLE-functions a bit, to reflect the need for the
+      new responsibilities. The ALTER_TABLE-functions do no longer access the
+      file structures directly, they use dbfHeader and dbfFileTable-functions
+      to complete the task. You will see, they are easier to understand now.
+      dbfFile is now capable of using properties. Currently the only property
+      used is the encoding-property. You may put dbfFile in readonly mode.

@@ -1,0 +1,119 @@
+The parser
+------------------
+
+Implemented functionality
+---------------------------
+The parser is a case insensitive SQL-Parser created with JavaCC.
+You will find the definition for the parser in the directory 
+src/ORG/as220/tinySQL/parser as file TinySQLParser.jj
+
+The parser recognizes all JDBC Datatypes. It supports expressions
+and most operations. It does not recognize functions and will fail
+if they are contained in a statement. The operators IN, BETWEEN and 
+NBETWEEN are not yet supported.
+
+Supported Types
+---------------------------
+The parser supports all JDBC-Datatypes.
+
+NUMERIC, DECIMAL and FLOAT are considered numeric types and take
+ size and decimals definitions
+ 
+CHAR, VARCHAR, LONGVARCHAR, BINARY, VARBINARY, LONGVARBINARY, CLOB and BLOB
+are considered character/byte ranges and take a size operator only.
+
+INT(EGER), BIGINT, TINYINT, SMALLINT, REAL, DOUBLE, DATE, TIME, TIMESTAMP,
+BIT, BOOLEAN are considered simple types and accept no size declarations at
+all.
+
+
+Expressions:
+----------------------------
+Expressions are simple computional terms.
+
+LValue =   (quoted) Identifier
+         | String literal
+         | numeric literal
+         | integers
+         | "?"
+         | "null"
+         | "(" Expression ")"
+         
+Expression = Lvalue [ operator LValue ]*
+Operator   = "+" | "-" | "*" | "/" | "=" | 
+             "==" | "!=" | "<>" | 
+             "<=" | ">=" | ">" | "<" |
+             "and" | "or" | 
+             "between" | "nbetween" | "like"
+
+* between, nbetween and like are not yet implemented and will not work
+  the way they are currently implemented.
+
+
+
+Supported statements
+---------------------------
+
+ALTER CREATE TABLE ....
+
+Alters a existing table to match the new specifications. 
+Columns with equal names are not lost and will be converted into the 
+new column. Columns not in both tables are added or removed from
+the table.
+
+ALTER TABLE tablename ADD [COLUMN] column_declaration
+
+Adds a new column to the table, the column is filled with empty values.
+
+ALTER TABLE tablename DROP [COLUMN] column_name [, column_name]*
+
+Removes the columns from the table.
+
+ALTER TABLE tablename RENAME [COLUMN] columnname [TO] newname
+
+Renames the columns in the table.
+
+CREATE TABLE tablename "(" columndefinition")" , "(" columndefinition ")"*
+columndefinition:= name type [ "(" size [ "," decimals ] ")" [ NULL | NOT NULL ]
+
+creates a table using the given column definitions. If the table is 
+declared to contain null values, execution of the statement may fail if
+the database does not support null values for that column type
+
+COMPACT TABLE tablename
+
+Removes all unused and deleted rows from a table. This shrinks tables
+to the real used space.
+
+DELETE FROM tablename WHERE expression
+
+Removes all rows in the table where the expression evaluates to true.
+
+DROP TABLE [ IF EXISTS ] tablename
+
+Removes the table from the database. If the "IF EXISTS" clause is set,
+no error is raised if the table was not found, and no action is taken
+on execute.
+
+INSERT INTO tablename SET colname=expression ["," colname=expression ]*
+INSERT INTO tablename ( column ["," column]* )
+       VALUES (expression ["," expression ] ) 
+               [, (expression ["," expression ] ) ]
+INSERT INTO tablename SELECT ...
+
+Inserts one or more rows into a table. The values may contain expressions,
+or may retrieved by a SELECT statement.
+
+
+SELECT [ALL|DISTINCT] expression [AS name] ["," expression [AS name] ]*
+  FROM tablename [AS tablealias] ["," tablename [AS tablealias] ]*
+  WHERE expression
+  ORDER BY expression ["," expression]*
+  
+Queries the database and retrieves a result set.
+
+
+UPDATE tablename SET colname=expression ["," colname=expression ]*
+
+updates a row in a table.
+

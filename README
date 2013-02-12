@@ -1,0 +1,288 @@
+=============
+What is this?
+=============
+
+tinySQL is a minimal SQL engine written in 100% Java It
+cannot be networked, so you can't use it in applets or
+distributed applications. It has a simple data engine that
+does not take advantage of indexes, so you shouldn't use it
+on large data sets.  
+
+However, if you're looking for an SQL engine for small data
+sets that is free, supports some SQL and JDBC, you've come
+to the right place! Here are the SQL statements that tinySQL
+supports:
+
+SELECT (with joins)               joins are buggy in dBase
+UPDATE
+INSERT
+DELETE
+CREATE TABLE
+DROP TABLE
+ALTER TABLE xx ADD coldef                  dBase only
+ALTER TABLE xx DROP [COLUMN] col           dBase only
+ALTER TABLE xx RENAME [COLUMN] foo TO bar  dBase only
+WHERE                             only AND is supported
+
+See TestDbf.java for many examples using the above syntax.
+Invoke it with  'java TestDbf'
+
+There are no indices, and the SELECT statement is very
+limited (for example, no aggregate functions, no nested
+queries).
+
+The keywords (SELECT etc) are case insensitive, so
+'Select' and 'SELECT' and 'select' are all the same.
+
+Although tinySQL started out as a tool for learning how to
+process SQL statements and write a JDBC driver, it has
+evolved quite a bit. It's still rough around certain edges,
+but if you're willing to occasionally dive into the (100%
+Java) code, it will be well worth your time.
+
+And if tinySQL is missing a feature you need, you are
+welcome to add that feature in!
+
+=============================
+Acknowledgement and Copyright
+=============================
+
+tinySQL, version 0.90 (Alpha) July 1999
+Copyright (c) 1996, Brian Jepson bjepson@jepstone.net
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+
+CUP portions, especially the java_cup/ subdirectory,
+copyright Scott Hudson. See:
+
+  http://www.cs.princeton.edu/~appel/modern/java/CUP/
+
+for licensing information and other information about CUP.
+
+A lot of the JDBC code is based on or directly taken from George
+Reese's (borg@imaginary.com) mSQL driver.
+
+So, I'd have to say:
+
+Portions of this package Copyright (c) 1996 George Reese
+
+============
+Requirements
+============
+
+If you have JDK 1.2.something or 1.3, you should be ok. I have no
+idea how to use tinySQL with one of those weird visual
+environments from Symantec or Microsoft. If your JDK can
+support a CLASSPATH, and is fully compliant with JDK 2, I
+don't see why this shouldn't work.
+
+To use tinySQL with JDK 1.1.x, there are three possibilities:
+
+1) you need to acces an older version from cvs,
+   taged with ´LAST_JDK_1_X_VERSION´:
+
+    cvs checkout -r LAST_JDK_1_X_VERSION tinySQL
+
+   Ask Brian Jepson <bjepson@home.com> for cvs access,
+   you need to set CVSROOT in your environment and get a
+   login name with a password.
+
+2) Get the precompiled *.class files (or tinySQL.jar).
+   You can develop your own application with JDK 1.1.x
+   using these binaries.
+   Note that the examples TestDbf.java QueryDbf.java etc.
+   compile well with JDK 1.1.x and with JDK 2.x
+
+3) Occasionally, we'll release a patch to support JDK 1.1.
+   Check the tinySQL web page.
+
+==================
+Using this package
+==================
+
+You should be able to use tinySQL just like any other JDBC
+driver. Simply add tinySQL.jar to your CLASSPATH.
+
+Here's how a UNIX sample installation might go:
+
+  # tar xvfz tinySQL-0.70.tar.gz
+  # cd tinySQL
+
+Test it:
+  # java -jar tinySQL.jar
+
+  This should display a demo session based on TestDbf.java
+
+  # other examples (see examples directory for source code):
+  # java -cp tinySQL.jar  TestDbf
+  # java -cp tinySQL.jar  tinySQLtest
+  
+Test it with CLASSPATH=tinySQL.jar:
+  # cd tinySQL
+  # java TestDbf
+
+or on Windows NT or 95:
+
+  C:\DOS> unzip tinySQL-0.70.zip
+  C:\DOS> cd tinySQL
+  C:\DOS\tinySQL> java -jar tinySQL.jar
+
+(make sure you use a zip program that understands long file
+names!!!)
+
+To integrate tinySQL into your own code look a the examples.
+Load the JDBC driver like:
+
+    Class.forName("ORG.as220.tinySQL.dbfFileDriver");
+    Connection con = DriverManager.getConnection("jdbc:dbfFile:.", "", "");
+    ...
+
+
+The Text File Driver
+====================
+
+To use tinySQL as a JDBC driver, you need to know two
+things. First, you will need to issue the Class.forName()
+method call, as required by all JDBC drivers:
+
+  Class.forName("ORG.as220.tinySQL.textFileDriver").newInstance();
+
+Secondly, you will need to know the JDBC URL for tinySQL,
+which is:
+
+  jdbc:tinySQL
+
+The tinySQL URL does not include a hostname, because it is
+not a data server. It does not include a database name,
+because each user only gets one database, under which they
+can create as many tables as they want.
+
+If you're interested, the database directory is named
+.tinySQL, and is created in your home directory.
+
+The DBF File Driver
+===================
+
+The DBF file driver is included along with this package,
+it conforms to 
+
+     http://www.apptools.com/dbase/faq/qformt.htm
+
+You can load the driver with:
+
+  Class.forName("ORG.as220.tinySQL.dbfFileDriver").newInstance();
+
+And the URLs for this driver look like:
+
+  jdbc:dbfFile:.
+
+The last component of the URL instructs the driver as to where it
+should look for DBF files. In this case, it is ., the current
+working directory.
+
+Also, the DBF files should have an uppercase extension on case-
+sensitive operating systems, as in people.DBF.
+
+Examples how to use this driver is included as TestDbf.java.
+Study this file for allowed SQL syntax.
+
+An example to query dBase files is QueryDbf.java:
+    cd examples
+    java -cp ../tinySQL.jar QueryDbf "SELECT * FROM people"
+
+Note that all keywords and column names are case sensitive.
+
+Note that the performance for dBase is not very good,
+to query of 1000 tuples you may have to wait 1 second.
+See the performance hints when invoking 'java TestDbf'.
+
+International Code pages:
+    The encoding is set to "Cp1252",
+    which is the '8 bit Windows Multilingual'.
+    This should be OK for Western Europe and South America
+    You can adjust it in the file Utils.java (you need to recompile)
+
+    Note that Unicode is not supported, due to JLex (the lexical analyzer)
+    which can't handle Unicode.
+
+
+======================
+Compiling this package
+======================
+
+  Download ant from http://jakarta.apache.org/ant/
+  and set your PATH and CLASSPATH to include the ant stuff.
+
+  Change to the tinySQL root directory (where build.xml lies) and type
+
+    ant
+
+  This compiles tinySQL.
+  Note that the build.xml assumes that tinySQL is installed
+  under
+
+    $HOME/tinySQL
+
+  If you have installed tinySQL on another place, please adjust
+  the line
+
+    <property name="tinySQL_home" value="${user.home}/tinySQL"></property>
+
+  in build.xml accordingly.
+
+  Test it:
+
+    java -jar tinySQL.jar
+
+
+=======
+Support
+=======
+
+There is a tinySQL mailing list. To subscribe, send a
+message containing the word "SUBSCRIBE" to:
+
+  tinysql-request@as220.org
+
+To unsubscribe, send a message containing the word
+"UNSUBSCRIBE" to that address.
+
+To view the archive please consult:
+
+  http://www.as220.org/~slist/showsubj.cgi?list=tinysql
+
+If you have any comments, questions or suggestions about
+tinySQL, please feel free to post to the mailing list.
+
+For updates, information, and other stuff, keep any eye on
+the main distribution site:
+
+   http://www.jepstone.net/tinySQL
+
+=======
+Changes
+=======
+
+  Added JDK 2 support and dBase write support (June 1999),
+    Marcel Ruff ruff@swand.lake.de
+
+  Added caching and read-on-demand (October 2001)
+    Thomas Morgner taquera@sherito.org
+
+  Added Ant build script (October 2001)
+    Edson Alves Pereira Cavaleiro@netscape.net
+
+(contributors should feel free to add more here)
+

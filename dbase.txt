@@ -1,0 +1,327 @@
+The dbase driver
+----------------
+
+1. Supported Properties
+--------------------
+
+Name          type        default
+------------- ----------- ------------
+autoenc       boolean     true
+encoding      string      "Cp1252"
+readonly      boolean     false
+tabletype     string      "db3"
+config.insert string      "default"
+
+
+AutoEnc
+-------------------------------
+Tries to sense the encoding of the table using the encoding byte in the
+dbase table. If autosense fails, fall back to the default encoding.
+
+encoding
+-------------------------------
+The encoding used to translate between UniCode and native table. Defaults
+to "Cp1252" == Windows ANSI
+For a complete list of supported encodings see DBFHeader.resolveEncoding()
+
+readonly
+-------------------------------
+Put the database into readonly mode. No modifications to the database are
+allowed.
+
+tabletype
+-------------------------------
+defines the tabletype for newly created tables. Not every table is able
+to support all datatypes. This table lists only implemented types. 
+Some of the tables may support extended datatypes.
+
+TableTypes:           Datatypes
+-----------           ------------
+db3                   CHAR, NUMERIC, LOGICAL, DATE
+db3memo               CHAR, NUMERIC, LOGICAL, DATE, (BLOB, CLOB)
+db4memo               CHAR, NUMERIC, LOGICAL, DATE, (BLOB, CLOB), 
+                      TIMESTAMP, INTEGER
+db4sqlsys             CHAR, NUMERIC, LOGICAL, DATE, TIMESTAMP, INTEGER
+                      (this tabletype is dbase management data)
+db4sqlmemo            CHAR, NUMERIC, LOGICAL, DATE, (BLOB, CLOB), 
+                      TIMESTAMP, INTEGER
+db4sql                CHAR, NUMERIC, LOGICAL, DATE, TIMESTAMP, INTEGER
+db2                   CHAR, NUMERIC, DATE
+foxbase               ? (no data available) is handled as db3
+foxpro2               ? (no data available) is handled as db3
+visualfoxpro          CHAR, NUMERIC, LOGICAL, DATE, (BLOB, CLOB), 
+                      TIMESTAMP, INTEGER
+                      
+
+config.insert
+---------------------------
+This property configures the behaviour on insert. Possible values
+are "default", "speed" and "size".
+
+default:
+--------
+  The default behaviour collects informations of deleted rows and 
+  if a deleted row is known to an table, this row is overwritten to
+  contain the new insert row.
+  
+speed
+--------
+  No deleted rows are searched, all inserted rows are appended at the
+  end of the table
+  
+size
+--------
+  As in he default behaviour this inserting algorithm collects informations 
+  of deleted rows and if a deleted row is known to an table, this row is 
+  overwritten to contain the new insert row. If no deleted rows were found,
+  and not all rows have been checked for the deletion state, the missing
+  rows are checked. If a deleted row was found, this row is used as the
+  new insertation row. If the table contained no deleted row, the row is
+  appended at the end of the table.
+  
+
+2. DatabaseMetaData
+---------------------------
+Metadata information has been changed to reflect the dbase standard limits.
+
+MaxBinaryLiteralLength:  254
+MaxCharLiteralLength:    254
+MaxColumnNameLength:     10
+MaxColumnsInTable:       255
+MaxRowSize:              65500
+
+MaxBinaryLitaralLength and MaxCharLiteralLength mirror the dbase limit
+for the size of a char column, wich is 254 bytes. If you want to use
+greater columns you have to use memo fields. A char field and a memo field
+can be set to binary by setting the binary flag for the field. 
+
+The default implementation of the converter ignores binary fields an returns
+them unchanged.
+
+3. DBFHeader
+---------------------------
+The header has been changed to support the table flags as well as field flags.
+Fielddefinitions for character data can now contain field sizes greater than
+255 bytes by using the DECIMALS field as Highbyte for a small int.
+
+For a rough overview over the dbase format see:
+
+  MSDN Libray for Visual FoxPro 7 
+  http://msdn.microsoft.com/library/en-us/fox7help/html/cmoriReference.asp
+  
+  XBase format by Erik Bachmann
+  http://www.e-bachmann.dk/docs/xbase.htm
+  
+  or for a simple overview:
+  
+This document is from somewhere in the net, but written by 
+multiSoft Datentechnik GmbH
+
+----------------------------------------------------------------------------
+Genaral Format of .dbf files in Xbase languages                    18-Nov-96
+----------------------------------------------------------------------------
+Applies for / supported by:
+
+   FS = FlagShip       D3 = dBaseIII+
+   Fb = FoxBase        D4 = dBaseIV
+   Fp = FoxPro         D5 = dBaseV
+   CL = Clipper
+
+
+3.1. DBF Structure
+================
+
+Byte   Description
+------+--------------------------------------
+0..n   .dbf header (see 2 for size, byte 8)
+n+1    1st record of fixed length (see 2&3)  \
+       2nd record (see 2 for size, byte 10)  \ if dbf is
+       ...                                   / not empty
+       last record                           /
+last   optional: 0x1a (eof byte)
+
+
+3.2. DBF Header (variable size, depending on field count)
+=======================================================
+
+Byte Size Contents Description                  Applies for (supported by)
+----+----+--------+----------------------------+-----------------------------
+00     1   0x03    plain .dbf                   FS, D3, D4, D5, Fb, Fp, CL
+           0x04    plain .dbf                   D4, D5  (FS)
+           0x05    plain .dbf                   D5, Fp  (FS)
+           0x43    with  .dbv memo var size     FS
+           0xB3    with  .dbv and .dbt memo     FS
+           0x83    with  .dbt memo              FS, D3, D4, D5, Fb, Fp, CL
+           0x8B    with  .dbt memo in D4 format D4, D5
+           0x8E    with  SQL table              D4, D5
+           0xF5    with  .fmp memo              Fp
+01     3  YYMMDD   Last update digits           all
+04     4  ulong    Number of records in file    all
+08     2  ushort   Header size in bytes         all
+10     2  ushort   Record size in bytes         all
+12     2   0,0     Reserved                     all
+14     1   0x01    Begin transaction            D4, D5
+           0x00    End Transaction              D4, D5
+           0x00    ignored                      FS, D3, Fb, Fp, CL
+15     1   0x01    Encryptpted                  D4, D5
+           0x00    normal visible               all
+16    12   0 (1)   multi-user environment use   D4,D5
+28     1   0x01    production index exists      Fp, D4, D5
+           0x00    index upon demand            all
+29     1   n       language driver ID           D4, D5
+           0x01    codepage  437 DOS USA        Fp
+           0x02    codepage  850 DOS Multi ling Fp
+           0x03    codepage 1251 Windows ANSI   Fp
+           0xC8    codepage 1250 Windows EE     Fp
+           0x00    ignored                      FS, D3, Fb, Fp, CL
+30     2   0,0     reserved                     all
+32    n*32         Field Descriptor, see (2a)   all
++1     1   0x0D    Header Record Terminator     all
+
+
+3.2a. Field descriptor array in dbf header (fix 32 bytes for each field)
+========================================
+
+Byte Size Contents Description                  Applies for (supported by)
+----+----+--------+----------------------------+-----------------------------
+0     11   ASCI    field name, 0x00 termin.     all
+11     1   ASCI    field type  (see 2b)         all
+12     4   n,n,n,n fld address in memory        D3
+           n,n,0,0 offset from record begin     Fp
+           0,0,0,0 ignored                      FS, D4, D5, Fb, CL
+16     1   byte    Field length, bin (see 2b)   all \ FS,CL: for C field type,
+17     1   byte    decimal count, bin           all / both used for fld lng
+18     2   0,0     reserved                     all
+20     1   byte    Work area ID                 D4, D5
+           0x00    unused                       FS, D3, Fb, Fp, CL
+21     2   n,n     multi-user dBase             D3, D4, D5
+           0,0     ignored                      FS, Fb, Fp, CL
+23     1   0x01    Set Fields                   D3, D4, D5
+           0x00    ignored                      FS, Fb, Fp, CL
+24     7   0..0    reserved                     all
+31     1   0x01    Field is in .mdx index       D4, D5
+           0x00    ignored                      FS, D3, Fb, Fp, CL
+
+
+3.2b. Field type and size in dbf header, field descriptor (1 byte)
+=======================================================
+
+  Size Type      Description/Storage            Applies for (supported by)
+------+---------+------------------------------+-----------------------------
+C 1..n Char      ASCII (OEM code page chars)    all
+                 rest= space, not \0 term.
+                 n = 1..64kb (using deci count) FS
+                 n = 1..32kb (using deci count) Fp, CL
+                 n = 1..254                     all
+D 8    Date      8 Ascii digits (0..9) in the   all
+                 YYYYMMDD format
+F 1..n Numeric   Ascii digits (-.0123456789)    FS, D4, D5, Fp
+                 variable pos. of float.point
+                 n = 1..20
+N 1..n Numeric   Ascii digits (-.0123456789)    all
+                 fix posit/no float.point
+                 n = 1..20                      FS, Fp, CL
+                 n = 1..18                      D3, D4, D5, Fb
+L 1    Logical   Ascii chars (YyNnTtFf space)   FS, D3, Fb, Fp, CL
+                 Ascii chars (YyNnTtFf ?)       D4, D5  (FS)
+M 10   Memo      10 digits repres. the start    all
+                 block posit. in .dbt file, or
+                 10spaces if no entry in memo
+V 10   Variable  Variable, bin/asc data in .dbv FS
+                 4bytes bin= start pos in memo
+                 4bytes bin= block size
+                 1byte     = subtype
+                 1byte     = reserved (0x1a)
+                 10spaces if no entry in .dbv
+P 10   Picture   binary data in .ftp            Fp
+                 structure like M
+B 10   Binary    binary data in .dbt            D5
+                 structure like M
+G 10   General   OLE objects                    D5, Fp
+                 structure like M
+2 2    short int binary int max +/- 32767       FS  
+4 4    long int  binary int max +/- 2147483647  FS
+I 4    long int  binary int ................... MS FoxPro
+
+8 8    double    binary signed double IEEE      FS
+B 8    double    binary signed double IEEE      MS FoxPro
+T 8    timestamp ??                             MS FoxPro
+
+
+3.3. Each Dbf record (fix length)
+==================
+
+Byte   Size  Description                           Applies for (supported by)
+------+----+--------------------------------------+--------------------------
+0      1    deleted flag "*" or not deleted " "     all
+1..n   1..  x-times contents of fields, fixed       all
+            length, unterminated.
+            For n, see (2) byte 10..11
+
+
+---
+multisoft Datentechnik GmbH
+
+Phone  (+49-89) 649-0040    Fax (+49-89) 641-2974
+E-mail support@fship.com    WWW http://www.fship.com
+.
+--------------------------------------------------------------------------
+
+
+
+4. Datatypes 
+---------------------------------------------
+
+NUMERIC
+  left padded String containing only numbers, a decimal point and minus or
+  plus in front of the number ("0".."9","+","-",".")
+  
+CHAR
+  characterdata, no restrictions, if not binary then right-padded with 0x20
+  (blank) else with 0x00
+  
+DATE
+  in the format YYYYMMDD, only numeric characters ("0"..."9")
+  
+LOGICAL
+  'T' or 'F' or ' ' when initialized. TinySQL does also recognize
+  'YyNn', but writes alway T of F
+  
+TIMESTAMP
+  VisualFoxPro: 'T'
+  Dbase:        '@'
+  This is somewhat weired. The field is a 8 byte array, the first 4 byte
+  store the days since 1.1.4713 B.C. The last 4 bytes are a timevalue,
+  storing the milliseconds of the day. 
+  
+  The storage of days is funny, as FoxPro does not care about the Gregorian
+  Change (see java.util.GregorianCalendar). This leads to a gap of 13 days
+  in the year 1583, as java handles the change, and every date object is
+  using a calendar to take care of leap years and such traps as Greg's change.
+  
+  This implementation is tested to work until the 1600 century. As long
+  as you don't implement an own calendar, you will have the gap.
+  
+  An other funny thing is: Visual FoxPro stores the value of 1 minute
+  as 59 seconds an 999 milliseconds. The converter is currently correcting
+  this and adds 1 millisecond to the time. You may get problems if you need
+  the 1 millisecond resolution of Timestamp.
+  
+  DBase does not support nano-seconds for timestamp, so don't try to set
+  them - they are ignored.
+
+INTEGER
+  binary 4 byte value, least-significant-byte first.
+
+
+-------------------------
+5. Natural Order
+--------------------
+dbfTables have no defined natural order.
+
+Rows of a new table (that means a table created by tinySQL) are always returned in insertation
+order as long as no delete occured. If the property "config.insert" is set to "speed", this order
+is preserved even after an insert or delete occured.
+
+
+  

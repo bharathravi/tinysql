@@ -1,0 +1,212 @@
+The TextFileDriver
+------------------
+
+Supported Datatypes:
+  
+  NUMERIC
+  CHAR
+  DATE  (in the format yyyy-MM-dd)
+  
+  INTEGER is silently mapped into NUMERIC(10,0)
+  
+The Delete-Flag
+--------------------
+The delete flag is the first column in the table. The column is handled
+specialy and normaly not visible to the user. It has the special name
+_DELETED, so do not use this name as an own column-name. The deleted-flag
+has to be the first column in the table.
+
+The delete flag is only used if the property "config.delete" is set to 
+"default".
+
+Natural order
+--------------------
+textFileTables have no defined natural order.
+
+Rows of a new table (that means a table created by tinySQL) are always returned in insertation
+order as long as no delete occured. If the property "config.insert" is set to "speed", this order
+is preserved even after an insert or delete occured.
+
+
+1. Supported Properties
+--------------------
+
+Name                        type        default
+-------------------------   ----------- ------------
+encoding                    string      "Cp1252"
+readonly                    boolean     false
+definition-extension        string      ".def"
+table-extension              string      ""
+delete.prefix               string      ""
+delete.postfix              string      ""
+column.prefix               string      ""
+column.postfix              string      ""
+row.prefix                  string      ""
+row.postfix                 string      "\n"
+table.prefix                string      ""
+table.postfix               string      ""
+config.insert               string      "default"
+config.delete               string      "default"
+ignore.first.column.prefix  boolean     "false"
+ignore.last.column.postfix  boolean     "false"
+quoting.engine              string      "ORG.as220.tinySQL.textFileQuoting"
+quoting.excelcsv.separator  string      ","
+quoting.csv.separator       string      ","
+
+
+encoding
+-------------------------------
+The encoding used to translate between UniCode and native table. Defaults
+to "Cp1252" == Windows ANSI
+For a complete list of supported encodings see DBFHeader.resolveEncoding()
+
+readonly
+-------------------------------
+Put the database into readonly mode. No modifications to the database are
+allowed.
+
+definition-extension
+-------------------------------
+The fileextension used for definition files. 
+
+table-extension
+-------------------------------
+The fileextension used for data files. table-extension and definition-extension
+must not be equal or your data will be corrupted.
+
+config.insert
+---------------------------
+This property configures the behaviour on insert. Possible values
+are "default", "speed" and "size".
+
+default:
+--------
+  The default behaviour collects informations of deleted rows and 
+  if a deleted row is known to an table, this row is overwritten to
+  contain the new insert row.
+  
+speed
+--------
+  No deleted rows are searched, all inserted rows are appended at the
+  end of the table
+  
+size
+--------
+  As in he default behaviour this inserting algorithm collects informations 
+  of deleted rows and if a deleted row is known to an table, this row is 
+  overwritten to contain the new insert row. If no deleted rows were found,
+  and not all rows have been checked for the deletion state, the missing
+  rows are checked. If a deleted row was found, this row is used as the
+  new insertation row. If the table contained no deleted row, the row is
+  appended at the end of the table.
+  
+config.delete
+-------------
+This property configures the behaviour of the table on an delete.
+
+none
+------
+  No deletions are allowed. Every attemp to delete a row will raise
+  a tinySQLException. No _DELETED row is used. If a table was created
+  with an deletion row (using config.delete=default), the previously hidden
+  delete row is visible now. This row may be removed using the statements
+  
+    DELETE FROM table WHERE _DELETED='Y'
+    COMPACT TABLE table
+    ALTER TABLE table REMOVE COLUMN _DELETED
+
+pack
+-------
+  Deletions are puffered until the table is COMPACT-ed or the table is
+  closed. If the table is closed and contains deleted rows, the rows
+  are removed using the SQL-Command COMPACT TABLE. If you use this feature
+  it is up to you to make sure that the table is closed. 
+  
+  The table will be closed, if the java.sql.Connection to tinySQL is 
+  closed. For details on the close process see backend.txt.
+  
+  If a table was created with an deletion row (using config.delete=default), 
+  the previously hidden delete row becomes visible now. 
+  This row may be removed using the statements
+  
+    DELETE FROM table WHERE _DELETED='Y'
+    COMPACT TABLE table
+    ALTER TABLE table REMOVE COLUMN _DELETED  
+
+default
+-------
+  A special column _DELETED, which is hidden to the database system, will be
+  maintained for deleted states of a row. This is a dbase-like behaviour which
+  is the default for all textFileTables created b previous versions of
+  tinySQL.
+
+
+EXPERIMENTAL FEATURES
+----------------------------------------------------
+The features described here are experimental and may not give the
+expected results. If you encounter any problems feel free to report
+them to tinySQL@as220.org. The bugs and problems will be resolved
+as soon as they are known :)
+
+quoting.engine
+-------------------------------
+The quoting engine is responsible for quoting a string when it is 
+converted into the native format an vice versa. The quoting engine
+enforces length-restrictions of the table columns, so be carefull when
+using this feature. If your quoted string exceeds the limit if the
+column, a tinySQLException is thrown.
+
+The property expects a classname as value. The specified class has
+to extend ORG.as220.tinySQL.textFileQuoting. 
+
+Currently there are tree known implementations:
+-------------------------------
+ORG.as220.tinySQL.textFileQuoting
+  A simple quoting that does nothing than to enforce the length of
+  the values of a table column. It does not alter the strings in any
+  way.
+
+ORG.as220.tinySQL.textFileExcelCSVQuoting
+  Quotes the column values in a way suitable for excel csv files.
+  If a column contains a separator value or a line break (\n), the 
+  column will be quoted. If the column is quoted and contains quotes
+  as character the quotes will be quoted using double quotes.
+  (-"- is rewritten into -""-).
+  
+  The separator value is defined using "quoting.excelcsv.separator" and
+  defaults to ",".
+  
+ORG.as220.tinySQL.textFileCSVQuoting
+  Quotes the column values in the standard CSV way. Columns are quoted
+  if they contain a separator value, a line break (\n) or a quote.
+  
+  Quotes are escaped with backslash (\). Backslashes are quoted using
+  another backslash. All other backslash quoted characters are treated
+  as if they are not quoted and the backslash is ignored.
+
+  The separator value is defined using "quoting.csv.separator" and defaults
+  to ",".
+  
+*.prefix and *.postfix
+-------------------------------
+These properties are used to customize the layout of the table.
+delete.* wraps around the delete-flag. 
+
+Examples
+-------------------------------
+
+To write into an Excel-compatible CSV-File:
+  column.prefix=";"
+  row.postfix="\n\r"
+
+
+To write the data as HTML-Table
+  delete.prefix="<!--"
+  delete.postfix="-->"
+  column.prefix="<td>"
+  column.postfix="</td>"
+  row.prefix="<tr>"
+  row.postfix="</tr>\n"
+  table.prefix="<html><body><table>"
+  table.postfix="</table></html>"
+

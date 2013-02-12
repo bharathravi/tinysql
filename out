@@ -1,0 +1,467 @@
+DriverManager.getConnection("jdbc:dbfFile:./test")
+    trying driver[className=ORG.as220.tinySQL.dbfFileDriver,ORG.as220.tinySQL.dbfFileDriver@6d9efb05]
+getConnection returning driver[className=ORG.as220.tinySQL.dbfFileDriver,ORG.as220.tinySQL.dbfFileDriver@6d9efb05]
+  DROP TABLE IF EXISTS cars
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table cars opened.
+DEBUG: TinySQL: Table cars closed.
+    -> Elapsed time: 16 msecs: -1
+  DROP TABLE IF EXISTS people
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table people opened.
+DEBUG: TinySQL: Table people closed.
+    -> Elapsed time: 96 msecs: -1
+  DROP TABLE IF EXISTS party
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table party opened.
+DEBUG: TinySQL: Table party closed.
+    -> Elapsed time: 2 msecs: -1
+
+CREATE TABLE party ...
+=====================
+  CREATE TABLE party (birthday TIMESTAMP, age INT)
+    -> Elapsed time: 64 msecs: 0
+
+CREATE TABLE cars ...
+=====================
+  CREATE TABLE cars (name CHAR(25), id NUMERIC(4,0))
+    -> Elapsed time: 34 msecs: 0
+
+CREATE TABLE people ...
+=======================
+  CREATE TABLE people (pe_name CHAR(25), pe_id NUMERIC(8,0), car_id NUMERIC(4,0))
+    -> Elapsed time: 45 msecs: 0
+
+INSERT INTO party ...
+====================
+  INSERT INTO party (birthday, age) VALUES('2000-12-01 12:00:00', 1)
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table party opened.
+class java.lang.String
+DEBUG: Insert row written on position : 0
+WARN:  Table party: Open Views left: 0
+    -> Elapsed time: 13 msecs: 1
+
+INSERT INTO cars ...
+====================
+  INSERT INTO cars (name, id) VALUES('Fiat', 1)
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table cars opened.
+DEBUG: Insert row written on position : 0
+WARN:  Table cars: Open Views left: 0
+    -> Elapsed time: 1 msecs: 1
+  insert into cars (name, id) values('Pinto', 2)
+DEBUG: Insert row written on position : 1
+WARN:  Table cars: Open Views left: 0
+    -> Elapsed time: 0 msecs: 1
+  INSerT inTO cars (name, id) VALueS('Thing', 3)
+DEBUG: Insert row written on position : 2
+WARN:  Table cars: Open Views left: 0
+    -> Elapsed time: 0 msecs: 1
+  INSERT INTO cars (name, id) VALUES('Bug', 4)
+DEBUG: Insert row written on position : 3
+WARN:  Table cars: Open Views left: 0
+    -> Elapsed time: 0 msecs: 1
+  INSERT INTO cars (name, id) VALUES('Newport', 5)
+DEBUG: Insert row written on position : 4
+WARN:  Table cars: Open Views left: 0
+    -> Elapsed time: 1 msecs: 1
+  INSERT INTO cars (name, id) VALUES('Rangerover', 6)
+DEBUG: Insert row written on position : 5
+WARN:  Table cars: Open Views left: 0
+    -> Elapsed time: 1 msecs: 1
+  INSERT INTO cars (name, id) VALUES('Jeep', 7)
+DEBUG: Insert row written on position : 6
+WARN:  Table cars: Open Views left: 0
+    -> Elapsed time: 0 msecs: 1
+  INSERT INTO cars (name, id) VALUES('Hummer', 8)
+DEBUG: Insert row written on position : 7
+WARN:  Table cars: Open Views left: 0
+    -> Elapsed time: 1 msecs: 1
+
+INSERT INTO people ...
+======================
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Irwin Garden', 1, 2)
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table people opened.
+DEBUG: Insert row written on position : 0
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 1 msecs: 1
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Mr. Fiction', 2, 7)
+DEBUG: Insert row written on position : 1
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 1 msecs: 1
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Sal Paradise', 3, 8)
+DEBUG: Insert row written on position : 2
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 2 msecs: 1
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Dean Moriarty', 4, 3)
+DEBUG: Insert row written on position : 3
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 1 msecs: 1
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Bull Lee', 5, 7)
+DEBUG: Insert row written on position : 4
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 0 msecs: 1
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Jack Chip', 6, 1)
+DEBUG: Insert row written on position : 5
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 1 msecs: 1
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Glen Runciter', 7, 4)
+DEBUG: Insert row written on position : 6
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 1 msecs: 1
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Horselover Fat', 8, 2)
+DEBUG: Insert row written on position : 7
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 0 msecs: 1
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Gnossos Pappadopoulos', 9, 7)
+DEBUG: Insert row written on position : 8
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 1 msecs: 1
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Hef', 10, 6)
+DEBUG: Insert row written on position : 9
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 1 msecs: 1
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Matty Groves', 11, 7)
+DEBUG: Insert row written on position : 10
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 0 msecs: 1
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Raoul Frodus', 12, 5)
+DEBUG: Insert row written on position : 11
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 1 msecs: 1
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('H�gar Bo�', 12, 5)
+DEBUG: Insert row written on position : 12
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 0 msecs: 1
+
+UPDATE Mr. Garden ...
+=====================
+  UPDATE people SET car_id=6 WHERE pe_name='Irwin Garden'
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 8 msecs: 1
+
+SELECT cars, people ...
+=======================
+  SELECT pe_name, name FROM cars, people WHERE car_id = id
+ERROR: Column : pe_name not found in this table
+ERROR: Column : pe_name not found in this table
+ERROR: Column : car_id not found in this table
+DEBUG: Statement: ResultSet opened
+    -> Elapsed time: 5 msecs
+pe_name                   name                      
+------------------------- ------------------------- 
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 13
+Irwin Garden              Rangerover                
+Mr. Fiction               Jeep                      
+Sal Paradise              Hummer                    
+Dean Moriarty             Thing                     
+Bull Lee                  Jeep                      
+Jack Chip                 Fiat                      
+Glen Runciter             Bug                       
+Horselover Fat            Pinto                     
+Gnossos Pappadopoulos     Jeep                      
+Hef                       Rangerover                
+Matty Groves              Jeep                      
+Raoul Frodus              Newport                   
+H?gar Bo?                 Newport                   
+
+SELECT party ...
+=======================
+  SELECT * FROM party
+DEBUG: Statement: ResultSet opened
+    -> Elapsed time: 0 msecs
+birthday             age  
+-------------------- ---- 
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 1
+2000-12-01 12:00:00  1    
+No Of Recs: 1
+
+SELECT OR ...
+=======================
+  SELECT * FROM people where (pe_name='Hef') or (pe_name='Bull Lee')
+DEBUG: Statement: ResultSet opened
+    -> Elapsed time: 1 msecs
+pe_name                   pe_id    car_id 
+------------------------- -------- ------ 
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 2
+Bull Lee                  5        7      
+Hef                       10       6      
+No Of Recs: 2
+
+ALTER TABLE ...
+===============
+  ALTER TABLE people ADD (nation CHAR(25), age NUMERIC(4,0))
+ERROR: Column : nation not found in this table
+ERROR: Column : age not found in this table
+DEBUG: TinySQL: Table people closed.
+DEBUG: File: ./test/people_tmp_ATAC_ORG.DBF does not exist. No action taken on delete.
+DEBUG: File: ./test/people_tmp_ATAC.DBF does not exist. No action taken on delete.
+INFO:  Table encoding set to : Cp850
+INFO:  Table encoding set to : Cp850
+INFO:  Table uses encoding of Cp850
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table people_tmp_ATAC opened.
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table people opened.
+DEBUG: Statement: ResultSet opened
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 13
+DEBUG: Insert row written on position : 0
+DEBUG: Insert row written on position : 1
+DEBUG: Insert row written on position : 2
+DEBUG: Insert row written on position : 3
+DEBUG: Insert row written on position : 4
+DEBUG: Insert row written on position : 5
+DEBUG: Insert row written on position : 6
+DEBUG: Insert row written on position : 7
+DEBUG: Insert row written on position : 8
+DEBUG: Insert row written on position : 9
+DEBUG: Insert row written on position : 10
+DEBUG: Insert row written on position : 11
+DEBUG: Insert row written on position : 12
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table people: Open Views left: 0
+DEBUG: Statement: ResultSet close
+WARN:  Table people_tmp_ATAC: Open Views left: 0
+DEBUG: TinySQL: Table people closed.
+DEBUG: TinySQL: Table people_tmp_ATAC closed.
+WARN:  [Rename] ./test/people.DBF to ./test/people_tmp_ATAC_ORG.DBF
+WARN:  [Rename] ./test/people_tmp_ATAC.DBF to ./test/people.DBF
+    -> Elapsed time: 140 msecs: 13
+  SELECT * FROM people
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table people opened.
+DEBUG: Statement: ResultSet opened
+    -> Elapsed time: 2 msecs
+pe_name                   pe_id    car_id nation                    age  
+------------------------- -------- ------ ------------------------- ---- 
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 13
+Irwin Garden              1        6                                0    
+Mr. Fiction               2        7                                0    
+Sal Paradise              3        8                                0    
+Dean Moriarty             4        3                                0    
+Bull Lee                  5        7                                0    
+Jack Chip                 6        1                                0    
+Glen Runciter             7        4                                0    
+Horselover Fat            8        2                                0    
+Gnossos Pappadopoulos     9        7                                0    
+Hef                       10       6                                0    
+Matty Groves              11       7                                0    
+Raoul Frodus              12       5                                0    
+H?gar Bo?                 12       5                                0    
+
+  ALTER TABLE people DROP COLUMN age
+DEBUG: TinySQL: Table people closed.
+DEBUG: File: ./test/people_tmp_ATAC_ORG.DBF does not exist. No action taken on delete.
+DEBUG: File: ./test/people_tmp_ATAC.DBF does not exist. No action taken on delete.
+INFO:  Table encoding set to : Cp850
+INFO:  Table encoding set to : Cp850
+INFO:  Table uses encoding of Cp850
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table people_tmp_ATAC opened.
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table people opened.
+DEBUG: Statement: ResultSet opened
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 13
+DEBUG: Insert row written on position : 0
+DEBUG: Insert row written on position : 1
+DEBUG: Insert row written on position : 2
+DEBUG: Insert row written on position : 3
+DEBUG: Insert row written on position : 4
+DEBUG: Insert row written on position : 5
+DEBUG: Insert row written on position : 6
+DEBUG: Insert row written on position : 7
+DEBUG: Insert row written on position : 8
+DEBUG: Insert row written on position : 9
+DEBUG: Insert row written on position : 10
+DEBUG: Insert row written on position : 11
+DEBUG: Insert row written on position : 12
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table people: Open Views left: 0
+DEBUG: Statement: ResultSet close
+WARN:  Table people_tmp_ATAC: Open Views left: 0
+DEBUG: TinySQL: Table people closed.
+DEBUG: TinySQL: Table people_tmp_ATAC closed.
+WARN:  [Rename] ./test/people.DBF to ./test/people_tmp_ATAC_ORG.DBF
+WARN:  [Rename] ./test/people_tmp_ATAC.DBF to ./test/people.DBF
+    -> Elapsed time: 127 msecs: 13
+  SELECT * FROM people
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table people opened.
+DEBUG: Statement: ResultSet opened
+    -> Elapsed time: 2 msecs
+pe_name                   pe_id    car_id nation                    
+------------------------- -------- ------ ------------------------- 
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 13
+Irwin Garden              1        6                                
+Mr. Fiction               2        7                                
+Sal Paradise              3        8                                
+Dean Moriarty             4        3                                
+Bull Lee                  5        7                                
+Jack Chip                 6        1                                
+Glen Runciter             7        4                                
+Horselover Fat            8        2                                
+Gnossos Pappadopoulos     9        7                                
+Hef                       10       6                                
+Matty Groves              11       7                                
+Raoul Frodus              12       5                                
+H?gar Bo?                 12       5                                
+
+  ALTER TABLE people DROP nation
+DEBUG: TinySQL: Table people closed.
+DEBUG: File: ./test/people_tmp_ATAC_ORG.DBF does not exist. No action taken on delete.
+DEBUG: File: ./test/people_tmp_ATAC.DBF does not exist. No action taken on delete.
+INFO:  Table encoding set to : Cp850
+INFO:  Table encoding set to : Cp850
+INFO:  Table uses encoding of Cp850
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table people_tmp_ATAC opened.
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table people opened.
+DEBUG: Statement: ResultSet opened
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 13
+DEBUG: Insert row written on position : 0
+DEBUG: Insert row written on position : 1
+DEBUG: Insert row written on position : 2
+DEBUG: Insert row written on position : 3
+DEBUG: Insert row written on position : 4
+DEBUG: Insert row written on position : 5
+DEBUG: Insert row written on position : 6
+DEBUG: Insert row written on position : 7
+DEBUG: Insert row written on position : 8
+DEBUG: Insert row written on position : 9
+DEBUG: Insert row written on position : 10
+DEBUG: Insert row written on position : 11
+DEBUG: Insert row written on position : 12
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table people: Open Views left: 0
+DEBUG: Statement: ResultSet close
+WARN:  Table people_tmp_ATAC: Open Views left: 0
+DEBUG: TinySQL: Table people closed.
+DEBUG: TinySQL: Table people_tmp_ATAC closed.
+WARN:  [Rename] ./test/people.DBF to ./test/people_tmp_ATAC_ORG.DBF
+WARN:  [Rename] ./test/people_tmp_ATAC.DBF to ./test/people.DBF
+    -> Elapsed time: 128 msecs: 13
+  SELECT * FROM people
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table people opened.
+DEBUG: Statement: ResultSet opened
+    -> Elapsed time: 1 msecs
+pe_name                   pe_id    car_id 
+------------------------- -------- ------ 
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 13
+Irwin Garden              1        6      
+Mr. Fiction               2        7      
+Sal Paradise              3        8      
+Dean Moriarty             4        3      
+Bull Lee                  5        7      
+Jack Chip                 6        1      
+Glen Runciter             7        4      
+Horselover Fat            8        2      
+Gnossos Pappadopoulos     9        7      
+Hef                       10       6      
+Matty Groves              11       7      
+Raoul Frodus              12       5      
+H?gar Bo?                 12       5      
+
+  ALTER TABLE people RENAME car_id TO carID
+DEBUG: TinySQL: Table people closed.
+INFO:  Table encoding set to : Cp850
+    -> Elapsed time: 29 msecs: -1
+  SELECT * FROM people
+INFO:  Table encoding set to : Cp850
+DEBUG: TinySQL: Table people opened.
+DEBUG: Statement: ResultSet opened
+    -> Elapsed time: 2 msecs
+pe_name                   pe_id    carID 
+------------------------- -------- ----- 
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 13
+Irwin Garden              1        6     
+Mr. Fiction               2        7     
+Sal Paradise              3        8     
+Dean Moriarty             4        3     
+Bull Lee                  5        7     
+Jack Chip                 6        1     
+Glen Runciter             7        4     
+Horselover Fat            8        2     
+Gnossos Pappadopoulos     9        7     
+Hef                       10       6     
+Matty Groves              11       7     
+Raoul Frodus              12       5     
+H?gar Bo?                 12       5     
+
+Checking Meta data ...
+======================
+
+*** Type Info: [DATA_TYPE is from java.sql.Types]
+TYPE_NAME  DATA_TYPE PRECISION LITERAL_PREFIX LITERAL_SUFFIX CREATE_PARAMS        NULLABLE CASE_SENSITIVE SEARCHABLE 
+---------- --------- --------- -------------- -------------- -------------------- -------- -------------- ---------- 
+CHAR       1         254       '              '              0                    1        Y              3          
+NUMERIC    6         19                                      0                    1        N              3          
+BOOLEAN    -7        1                                       0                    1        N              3          
+INTEGER    4         19                                      0                    1        N              3          
+DATE       91        8         '              '              0                    1        N              3          
+TIMESTAMP  93        8         '              '              0                    1        N              3          
+DEBUG: ResultSet: Max Rows reached: 6
+
+*** Table Info:
+TABLE_CAT  TABLE_SCHEM TABLE_NAME                                                                                                                                                                                                                                                 TABLE_TYPE                               TABLE_REMARKS                                                                                                                                                                                                                                                  
+---------- ----------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+                       cars                                                                                                                                                                                                                                                       TABLE                                                                                                                                                                                                                                                                                                   
+                       people                                                                                                                                                                                                                                                     TABLE                                                                                                                                                                                                                                                                                                   
+                       party                                                                                                                                                                                                                                                      TABLE                                                                                                                                                                                                                                                                                                   
+DEBUG: ResultSet: Max Rows reached: 3
+
+*** Column Info:
+WARN:  Table cars: Open Views left: 1
+WARN:  Table people: Open Views left: 1
+WARN:  Table party: Open Views left: 1
+DEBUG: ResultSet: Max Rows reached: 3
+TABLE_CAT TABLE_SCHEM TABLE_NAME                                                                                                                                                                                                                                                 COLUMN_NAME DATA_TYPE TYPE_NAME COLUMN_SIZE DECIMAL_DIGITS NULLABLE REMARKS                                                                                                                          COLUMN_DEF                                                                                                                       IS_NULLABLE 
+--------- ----------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------- --------- --------- ----------- -------------- -------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ----------- 
+                      cars                                                                                                                                                                                                                                                       name        1         CHAR      25          0              0                                                                                                                                                                                                                                                                          NO          
+                      cars                                                                                                                                                                                                                                                       id          2         NUMERIC   4           0              0                                                                                                                                                                                                                                                                          NO          
+                      people                                                                                                                                                                                                                                                     pe_name     1         CHAR      25          0              0                                                                                                                                                                                                                                                                          NO          
+                      people                                                                                                                                                                                                                                                     pe_id       2         NUMERIC   8           0              0                                                                                                                                                                                                                                                                          NO          
+                      people                                                                                                                                                                                                                                                     carID       2         NUMERIC   4           0              0                                                                                                                                                                                                                                                                          NO          
+                      party                                                                                                                                                                                                                                                      birthday    93        TIMESTAMP 8           4              0                                                                                                                                                                                                                                                                          NO          
+                      party                                                                                                                                                                                                                                                      age         4         INTEGER   4           0              0                                                                                                                                                                                                                                                                          NO          
+DEBUG: ResultSet: Max Rows reached: 7
+DEBUG: ResultSet.close(): Closing 2 views
+WARN:  Table people: Open Views left: 2
+WARN:  Table cars: Open Views left: 0
+DEBUG: Statement: ResultSet close
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table party: Open Views left: 0
+DEBUG: Statement: ResultSet close
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table people: Open Views left: 1
+DEBUG: Statement: ResultSet close
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table people: Open Views left: 1
+DEBUG: Statement: ResultSet close
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table people: Open Views left: 1
+DEBUG: Statement: ResultSet close
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table people: Open Views left: 1
+DEBUG: Statement: ResultSet close
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table people: Open Views left: 0
+DEBUG: Statement: ResultSet close
+DEBUG: TinySQL: Table party closed.
+DEBUG: TinySQL: Table people closed.
+DEBUG: TinySQL: Table cars closed.
+
+Good bye

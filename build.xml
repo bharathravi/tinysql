@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!--///////////////////////////////////////////////////////////-->
+<!--Build file to generat a distribution of tinySQL:-->
+<!--@author Edson Alves Pereira - cavaleiro@netscape.net/GuardianOfSteel@netscape.net-->
+<!--$Id: build.xml,v 1.4 2002/08/18 13:37:24 marcel Exp $-->
+<!--$Revision: 1.4 $-->
+<!--///////////////////////////////////////////////////////////-->
+<!--Building the base classes to create our library:-->
+<project        name   ="tinySQL"
+                default="dist"
+                basedir=".">
+                
+  <!--Locals variables that is required to known where the sources is:-->
+  <property name="tinySQL_home"         value="${user.home}/workspace/6422/tinySQL"></property>
+  <property name="tiny_src"             value="${tinySQL_home}/src"></property>
+  <property name="tiny"                 value="${tiny_src}/ORG/as220/tinySQL"></property>
+  <property name="examples"             value="${tinySQL_home}/examples"></property>
+  <property name="bin"                  value="${tinySQL_home}/classes"></property>
+  <property name="tinySQL_jar"          value="tinySQL.jar"></property>
+  <property name="use_debug"            value="on"></property>
+  <property name="use_deprecation"      value="off"></property>
+
+  <!--This is the CLASSPATH to all library that we need:-->
+  <path id="project.class.path">
+  </path>
+  
+  <!--//////////////////////////////////////////////////////-->
+  <!--Cleanning old files and building the tree:-->
+  <target name="init">
+    <tstamp></tstamp>
+    <!--Deleting old files:-->
+    <delete dir="${bin}"></delete>
+    
+    <!--Creating the tree:-->
+    <mkdir dir="${bin}"></mkdir>    
+  </target>  
+  <!--//////////////////////////////////////////////////////-->
+  <!--Building the binaries of tinySQL:-->
+  <target name="compile_base_classes"
+          depends="init">
+    <!--Compile the source of tinySQL:-->
+    <javac srcdir="${tiny}:${examples}"
+           destdir="${bin}"
+           debug="${use_debug}"
+           deprecation="${use_deprecation}">
+       <classpath refid="project.class.path"></classpath>
+    </javac>    
+  </target>
+  
+  <!--#####################################################-->
+  <!--Catching all binaries compiled and changing to a library:-->
+  <target name="build_library"
+          depends="compile_base_classes">      
+      <!--Creating the JAR package:-->
+      <jar jarfile="${tinySQL_jar}" manifest="${tiny_src}/manifest.tinySQL">
+        <fileset dir="${bin}"></fileset>                                
+      </jar>
+  </target>
+  <!--#####################################################-->
+  <!--///////////////////////////////////////////////////////-->
+  <!--Delete all "dot class" that we don't need anymore:-->
+  <target name="clean"
+          depends="build_library">
+        <delete dir="${bin}"></delete>  
+  </target>
+  <!--///////////////////////////////////////////////////////-->
+  <!--Main method, this start the whole process:-->
+  <target name="dist"
+      depends="clean">
+  </target>
+  <!--///////////////////////////////////////////////////////-->
+</project>
+<!--/////////////////////////////////////////////////////////-->

@@ -328,7 +328,7 @@ public class dbfFileTable extends tinySQLTable
 
   private int getNextInsertRow() throws tinySQLException
   {
-    if (insertMode == textFile.INSERT_SPEED)
+    if (insertMode == textFileDatabase.INSERT_SPEED)
     {
       return getRowCount();
     }
@@ -337,7 +337,7 @@ public class dbfFileTable extends tinySQLTable
     if (delrow != -1)
       return delrow;
 
-    if (insertMode == textFile.INSERT_DEFAULT)
+    if (insertMode == textFileDatabase.INSERT_DEFAULT)
       return getRowCount();
 
     for (int i = 0; i < deletedRows.length; i++)

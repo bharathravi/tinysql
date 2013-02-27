@@ -1514,7 +1514,7 @@ public class TinySQLParser implements TinySQLParserConstants
     for (int i = 0; i < 43; i++) jj_la1[i] = -1;
   }
 
-  public TinySQLParser(java.io.Reader stream)
+  public  TinySQLParser(java.io.Reader stream)
   {
     jj_input_stream = new SimpleCharStream(stream, 1, 1);
     token_source = new TinySQLParserTokenManager(jj_input_stream);

@@ -55,7 +55,7 @@ public class textFileConnection extends tinySQLConnection
 
   /**
    *
-   * Returns a new textFile object which is cast to a tinySQL
+   * Returns a new textFileDatabase object which is cast to a tinySQL
    * object.
    *
    */
@@ -77,7 +77,7 @@ public class textFileConnection extends tinySQLConnection
       //
       dataDir = System.getProperty("user.home") + "/.tinySQL";
     }
-    textFile db = new textFile(dataDir, getProperties());
+    textFileDatabase db = TextFileDatabaseConstructor.createTextFileDatabase(dataDir, getProperties());
     return db;
 
 

@@ -115,7 +115,7 @@ public class textFileDriver extends tinySQLDriver
     }
 
     // if everything after the jdbc: part is
-    // dbfFile, then return true.
+    // tinySQL, then return true.
     //
     return url.substring(5, 12).equals("tinySQL");
 

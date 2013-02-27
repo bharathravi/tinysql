@@ -392,8 +392,7 @@ public abstract class tinySQL
   protected void addColumnsToRow(Vector columns, tsPhysicalRow record, tinySQLTableView jtbl)
       throws tinySQLException
   {
-    int size = columns.size();
-    for (int ii = 0; ii < size; ii++)
+    for (int ii = 0; ii < columns.size(); ii++)
     {
       tsColumn col = (tsColumn) columns.elementAt(ii);
       Object o = jtbl.getColumn(col.getTablePosition());
@@ -755,7 +754,7 @@ public abstract class tinySQL
       tinySQLTable oldTable = openTable(tablename);
       tinySQLTable newTable = openTable(newTableName);
 
-      // gleiche Columns werden übernommen, neue dazugefügt, überflüssige entfernt
+      // gleiche Columns werden ï¿½bernommen, neue dazugefï¿½gt, ï¿½berflï¿½ssige entfernt
       Vector newnames = new Vector();
       for (int i = 0; i < newTable.getColumnCount(); i++)
       {

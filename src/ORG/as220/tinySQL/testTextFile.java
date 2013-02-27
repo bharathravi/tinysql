@@ -72,7 +72,7 @@ public class testTextFile
       String colval = rs.getString(1);
       if (colval.startsWith("test"))
       {
-        System.out.println("textFile JDBC driver installed correctly.");
+        System.out.println("textFileDatabase JDBC driver installed correctly.");
       }
       else
       {

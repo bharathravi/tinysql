@@ -86,7 +86,7 @@ public class textFileTable extends tinySQLTable
   private static final int ROW_DELETED = -1;
   private static final int ROW_NOT_DELETED = 1;
   private byte[] deletedRows;  // 0 = not read, -1 = deleted, 1 = not deleted
-  private textFile databaseEngine;
+  private textFileDatabase databaseEngine;
 
   private int deleteMode;
   private int insertMode;
@@ -108,13 +108,13 @@ public class textFileTable extends tinySQLTable
   /**
    *
    * Constructs a textFileTable. This is only called by getTable()
-   * in textFile.java.
+   * in textFileDatabase.java.
    *
    * @param dDir data directory
    * @param table_name the name of the table
    *
    */
-  public textFileTable(String dDir, String table_name, textFile engine) throws tinySQLException
+  public textFileTable(String dDir, String table_name, textFileDatabase engine) throws tinySQLException
   {
     super(table_name);
     this.encoding = engine.getEncoding();
@@ -240,7 +240,7 @@ public class textFileTable extends tinySQLTable
       }
     }
 
-    if (deleteMode == textFile.DELETE_PACK && compressTableCalled == false)
+    if (deleteMode == textFileDatabase.DELETE_PACK && compressTableCalled == false)
     {
       compressTableCalled = true;
       if (findDeletedRow() != -1)
@@ -285,7 +285,7 @@ public class textFileTable extends tinySQLTable
 
   private int getNextInsertRow() throws tinySQLException
   {
-    if (insertMode == textFile.INSERT_SPEED)
+    if (insertMode == textFileDatabase.INSERT_SPEED)
     {
       return getRowCount();
     }
@@ -296,7 +296,7 @@ public class textFileTable extends tinySQLTable
     if (delrow != -1)
       return delrow;
 
-    if (insertMode == textFile.INSERT_DEFAULT)
+    if (insertMode == textFileDatabase.INSERT_DEFAULT)
     {
       Log.debug("RowCount: " + getRowCount());
       return getRowCount();
@@ -326,7 +326,7 @@ public class textFileTable extends tinySQLTable
   {
     tsColumn info = null;
     // Ignore the deleted row
-    if (deleteMode == textFile.DELETE_DEFAULT)
+    if (deleteMode == textFileDatabase.DELETE_DEFAULT)
     {
       info = (tsColumn) column_info.get(column + 1);
     }
@@ -360,7 +360,7 @@ public class textFileTable extends tinySQLTable
 
     int currentPos = setRawData(rowpref, data, 0);
 
-    if (deleteMode == textFile.DELETE_DEFAULT)
+    if (deleteMode == textFileDatabase.DELETE_DEFAULT)
     {
       currentPos = setRawData(delpref, data, currentPos);
       currentPos = setRawData(NOT_DELETED, data, currentPos);
@@ -501,7 +501,7 @@ public class textFileTable extends tinySQLTable
    */
   public int getColumnCount()
   {
-    if (deleteMode == textFile.DELETE_DEFAULT)
+    if (deleteMode == textFileDatabase.DELETE_DEFAULT)
       return column_info.size() - 1;
     else
       return column_info.size();
@@ -602,12 +602,12 @@ public class textFileTable extends tinySQLTable
 
     Log.debug("DeleteMode : " + deleteMode + " DELETE ROW " + row);
 
-    if (deleteMode == textFile.DELETE_NONE)
+    if (deleteMode == textFileDatabase.DELETE_NONE)
       throw new tinySQLException("Deletion of records has been disabled");
 
     deletedRows[row] = ROW_DELETED;
 
-    if (deleteMode == textFile.DELETE_DEFAULT)
+    if (deleteMode == textFileDatabase.DELETE_DEFAULT)
     {
       synchronized (ftbl)
       {
@@ -641,7 +641,7 @@ public class textFileTable extends tinySQLTable
 
     // this is real easy; just check the value of the _DELETED column
     //
-    if (deleteMode == textFile.DELETE_NONE)
+    if (deleteMode == textFileDatabase.DELETE_NONE)
       return false;
 
     if (deletedRows[row] == ROW_UNREAD) getRow(row);
@@ -651,10 +651,10 @@ public class textFileTable extends tinySQLTable
 
   private boolean isDeleted(byte[] b, int row)
   {
-    if (deleteMode == textFile.DELETE_NONE)
+    if (deleteMode == textFileDatabase.DELETE_NONE)
       return false;
 
-    if (deleteMode == textFile.DELETE_PACK)
+    if (deleteMode == textFileDatabase.DELETE_PACK)
     {
       if (deletedRows[row] == ROW_DELETED)
         return true;
@@ -793,7 +793,7 @@ public class textFileTable extends tinySQLTable
 
     int retval = 0;
 
-    if (deleteMode == textFile.DELETE_DEFAULT && column.equals("_DELETED"))
+    if (deleteMode == textFileDatabase.DELETE_DEFAULT && column.equals("_DELETED"))
     {
       // create an info array
       //
@@ -825,7 +825,7 @@ public class textFileTable extends tinySQLTable
     if (ignoreFirst)
     {
       if (
-          ((deleteMode == textFile.DELETE_DEFAULT) && (tablePos == 1))
+          ((deleteMode == textFileDatabase.DELETE_DEFAULT) && (tablePos == 1))
           ||
           (tablePos == 0)
       )

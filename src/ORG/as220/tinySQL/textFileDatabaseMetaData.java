@@ -81,9 +81,9 @@ public class textFileDatabaseMetaData extends tinySqlDatabaseMetaData
     return dataDir;
   }
 
-  protected textFile getTextFileEngine() throws tinySQLException
+  protected textFileDatabase getTextFileEngine() throws tinySQLException
   {
-    return (textFile) ((tinySQLConnection) getConnection()).getDatabaseEngine();
+    return (textFileDatabase) ((tinySQLConnection) getConnection()).getDatabaseEngine();
   }
 
   /**

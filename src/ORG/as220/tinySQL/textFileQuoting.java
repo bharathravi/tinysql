@@ -3,18 +3,18 @@ package ORG.as220.tinySQL;
 
 public class textFileQuoting
 {
-  private textFile db;
+  private textFileDatabase db;
 
   public textFileQuoting()
   {
   }
 
-  public void setDatabase(textFile tf)
+  public void setDatabase(textFileDatabase tf)
   {
     this.db = tf;
   }
 
-  public textFile getDatabase()
+  public textFileDatabase getDatabase()
   {
     return db;
   }

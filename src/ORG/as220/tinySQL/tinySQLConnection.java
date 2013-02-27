@@ -121,7 +121,7 @@ public abstract class tinySQLConnection implements java.sql.Connection
 
     // call get_tinySQL() to return a new tinySQL object.
     // get_tinySQL() is an abstract method which allows
-    // subclasses of tinySQL, such as textFile, to be used
+    // subclasses of tinySQL, such as textFileDatabase, to be used
     // as JDBC datasources
     //
     tsql = createDatabaseEngine();

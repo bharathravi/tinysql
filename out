@@ -11,7 +11,7 @@ FileList:
 File ./test/cars :
 Stacktrace is: 
 java.io.FileNotFoundException: ./test/cars.def
-	at ORG.as220.tinySQL.MemoryFile.getInputStream(MemoryFile.java:133)
+	at ORG.as220.tinySQL.MemoryFile.getInputStream(MemoryFile.java:135)
 	at ORG.as220.tinySQL.InMemoryTextFileTable.readColumnInfo(InMemoryTextFileTable.java:686)
 	at ORG.as220.tinySQL.InMemoryTextFileTable.<init>(InMemoryTextFileTable.java:162)
 	at ORG.as220.tinySQL.memoryTextFileDatabase.openTable(memoryTextFileDatabase.java:26)
@@ -25,7 +25,7 @@ java.io.FileNotFoundException: ./test/cars.def
 	at TestInMemoryText.executeUpdate(TestInMemoryText.java:11)
 	at TestInMemoryText.main(TestInMemoryText.java:54)
 EndStacktrace 
-    -> Elapsed time: 13 msecs: -1
+    -> Elapsed time: 12 msecs: -1
   DROP TABLE IF EXISTS people
 ORG.as220.tinySQL.tinySQLException: ./test/cars.def
 	at ORG.as220.tinySQL.InMemoryTextFileTable.readColumnInfo(InMemoryTextFileTable.java:797)
@@ -49,7 +49,7 @@ File ./test/people :
 File ./test/cars :
 Stacktrace is: 
 java.io.FileNotFoundException: ./test/people.def
-	at ORG.as220.tinySQL.MemoryFile.getInputStream(MemoryFile.java:133)
+	at ORG.as220.tinySQL.MemoryFile.getInputStream(MemoryFile.java:135)
 	at ORG.as220.tinySQL.InMemoryTextFileTable.readColumnInfo(InMemoryTextFileTable.java:686)
 	at ORG.as220.tinySQL.InMemoryTextFileTable.<init>(InMemoryTextFileTable.java:162)
 	at ORG.as220.tinySQL.memoryTextFileDatabase.openTable(memoryTextFileDatabase.java:26)
@@ -63,7 +63,7 @@ java.io.FileNotFoundException: ./test/people.def
 	at TestInMemoryText.executeUpdate(TestInMemoryText.java:11)
 	at TestInMemoryText.main(TestInMemoryText.java:55)
 EndStacktrace 
-    -> Elapsed time: 2 msecs: -1
+    -> Elapsed time: 1 msecs: -1
   DROP TABLE IF EXISTS party
 ORG.as220.tinySQL.tinySQLException: ./test/people.def
 	at ORG.as220.tinySQL.InMemoryTextFileTable.readColumnInfo(InMemoryTextFileTable.java:797)
@@ -88,7 +88,7 @@ File ./test/people :
 File ./test/cars :
 Stacktrace is: 
 java.io.FileNotFoundException: ./test/party.def
-	at ORG.as220.tinySQL.MemoryFile.getInputStream(MemoryFile.java:133)
+	at ORG.as220.tinySQL.MemoryFile.getInputStream(MemoryFile.java:135)
 	at ORG.as220.tinySQL.InMemoryTextFileTable.readColumnInfo(InMemoryTextFileTable.java:686)
 	at ORG.as220.tinySQL.InMemoryTextFileTable.<init>(InMemoryTextFileTable.java:162)
 	at ORG.as220.tinySQL.memoryTextFileDatabase.openTable(memoryTextFileDatabase.java:26)
@@ -332,7 +332,7 @@ Writing bytes:
 Writing old before: ./test/people 
 Writing this stuff:
 Writing old: ./test/people 
-    -> Elapsed time: 3 msecs: 0
+    -> Elapsed time: 4 msecs: 0
 Created the tables.
 
 INSERT INTO party ...
@@ -384,7 +384,7 @@ Writing old: ./test/party N2001-00-011
 
 Seeked to 0 in file ./test/party
 WARN:  Table party: Open Views left: 0
-    -> Elapsed time: 23 msecs: 1
+    -> Elapsed time: 22 msecs: 1
 
 INSERT INTO cars ...
 ====================
@@ -444,7 +444,7 @@ NPinto                    2
 
 Seeked to 31 in file ./test/cars
 WARN:  Table cars: Open Views left: 0
-    -> Elapsed time: 1 msecs: 1
+    -> Elapsed time: 0 msecs: 1
   INSerT inTO cars (name, id) VALueS('Thing', 3)
 DEBUG: FindDeletedRow returned : -1
 DEBUG: RowCount: 2
@@ -580,7 +580,7 @@ NRangerover               6
 
 Seeked to 155 in file ./test/cars
 WARN:  Table cars: Open Views left: 0
-    -> Elapsed time: 0 msecs: 1
+    -> Elapsed time: 1 msecs: 1
   INSERT INTO cars (name, id) VALUES('Jeep', 7)
 DEBUG: FindDeletedRow returned : -1
 DEBUG: RowCount: 6
@@ -870,7 +870,7 @@ NJack Chip                6       1
 
 Seeked to 195 in file ./test/people
 WARN:  Table people: Open Views left: 0
-    -> Elapsed time: 0 msecs: 1
+    -> Elapsed time: 1 msecs: 1
   INSERT INTO people (pe_name, pe_id, car_id) VALUES('Glen Runciter', 7, 4)
 DEBUG: FindDeletedRow returned : -1
 DEBUG: RowCount: 6
@@ -1262,7 +1262,7 @@ NH?gar Bo?                12      5
 
 Seeked to 468 in file ./test/people
 WARN:  Table people: Open Views left: 0
-    -> Elapsed time: 1 msecs: 1
+    -> Elapsed time: 2 msecs: 1
 
 UPDATE Mr. Garden ...
 =====================
@@ -1323,7 +1323,7 @@ ERROR: Column : pe_name not found in this table
 ERROR: Column : pe_name not found in this table
 ERROR: Column : car_id not found in this table
 DEBUG: Statement: ResultSet opened
-    -> Elapsed time: 8 msecs
+    -> Elapsed time: 5 msecs
 pe_name                   name                      
 ------------------------- ------------------------- 
 Seeked to 0 in file ./test/cars
@@ -1462,7 +1462,7 @@ SELECT party ...
 =======================
   SELECT * FROM party
 DEBUG: Statement: ResultSet opened
-    -> Elapsed time: 0 msecs
+    -> Elapsed time: 1 msecs
 birthday   age        
 ---------- ---------- 
 Seeked to 0 in file ./test/party
@@ -2282,16 +2282,1734 @@ DEBUG: TinySQL: Table people closed.
 INFO:  About to close table people_tmp_ATAC
 INFO:  Closing table people_tmp_ATAC
 DEBUG: TinySQL: Table people_tmp_ATAC closed.
-WARN:  [Rename] ./test/people to ./test/people_tmp_ATAC_ORG
-WARN:  [Rename] ./test/people.def to ./test/people_tmp_ATAC_ORG.def
-WARN:  [Rename] ./test/people_tmp_ATAC to ./test/people
-WARN:  File ./test/people_tmp_ATAC does not exist
-Renaming of table people_tmp_ATAC to people failed
-java.io.IOException: Renaming of table people_tmp_ATAC to people failed
-	at ORG.as220.tinySQL.textFileDatabase.db_renameTable(textFileDatabase.java:322)
-	at ORG.as220.tinySQL.tinySQL.AlterTableAddCol(tinySQL.java:713)
-	at ORG.as220.tinySQL.sqlparser.AlterTableAddColumnStatement.execute(AlterTableAddColumnStatement.java:124)
-	at ORG.as220.tinySQL.tinySQLStatement.execute(tinySQLStatement.java:196)
-	at ORG.as220.tinySQL.tinySQLStatement.executeUpdate(tinySQLStatement.java:169)
-	at TestInMemoryText.executeUpdate(TestInMemoryText.java:11)
-	at TestInMemoryText.main(TestInMemoryText.java:134)
+    -> Elapsed time: 18 msecs: 13
+  SELECT * FROM people
+DEBUG: InMemory TextFile-Engine: Opening table people
+DEBUG: Default DeleteMode : -1
+Opening InMemory TextFile
+Created IS for string: CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+CHAR|nation|25
+NUMERIC|age|4
+
+DEBUG: RecordLength [0] : 1
+DEBUG: RecordLength [1] : 26
+DEBUG: RecordLength [2] : 34
+DEBUG: RecordLength [3] : 38
+DEBUG: RecordLength [4] : 63
+DEBUG: RecordLength [5] : 67
+RecordLength: 68
+___67
+DEBUG: TinySQL: Table people opened.
+DEBUG: Statement: ResultSet opened
+    -> Elapsed time: 1 msecs
+pe_name                   pe_id    car_id nation                    age  
+------------------------- -------- ------ ------------------------- ---- 
+Seeked to 0 in file ./test/people
+Seeked to 0 in file ./test/people
+Seeked to 68 in file ./test/people
+Seeked to 68 in file ./test/people
+Seeked to 136 in file ./test/people
+Seeked to 136 in file ./test/people
+Seeked to 204 in file ./test/people
+Seeked to 204 in file ./test/people
+Seeked to 272 in file ./test/people
+Seeked to 272 in file ./test/people
+Seeked to 340 in file ./test/people
+Seeked to 340 in file ./test/people
+Seeked to 408 in file ./test/people
+Seeked to 408 in file ./test/people
+Seeked to 476 in file ./test/people
+Seeked to 476 in file ./test/people
+Seeked to 544 in file ./test/people
+Seeked to 544 in file ./test/people
+Seeked to 612 in file ./test/people
+Seeked to 612 in file ./test/people
+Seeked to 680 in file ./test/people
+Seeked to 680 in file ./test/people
+Seeked to 748 in file ./test/people
+Seeked to 748 in file ./test/people
+Seeked to 816 in file ./test/people
+Seeked to 816 in file ./test/people
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 13
+Irwin Garden              1        6                                0    
+Mr. Fiction               2        7                                0    
+Sal Paradise              3        8                                0    
+Dean Moriarty             4        3                                0    
+Bull Lee                  5        7                                0    
+Jack Chip                 6        1                                0    
+Glen Runciter             7        4                                0    
+Horselover Fat            8        2                                0    
+Gnossos Pappadopoulos     9        7                                0    
+Hef                       10       6                                0    
+Matty Groves              11       7                                0    
+Raoul Frodus              12       5                                0    
+H?gar Bo?                 12       5                                0    
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table people: Open Views left: 0
+DEBUG: Statement: ResultSet close
+
+  ALTER TABLE people DROP COLUMN age
+INFO:  About to close table people
+WARN:  Table people: Open Views left: 0
+INFO:  Closing table people
+DEBUG: TinySQL: Table people closed.
+DEBUG: File: ./test/people_tmp_ATAC_ORG does not exist. No action taken on delete.
+DEBUG: File: ./test/people_tmp_ATAC_ORG.def does not exist. No action taken on delete.
+DEBUG: File: ./test/people_tmp_ATAC does not exist. No action taken on delete.
+DEBUG: File: ./test/people_tmp_ATAC.def does not exist. No action taken on delete.
+DEBUG: InMemory TextFile-Engine: Opening table people
+DEBUG: Default DeleteMode : -1
+Opening InMemory TextFile
+Created IS for string: CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+CHAR|nation|25
+NUMERIC|age|4
+
+DEBUG: RecordLength [0] : 1
+DEBUG: RecordLength [1] : 26
+DEBUG: RecordLength [2] : 34
+DEBUG: RecordLength [3] : 38
+DEBUG: RecordLength [4] : 63
+DEBUG: RecordLength [5] : 67
+RecordLength: 68
+___67
+INFO:  About to close table people
+INFO:  Closing table people
+Creating non existent file./test/people_tmp_ATAC.def
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def 
+Writing this stuff:CHAR|_DELETED|1
+
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+
+Writing this stuff:CHAR|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|
+Writing this stuff:pe_name|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|
+Writing this stuff:25
+
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+
+Writing this stuff:NUMERIC|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|
+Writing this stuff:pe_id|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|
+Writing this stuff:8
+
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+
+Writing this stuff:NUMERIC|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|
+Writing this stuff:car_id|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|
+Writing this stuff:4
+
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+
+Writing this stuff:CHAR|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+CHAR|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+CHAR|
+Writing this stuff:nation|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+CHAR|nation|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+CHAR|nation|
+Writing this stuff:25
+
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+CHAR|nation|25
+
+Creating non existent file./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC 
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC 
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC 
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC 
+DEBUG: InMemory TextFile-Engine: Opening table people_tmp_ATAC
+DEBUG: Default DeleteMode : -1
+Opening InMemory TextFile
+Created IS for string: CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+CHAR|nation|25
+
+DEBUG: RecordLength [0] : 1
+DEBUG: RecordLength [1] : 26
+DEBUG: RecordLength [2] : 34
+DEBUG: RecordLength [3] : 38
+DEBUG: RecordLength [4] : 63
+RecordLength: 64
+___63
+DEBUG: TinySQL: Table people_tmp_ATAC opened.
+DEBUG: InMemory TextFile-Engine: Opening table people
+DEBUG: Default DeleteMode : -1
+Opening InMemory TextFile
+Created IS for string: CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+CHAR|nation|25
+NUMERIC|age|4
+
+DEBUG: RecordLength [0] : 1
+DEBUG: RecordLength [1] : 26
+DEBUG: RecordLength [2] : 34
+DEBUG: RecordLength [3] : 38
+DEBUG: RecordLength [4] : 63
+DEBUG: RecordLength [5] : 67
+RecordLength: 68
+___67
+DEBUG: TinySQL: Table people opened.
+DEBUG: Statement: ResultSet opened
+Seeked to 0 in file ./test/people
+Seeked to 0 in file ./test/people
+Seeked to 68 in file ./test/people
+Seeked to 68 in file ./test/people
+Seeked to 136 in file ./test/people
+Seeked to 136 in file ./test/people
+Seeked to 204 in file ./test/people
+Seeked to 204 in file ./test/people
+Seeked to 272 in file ./test/people
+Seeked to 272 in file ./test/people
+Seeked to 340 in file ./test/people
+Seeked to 340 in file ./test/people
+Seeked to 408 in file ./test/people
+Seeked to 408 in file ./test/people
+Seeked to 476 in file ./test/people
+Seeked to 476 in file ./test/people
+Seeked to 544 in file ./test/people
+Seeked to 544 in file ./test/people
+Seeked to 612 in file ./test/people
+Seeked to 612 in file ./test/people
+Seeked to 680 in file ./test/people
+Seeked to 680 in file ./test/people
+Seeked to 748 in file ./test/people
+Seeked to 748 in file ./test/people
+Seeked to 816 in file ./test/people
+Seeked to 816 in file ./test/people
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 13
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 0
+DEBUG: Insering in row : 0 -> 0
+Seeked to 0 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC 
+Writing this stuff:NIrwin Garden             1       6                            
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+
+Seeked to 0 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 1
+DEBUG: Insering in row : 1 -> 1
+Seeked to 64 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+
+Writing this stuff:NMr. Fiction              2       7                            
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+
+Seeked to 64 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 2
+DEBUG: Insering in row : 2 -> 2
+Seeked to 128 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+
+Writing this stuff:NSal Paradise             3       8                            
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+
+Seeked to 128 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 3
+DEBUG: Insering in row : 3 -> 3
+Seeked to 192 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+
+Writing this stuff:NDean Moriarty            4       3                            
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+
+Seeked to 192 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 4
+DEBUG: Insering in row : 4 -> 4
+Seeked to 256 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+
+Writing this stuff:NBull Lee                 5       7                            
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+
+Seeked to 256 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 5
+DEBUG: Insering in row : 5 -> 5
+Seeked to 320 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+
+Writing this stuff:NJack Chip                6       1                            
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+
+Seeked to 320 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 6
+DEBUG: Insering in row : 6 -> 6
+Seeked to 384 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+
+Writing this stuff:NGlen Runciter            7       4                            
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+
+Seeked to 384 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 7
+DEBUG: Insering in row : 7 -> 7
+Seeked to 448 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+
+Writing this stuff:NHorselover Fat           8       2                            
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+
+Seeked to 448 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 8
+DEBUG: Insering in row : 8 -> 8
+Seeked to 512 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+
+Writing this stuff:NGnossos Pappadopoulos    9       7                            
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+
+Seeked to 512 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 9
+DEBUG: Insering in row : 9 -> 9
+Seeked to 576 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+
+Writing this stuff:NHef                      10      6                            
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+
+Seeked to 576 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 10
+DEBUG: Insering in row : 10 -> 10
+Seeked to 640 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+
+Writing this stuff:NMatty Groves             11      7                            
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+NMatty Groves             11      7                            
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+NMatty Groves             11      7                            
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+NMatty Groves             11      7                            
+
+Seeked to 640 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 11
+DEBUG: Insering in row : 11 -> 11
+Seeked to 704 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+NMatty Groves             11      7                            
+
+Writing this stuff:NRaoul Frodus             12      5                            
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+NMatty Groves             11      7                            
+NRaoul Frodus             12      5                            
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+NMatty Groves             11      7                            
+NRaoul Frodus             12      5                            
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+NMatty Groves             11      7                            
+NRaoul Frodus             12      5                            
+
+Seeked to 704 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 12
+DEBUG: Insering in row : 12 -> 12
+Seeked to 768 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+NMatty Groves             11      7                            
+NRaoul Frodus             12      5                            
+
+Writing this stuff:NH?gar Bo?                12      5                            
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+NMatty Groves             11      7                            
+NRaoul Frodus             12      5                            
+NH?gar Bo?                12      5                            
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+NMatty Groves             11      7                            
+NRaoul Frodus             12      5                            
+NH?gar Bo?                12      5                            
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6                            
+NMr. Fiction              2       7                            
+NSal Paradise             3       8                            
+NDean Moriarty            4       3                            
+NBull Lee                 5       7                            
+NJack Chip                6       1                            
+NGlen Runciter            7       4                            
+NHorselover Fat           8       2                            
+NGnossos Pappadopoulos    9       7                            
+NHef                      10      6                            
+NMatty Groves             11      7                            
+NRaoul Frodus             12      5                            
+NH?gar Bo?                12      5                            
+
+Seeked to 768 in file ./test/people_tmp_ATAC
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table people: Open Views left: 0
+DEBUG: Statement: ResultSet close
+WARN:  Table people_tmp_ATAC: Open Views left: 0
+INFO:  About to close table people
+INFO:  Closing table people
+DEBUG: TinySQL: Table people closed.
+INFO:  About to close table people_tmp_ATAC
+INFO:  Closing table people_tmp_ATAC
+DEBUG: TinySQL: Table people_tmp_ATAC closed.
+    -> Elapsed time: 26 msecs: 13
+  SELECT * FROM people
+DEBUG: InMemory TextFile-Engine: Opening table people
+DEBUG: Default DeleteMode : -1
+Opening InMemory TextFile
+Created IS for string: CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+CHAR|nation|25
+
+DEBUG: RecordLength [0] : 1
+DEBUG: RecordLength [1] : 26
+DEBUG: RecordLength [2] : 34
+DEBUG: RecordLength [3] : 38
+DEBUG: RecordLength [4] : 63
+RecordLength: 64
+___63
+DEBUG: TinySQL: Table people opened.
+DEBUG: Statement: ResultSet opened
+    -> Elapsed time: 1 msecs
+pe_name                   pe_id    car_id nation                    
+------------------------- -------- ------ ------------------------- 
+Seeked to 0 in file ./test/people
+Seeked to 0 in file ./test/people
+Seeked to 64 in file ./test/people
+Seeked to 64 in file ./test/people
+Seeked to 128 in file ./test/people
+Seeked to 128 in file ./test/people
+Seeked to 192 in file ./test/people
+Seeked to 192 in file ./test/people
+Seeked to 256 in file ./test/people
+Seeked to 256 in file ./test/people
+Seeked to 320 in file ./test/people
+Seeked to 320 in file ./test/people
+Seeked to 384 in file ./test/people
+Seeked to 384 in file ./test/people
+Seeked to 448 in file ./test/people
+Seeked to 448 in file ./test/people
+Seeked to 512 in file ./test/people
+Seeked to 512 in file ./test/people
+Seeked to 576 in file ./test/people
+Seeked to 576 in file ./test/people
+Seeked to 640 in file ./test/people
+Seeked to 640 in file ./test/people
+Seeked to 704 in file ./test/people
+Seeked to 704 in file ./test/people
+Seeked to 768 in file ./test/people
+Seeked to 768 in file ./test/people
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 13
+Irwin Garden              1        6                                
+Mr. Fiction               2        7                                
+Sal Paradise              3        8                                
+Dean Moriarty             4        3                                
+Bull Lee                  5        7                                
+Jack Chip                 6        1                                
+Glen Runciter             7        4                                
+Horselover Fat            8        2                                
+Gnossos Pappadopoulos     9        7                                
+Hef                       10       6                                
+Matty Groves              11       7                                
+Raoul Frodus              12       5                                
+H?gar Bo?                 12       5                                
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table people: Open Views left: 0
+DEBUG: Statement: ResultSet close
+
+  ALTER TABLE people DROP nation
+INFO:  About to close table people
+WARN:  Table people: Open Views left: 0
+INFO:  Closing table people
+DEBUG: TinySQL: Table people closed.
+DEBUG: File: ./test/people_tmp_ATAC_ORG does not exist. No action taken on delete.
+DEBUG: File: ./test/people_tmp_ATAC_ORG.def does not exist. No action taken on delete.
+DEBUG: File: ./test/people_tmp_ATAC does not exist. No action taken on delete.
+DEBUG: File: ./test/people_tmp_ATAC.def does not exist. No action taken on delete.
+DEBUG: InMemory TextFile-Engine: Opening table people
+DEBUG: Default DeleteMode : -1
+Opening InMemory TextFile
+Created IS for string: CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+CHAR|nation|25
+
+DEBUG: RecordLength [0] : 1
+DEBUG: RecordLength [1] : 26
+DEBUG: RecordLength [2] : 34
+DEBUG: RecordLength [3] : 38
+DEBUG: RecordLength [4] : 63
+RecordLength: 64
+___63
+INFO:  About to close table people
+INFO:  Closing table people
+Creating non existent file./test/people_tmp_ATAC.def
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def 
+Writing this stuff:CHAR|_DELETED|1
+
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+
+Writing this stuff:CHAR|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|
+Writing this stuff:pe_name|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|
+Writing this stuff:25
+
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+
+Writing this stuff:NUMERIC|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|
+Writing this stuff:pe_id|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|
+Writing this stuff:8
+
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+
+Writing this stuff:NUMERIC|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|
+Writing this stuff:car_id|
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|
+Writing this stuff:4
+
+Writing old: ./test/people_tmp_ATAC.def CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+
+Creating non existent file./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC 
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC 
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC 
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC 
+DEBUG: InMemory TextFile-Engine: Opening table people_tmp_ATAC
+DEBUG: Default DeleteMode : -1
+Opening InMemory TextFile
+Created IS for string: CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+
+DEBUG: RecordLength [0] : 1
+DEBUG: RecordLength [1] : 26
+DEBUG: RecordLength [2] : 34
+DEBUG: RecordLength [3] : 38
+RecordLength: 39
+___38
+DEBUG: TinySQL: Table people_tmp_ATAC opened.
+DEBUG: InMemory TextFile-Engine: Opening table people
+DEBUG: Default DeleteMode : -1
+Opening InMemory TextFile
+Created IS for string: CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+CHAR|nation|25
+
+DEBUG: RecordLength [0] : 1
+DEBUG: RecordLength [1] : 26
+DEBUG: RecordLength [2] : 34
+DEBUG: RecordLength [3] : 38
+DEBUG: RecordLength [4] : 63
+RecordLength: 64
+___63
+DEBUG: TinySQL: Table people opened.
+DEBUG: Statement: ResultSet opened
+Seeked to 0 in file ./test/people
+Seeked to 0 in file ./test/people
+Seeked to 64 in file ./test/people
+Seeked to 64 in file ./test/people
+Seeked to 128 in file ./test/people
+Seeked to 128 in file ./test/people
+Seeked to 192 in file ./test/people
+Seeked to 192 in file ./test/people
+Seeked to 256 in file ./test/people
+Seeked to 256 in file ./test/people
+Seeked to 320 in file ./test/people
+Seeked to 320 in file ./test/people
+Seeked to 384 in file ./test/people
+Seeked to 384 in file ./test/people
+Seeked to 448 in file ./test/people
+Seeked to 448 in file ./test/people
+Seeked to 512 in file ./test/people
+Seeked to 512 in file ./test/people
+Seeked to 576 in file ./test/people
+Seeked to 576 in file ./test/people
+Seeked to 640 in file ./test/people
+Seeked to 640 in file ./test/people
+Seeked to 704 in file ./test/people
+Seeked to 704 in file ./test/people
+Seeked to 768 in file ./test/people
+Seeked to 768 in file ./test/people
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 13
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 0
+DEBUG: Insering in row : 0 -> 0
+Seeked to 0 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC 
+Writing this stuff:NIrwin Garden             1       6   
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+
+Seeked to 0 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 1
+DEBUG: Insering in row : 1 -> 1
+Seeked to 39 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+
+Writing this stuff:NMr. Fiction              2       7   
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+
+Seeked to 39 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 2
+DEBUG: Insering in row : 2 -> 2
+Seeked to 78 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+
+Writing this stuff:NSal Paradise             3       8   
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+
+Seeked to 78 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 3
+DEBUG: Insering in row : 3 -> 3
+Seeked to 117 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+
+Writing this stuff:NDean Moriarty            4       3   
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+
+Seeked to 117 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 4
+DEBUG: Insering in row : 4 -> 4
+Seeked to 156 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+
+Writing this stuff:NBull Lee                 5       7   
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+
+Seeked to 156 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 5
+DEBUG: Insering in row : 5 -> 5
+Seeked to 195 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+
+Writing this stuff:NJack Chip                6       1   
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+
+Seeked to 195 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 6
+DEBUG: Insering in row : 6 -> 6
+Seeked to 234 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+
+Writing this stuff:NGlen Runciter            7       4   
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+
+Seeked to 234 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 7
+DEBUG: Insering in row : 7 -> 7
+Seeked to 273 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+
+Writing this stuff:NHorselover Fat           8       2   
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+
+Seeked to 273 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 8
+DEBUG: Insering in row : 8 -> 8
+Seeked to 312 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+
+Writing this stuff:NGnossos Pappadopoulos    9       7   
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+
+Seeked to 312 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 9
+DEBUG: Insering in row : 9 -> 9
+Seeked to 351 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+
+Writing this stuff:NHef                      10      6   
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+
+Seeked to 351 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 10
+DEBUG: Insering in row : 10 -> 10
+Seeked to 390 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+
+Writing this stuff:NMatty Groves             11      7   
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+NMatty Groves             11      7   
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+NMatty Groves             11      7   
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+NMatty Groves             11      7   
+
+Seeked to 390 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 11
+DEBUG: Insering in row : 11 -> 11
+Seeked to 429 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+NMatty Groves             11      7   
+
+Writing this stuff:NRaoul Frodus             12      5   
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+NMatty Groves             11      7   
+NRaoul Frodus             12      5   
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+NMatty Groves             11      7   
+NRaoul Frodus             12      5   
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+NMatty Groves             11      7   
+NRaoul Frodus             12      5   
+
+Seeked to 429 in file ./test/people_tmp_ATAC
+DEBUG: FindDeletedRow returned : -1
+DEBUG: RowCount: 12
+DEBUG: Insering in row : 12 -> 12
+Seeked to 468 in file ./test/people_tmp_ATAC
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+NMatty Groves             11      7   
+NRaoul Frodus             12      5   
+
+Writing this stuff:NH?gar Bo?                12      5   
+
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+NMatty Groves             11      7   
+NRaoul Frodus             12      5   
+NH?gar Bo?                12      5   
+
+Writing bytes:
+Writing old before: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+NMatty Groves             11      7   
+NRaoul Frodus             12      5   
+NH?gar Bo?                12      5   
+
+Writing this stuff:
+Writing old: ./test/people_tmp_ATAC NIrwin Garden             1       6   
+NMr. Fiction              2       7   
+NSal Paradise             3       8   
+NDean Moriarty            4       3   
+NBull Lee                 5       7   
+NJack Chip                6       1   
+NGlen Runciter            7       4   
+NHorselover Fat           8       2   
+NGnossos Pappadopoulos    9       7   
+NHef                      10      6   
+NMatty Groves             11      7   
+NRaoul Frodus             12      5   
+NH?gar Bo?                12      5   
+
+Seeked to 468 in file ./test/people_tmp_ATAC
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table people: Open Views left: 0
+DEBUG: Statement: ResultSet close
+WARN:  Table people_tmp_ATAC: Open Views left: 0
+INFO:  About to close table people
+INFO:  Closing table people
+DEBUG: TinySQL: Table people closed.
+INFO:  About to close table people_tmp_ATAC
+INFO:  Closing table people_tmp_ATAC
+DEBUG: TinySQL: Table people_tmp_ATAC closed.
+    -> Elapsed time: 13 msecs: 13
+  SELECT * FROM people
+DEBUG: InMemory TextFile-Engine: Opening table people
+DEBUG: Default DeleteMode : -1
+Opening InMemory TextFile
+Created IS for string: CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4
+
+DEBUG: RecordLength [0] : 1
+DEBUG: RecordLength [1] : 26
+DEBUG: RecordLength [2] : 34
+DEBUG: RecordLength [3] : 38
+RecordLength: 39
+___38
+DEBUG: TinySQL: Table people opened.
+DEBUG: Statement: ResultSet opened
+    -> Elapsed time: 1 msecs
+pe_name                   pe_id    car_id 
+------------------------- -------- ------ 
+Seeked to 0 in file ./test/people
+Seeked to 0 in file ./test/people
+Seeked to 39 in file ./test/people
+Seeked to 39 in file ./test/people
+Seeked to 78 in file ./test/people
+Seeked to 78 in file ./test/people
+Seeked to 117 in file ./test/people
+Seeked to 117 in file ./test/people
+Seeked to 156 in file ./test/people
+Seeked to 156 in file ./test/people
+Seeked to 195 in file ./test/people
+Seeked to 195 in file ./test/people
+Seeked to 234 in file ./test/people
+Seeked to 234 in file ./test/people
+Seeked to 273 in file ./test/people
+Seeked to 273 in file ./test/people
+Seeked to 312 in file ./test/people
+Seeked to 312 in file ./test/people
+Seeked to 351 in file ./test/people
+Seeked to 351 in file ./test/people
+Seeked to 390 in file ./test/people
+Seeked to 390 in file ./test/people
+Seeked to 429 in file ./test/people
+Seeked to 429 in file ./test/people
+Seeked to 468 in file ./test/people
+Seeked to 468 in file ./test/people
+DEBUG: SELECT returned on level: -1
+DEBUG: ResultSet: Max Rows reached: 13
+Irwin Garden              1        6      
+Mr. Fiction               2        7      
+Sal Paradise              3        8      
+Dean Moriarty             4        3      
+Bull Lee                  5        7      
+Jack Chip                 6        1      
+Glen Runciter             7        4      
+Horselover Fat            8        2      
+Gnossos Pappadopoulos     9        7      
+Hef                       10       6      
+Matty Groves              11       7      
+Raoul Frodus              12       5      
+H?gar Bo?                 12       5      
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table people: Open Views left: 0
+DEBUG: Statement: ResultSet close
+
+Checking Meta data ...
+======================
+
+*** Type Info: [DATA_TYPE is from java.sql.Types]
+TYPE_NAME  DATA_TYPE PRECISION LITERAL_PREFIX LITERAL_SUFFIX CREATE_PARAMS        NULLABLE CASE_SENSITIVE SEARCHABLE 
+---------- --------- --------- -------------- -------------- -------------------- -------- -------------- ---------- 
+CHAR       1         254       '              '              0                    1        Y              3          
+NUMERIC    6         19                                      0                    1        N              3          
+BOOLEAN    -7        1                                       0                    1        N              3          
+DATE       91        10        '              '              0                    1        N              3          
+DEBUG: ResultSet: Max Rows reached: 4
+
+*** Table Info:
+TABLE_CAT  TABLE_SCHEM TABLE_NAME                                                                                                                                                                                                                                                 TABLE_TYPE                               TABLE_REMARKS                                                                                                                                                                                                                                                  
+---------- ----------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+                       people_tmp_ATAC_ORG                                                                                                                                                                                                                                        TABLE                                                                                                                                                                                                                                                                                                   
+                       cars                                                                                                                                                                                                                                                       TABLE                                                                                                                                                                                                                                                                                                   
+                       party                                                                                                                                                                                                                                                      TABLE                                                                                                                                                                                                                                                                                                   
+DEBUG: ResultSet: Max Rows reached: 3
+DEBUG: ResultSet.close(): Closing 1 views
+WARN:  Table party: Open Views left: 0
+DEBUG: Statement: ResultSet close
+INFO:  About to close table party
+INFO:  Closing table party
+DEBUG: TinySQL: Table party closed.
+INFO:  About to close table people
+INFO:  Closing table people
+DEBUG: TinySQL: Table people closed.
+INFO:  About to close table cars
+INFO:  Closing table cars
+DEBUG: TinySQL: Table cars closed.
+
+Good bye

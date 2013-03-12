@@ -1,0 +1,4 @@
+CHAR|_DELETED|1
+CHAR|pe_name|25
+NUMERIC|pe_id|8
+NUMERIC|car_id|4

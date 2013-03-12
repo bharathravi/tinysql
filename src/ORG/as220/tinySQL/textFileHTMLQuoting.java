@@ -35,7 +35,7 @@ public class textFileHTMLQuoting extends textFileQuoting
     quoting.doTest("Not really!");
     quoting.doTest("It won't work, but who cares?");
     quoting.doTest("Not really! \" yo\" ");
-    quoting.doTest("H‰gar Boﬂ");
+    quoting.doTest("Hogar Boo");
 
   }
 

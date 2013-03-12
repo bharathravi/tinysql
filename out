@@ -1195,7 +1195,7 @@ NRaoul Frodus             12      5
 Seeked to 429 in file ./test/people
 WARN:  Table people: Open Views left: 0
     -> Elapsed time: 1 msecs: 1
-  INSERT INTO people (pe_name, pe_id, car_id) VALUES('H�gar Bo�', 12, 5)
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Hogar Boo', 12, 5)
 DEBUG: FindDeletedRow returned : -1
 DEBUG: RowCount: 12
 DEBUG: Insering in row : 12 -> 12

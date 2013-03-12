@@ -754,7 +754,7 @@ public abstract class tinySQL
       tinySQLTable oldTable = openTable(tablename);
       tinySQLTable newTable = openTable(newTableName);
 
-      // gleiche Columns werden �bernommen, neue dazugef�gt, �berfl�ssige entfernt
+      // gleiche Columns werden obernommen, neue dazugefogt, oberflossige entfernt
       Vector newnames = new Vector();
       for (int i = 0; i < newTable.getColumnCount(); i++)
       {

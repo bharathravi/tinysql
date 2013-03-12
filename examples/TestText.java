@@ -104,7 +104,7 @@ public class TestText
             executeUpdate(stmt, "INSERT INTO people (pe_name, pe_id, car_id) VALUES('Hef', 10, 6)");
             executeUpdate(stmt, "INSERT INTO people (pe_name, pe_id, car_id) VALUES('Matty Groves', 11, 7)");
             executeUpdate(stmt, "INSERT INTO people (pe_name, pe_id, car_id) VALUES('Raoul Frodus', 12, 5)");
-            executeUpdate(stmt, "INSERT INTO people (pe_name, pe_id, car_id) VALUES('H�gar Bo�', 12, 5)");
+            executeUpdate(stmt, "INSERT INTO people (pe_name, pe_id, car_id) VALUES('Hogar Boo', 12, 5)");
             System.out.println("");
             System.out.println("UPDATE Mr. Garden ...");
             System.out.println("=====================");

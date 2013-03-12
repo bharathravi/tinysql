@@ -381,7 +381,7 @@ public class dbfFileDatabaseMetaData extends tinySqlDatabaseMetaData
    * catalog; null means drop catalog name from the selection criteria
    * THIS VALUE IS IGNORED
    * @param schemaPattern THIS VALUE IS IGNORED
-   * @param tableNamePattern a table name pattern, �null� or "%" delivers all
+   * @param tableNamePattern a table name pattern, onullo or "%" delivers all
    *                         token will be handled as substrings
    * @param types a list of table types to include; null returns all DBF types
    *              only "TABLE" is supported, others like "VIEW", "SYSTEM TABLE", "SEQUENCE"

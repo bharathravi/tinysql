@@ -40,16 +40,16 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 /**
- * Atr�ves do uso desta classe � poss�vel executar com facilidade uma mesma
+ * Atroves do uso desta classe o possovel executar com facilidade uma mesma
  * diretiva <code.SQL</code> diversas vezes, bastando para isto subistituir as
- * vari�veis representadas pelo s�mbolo <b>?</b>, que � colocado pelo usu�rio
- * dentro do c�digo <code.SQL</code> para ser utilizado como vari�vel.<b>
- * Estas vari�veis pode ter seus valores definidos utilizando os m�todos
- * <code>setXXX( )</code> que s�o herdados da interface
- * <code>PreparedStatement</code>. Estes m�todos utilizam como par�metro sempre
- * o indice que representa a ordem da vari�vel bind <code>SQL</code> ( <b>?</b>
- * ) dentro do comando que dever� ser enviado ao banco de dados e o valor
- * adequado que deve ser v�nculado ao campo da tabela no banco de dados.
+ * varioveis representadas pelo sombolo <b>?</b>, que o colocado pelo usuorio
+ * dentro do codigo <code.SQL</code> para ser utilizado como variovel.<b>
+ * Estas varioveis pode ter seus valores definidos utilizando os motodos
+ * <code>setXXX( )</code> que soo herdados da interface
+ * <code>PreparedStatement</code>. Estes motodos utilizam como parometro sempre
+ * o indice que representa a ordem da variovel bind <code>SQL</code> ( <b>?</b>
+ * ) dentro do comando que devero ser enviado ao banco de dados e o valor
+ * adequado que deve ser vonculado ao campo da tabela no banco de dados.
  * @author <a href='mailto:GuardianOfSteel@netscape.net'>Edson Alves Pereira</a> - 29/12/2001
  * @version $Revision: 1.4 $
  */

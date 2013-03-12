@@ -20,9 +20,9 @@ package ORG.as220.tinySQL.util;
 import java.util.Enumeration;
 
 /**
- * Eine Enumeration über ein Array von Objekten.
+ * Eine Enumeration ober ein Array von Objekten.
  *
- * Abhängikeiten: Keine
+ * Abhongikeiten: Keine
  */
 public class ArrayEnumeration implements Enumeration
 {

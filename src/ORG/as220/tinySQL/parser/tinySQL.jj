@@ -138,6 +138,7 @@ TOKEN [IGNORE_CASE]:
   | <NULL:    "null">
   | <OR:      "or">
   | <ORDER:   "order">
+  | <PRIMARY_KEY: "primary key">
   | <RENAME:  "rename">
   | <SELECT:  "select">
   | <SET:     "set">
@@ -917,10 +918,42 @@ SQLStatement CreateTable (tinySQLStatement statement) throws tinySQLException :
     stmt.setTable (table);
 
     int size = coldefs.size();
+    boolean checkForPrimaryKey = false;
+    String primaryKeyName = "";
     for (int i = 0; i < size; i++)
     {
-      stmt.addColumnDefinition ((ColumnDefinition) coldefs.elementAt (i));
+      ColumnDefinition coldef = (ColumnDefinition) coldefs.elementAt (i);
+      stmt.addColumnDefinition (coldef);
+      if (coldef.isPrimaryKey()) {
+        if (!checkForPrimaryKey) {
+          checkForPrimaryKey = true;
+          primaryKeyName = coldef.getName();
+        } else {
+          throw new tinySQLException("Too many Primary keys");
+        }
+      }
     }
+
+    if (checkForPrimaryKey) {
+      boolean found = false;
+      for (int i = 0; i < size; i++) {
+        ColumnDefinition thisdef = (ColumnDefinition) coldefs.elementAt (i);
+        if (thisdef.getName().equals(primaryKeyName)) {
+          found = true;
+          break;
+        }
+      }
+
+      if (!found) {
+        throw new tinySQLException("Primary Key Column does not exist!");
+      }
+
+      stmt.setHasPrimaryKey(true);
+      stmt.setPrimaryKey(primaryKeyName);
+    } else {
+      stmt.setHasPrimaryKey(false);
+    }
+
     return stmt;
   }
 }
@@ -955,16 +988,15 @@ Vector getColumnDefinitions () throws tinySQLException  :
   }
 }
 
-ColumnDefinition getColumnDefinition () throws tinySQLException  :
+void getNormalColumn (ColumnDefinition coldef) throws tinySQLException :
 {
-  ColumnDefinition coldef = null;
   String name = null;
 }
 {
   (
     name = getName ()
     {
-      coldef = new ColumnDefinition (name);
+      coldef.setName(name);
     }
   )
   (
@@ -976,8 +1008,39 @@ ColumnDefinition getColumnDefinition () throws tinySQLException  :
       (<NULL>) { coldef.setNullable (true); }
     | (<NOT> <NULL>) { coldef.setNullable (false); }
   )?
+}
+
+void getPrimaryKeyDef (ColumnDefinition coldef) throws tinySQLException :
+{
+  String name = null;
+}
+{
+  ( <PRIMARY_KEY>
+    <L_PAREN>
+    name = getName ()
+    <R_PAREN>
+    {
+      coldef.setName(name);
+    }
+  )
   {
-    return coldef;
+    coldef.setPrimaryKey (true);
+  }
+}
+
+
+ColumnDefinition getColumnDefinition () throws tinySQLException  :
+{
+  String name = null;
+  ColumnDefinition coldef = new ColumnDefinition(name);
+}
+{
+
+  (   getPrimaryKeyDef(coldef)
+    | getNormalColumn(coldef)
+  )
+  {
+      return coldef;
   }
 }
 

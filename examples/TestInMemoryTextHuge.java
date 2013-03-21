@@ -90,7 +90,7 @@ public class TestInMemoryTextHuge
       executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Jeep', 7)");
       executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Hummer', 8)");
 
-      for (long i = 0; i < 600000; ++i) {
+      for (long i = 0; i < 120000; ++i) {
         executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Hummer', 8)");
       }
 

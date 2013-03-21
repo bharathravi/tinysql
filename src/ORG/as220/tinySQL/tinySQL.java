@@ -295,6 +295,8 @@ public abstract class tinySQL
       boolean eof = false;        // did we hit eof?
       boolean haveRecord = false; // did we get a record or not?
 
+      // TODO(bharath): nextNonDeleted is the row iterator in the physical table
+      // (eventually). Binary search will need to be done here.
       if (currentTable.nextNonDeleted())
       {
         // add each column for this table to

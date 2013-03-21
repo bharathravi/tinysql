@@ -57,7 +57,7 @@ public class TestText
             System.out.println("");
             System.out.println("CREATE TABLE party ...");
             System.out.println("=====================");
-            executeUpdate(stmt, "CREATE TABLE party (birthday DATE, age INT)");
+            executeUpdate(stmt, "CREATE TABLE party (birthday DATE, age INT, PRIMARY KEY (birthday))");
 
 
             System.out.println("");

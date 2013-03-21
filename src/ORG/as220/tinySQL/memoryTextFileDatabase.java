@@ -95,18 +95,34 @@ public class memoryTextFileDatabase extends textFileDatabase {
   }
 
   @Override
+  protected void db_createIndex(String table_name, String primaryKey) throws IOException, tinySQLException {
+    // create the table index file
+    //
+    //
+    MemoryFile memFile = new MemoryFile(dataDir + File.separator
+        + table_name + getIndexExtension(), "rw");
+
+    memFile.write(("PRIMARY_KEY|" + primaryKey + "\n").getBytes());
+    memFile.write("NUM_ROWS|0\n".getBytes());
+
+    // Close the file
+    memFile.close();
+  }
+
+  @Override
   protected void db_removeTable(String table_name) throws IOException {
     MemoryFile.delFile(dataDir + File.separator + table_name + getTableExtension());
     MemoryFile.delFile(dataDir + File.separator + table_name + getDefinitionExtension());
+    MemoryFile.delFile(dataDir + File.separator + table_name + getIndexExtension());
   }
 
   @Override
   protected void db_renameTable(String table_name, String newname) throws IOException {
-      String source = dataDir + File.separator + table_name;
-      String dest = dataDir + File.separator + newname;
-      if (MemoryFile.renameFile(source + getTableExtension(), dest + getTableExtension()) == false ||
-          MemoryFile.renameFile(source + getDefinitionExtension(), dest + getDefinitionExtension()) == false)
-        throw new IOException("Renaming of table " + table_name + " to " + newname + " failed");
-    }
+    String source = dataDir + File.separator + table_name;
+    String dest = dataDir + File.separator + newname;
+    if (MemoryFile.renameFile(source + getTableExtension(), dest + getTableExtension()) == false ||
+        MemoryFile.renameFile(source + getDefinitionExtension(), dest + getDefinitionExtension()) == false)
+      throw new IOException("Renaming of table " + table_name + " to " + newname + " failed");
+  }
 
 }

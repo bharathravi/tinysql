@@ -135,10 +135,34 @@ public class diskTextFileDatabase extends textFileDatabase
 
   }
 
+  @Override
+  protected void db_createIndex(String table_name, String primaryKey) throws IOException, tinySQLException {
+    // Create Index file
+    BufferedOutputStream fdef =
+        new BufferedOutputStream(
+            new FileOutputStream(dataDir + File.separator + table_name + getIndexExtension()
+            ));
+
+    // open it as a DataOutputStream
+    //
+    DataOutputStream def = new DataOutputStream(fdef);
+
+    System.out.println(primaryKey + " is PRIMKEY");
+    def.write(("PRIMARY_KEY|" + primaryKey + "\n").getBytes());
+    def.write("NUM_ROWS|0\n".getBytes());
+
+    // Close the file
+    def.flush();
+    fdef.close();
+  }
+
+
+
   protected void db_removeTable(String table_name) throws IOException
   {
     Utils.delFile(dataDir + File.separator + table_name + getTableExtension());
     Utils.delFile(dataDir + File.separator + table_name + getDefinitionExtension());
+    Utils.delFile(dataDir + File.separator + table_name + getIndexExtension());
   }
 
   protected void db_renameTable(String table_name, String newname) throws IOException {

@@ -263,7 +263,7 @@ public class tsResultSet
    * creates an empty tsPhysicalRow using the copyconstructor for the
    * prototype.
    */
-  public tsPhysicalRow createPhysicalRow()
+  public tsPhysicalRow  createPhysicalRow()
   {
     return new tsPhysicalRow(rowPrototype);
   }

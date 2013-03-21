@@ -37,6 +37,16 @@ public class ColumnDefinition
   private int decimals;
   private boolean nullable;
 
+  public boolean isPrimaryKey() {
+    return isPrimaryKey;
+  }
+
+  public void setPrimaryKey(boolean primaryKey) {
+    isPrimaryKey = primaryKey;
+  }
+
+  private boolean isPrimaryKey;
+
   /**
    * creates a new column definition for a column with the specified name.
    * The definition has to be valid to the underlying database, or a database
@@ -53,6 +63,10 @@ public class ColumnDefinition
   public String getName()
   {
     return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   /**

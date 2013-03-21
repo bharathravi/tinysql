@@ -61,6 +61,7 @@ public abstract class textFileDatabase extends tinySQL
   protected byte[] tablepost;
 
   protected String defext;
+  protected String indext;
   protected String tableext;
   protected String quoting;
   protected textFileQuoting quotingEngine;
@@ -83,6 +84,7 @@ public abstract class textFileDatabase extends tinySQL
     this.encoding = p.getProperty("encoding", "Cp1252");
     this.readOnly = p.getProperty("readonly", "false").equalsIgnoreCase("true");
     this.defext = p.getProperty("definition-extension", ".def");
+    this.indext = p.getProperty("index-extension", ".ind");
     this.tableext = p.getProperty("table-extension", "");
     this.quoting = p.getProperty("qouting.engine", textFileQuoting.class.getName());
     quotingEngine = loadTextFileQuoting(quoting);
@@ -220,17 +222,25 @@ public abstract class textFileDatabase extends tinySQL
       int numCols = coldefs.size();
       int recordLength = 1;        // 1 byte for the flag field
 
+      // make the data directory, if it needs to be make
+      //
+      mkDataDirectory();
+
+
       Vector v = new Vector();
       for (int i = 0; i < numCols; i++)
       {
         ColumnDefinition coldef = (ColumnDefinition) coldefs.elementAt(i);
-        tsColumn col = coldef.getColumn();
-        v.add(col);
+
+        if (!coldef.isPrimaryKey()) {
+          tsColumn col = coldef.getColumn();
+          v.add(col);
+        } else {
+          // Primary key found, create index
+          db_createIndex(table_name, coldef.getName());
+        }
       }
 
-      // make the data directory, if it needs to be make
-      //
-      mkDataDirectory();
 
       db_createTable(table_name, v);
     }
@@ -249,6 +259,11 @@ public abstract class textFileDatabase extends tinySQL
   public String getDefinitionExtension()
   {
     return defext;
+  }
+
+  public String getIndexExtension()
+  {
+    return indext;
   }
 
   public String getEncoding()
@@ -312,12 +327,19 @@ public abstract class textFileDatabase extends tinySQL
   protected abstract void db_renameTable(String table_name, String newname) throws IOException;
 
   /**
-   * Create the files for the table. While CreateTable may update some
+   * Create the META and DATA files for the table. While CreateTable may update some
    * arbitary database structures, this function just creates the specifiy
    * file structures needed for a data table.
    */
   protected abstract void db_createTable(String table_name, Vector v)
       throws IOException, tinySQLException;
+
+  /**
+   * Create the INDEX files for the table.
+   */
+  protected abstract void db_createIndex(String table_name, String primaryKey)
+      throws IOException, tinySQLException;
+
 
   /**
    *

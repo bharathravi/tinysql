@@ -95,14 +95,15 @@ public class memoryTextFileDatabase extends textFileDatabase {
   }
 
   @Override
-  protected void db_createIndex(String table_name, String primaryKey) throws IOException, tinySQLException {
+  protected void db_createIndex(String table_name, String primaryKey, int primaryKeyTablepos) throws IOException, tinySQLException {
     // create the table index file
     //
     //
     MemoryFile memFile = new MemoryFile(dataDir + File.separator
         + table_name + getIndexExtension(), "rw");
 
-    memFile.write(("PRIMARY_KEY|" + primaryKey + "\n").getBytes());
+    memFile.write(("PRIMARY_KEY|" + primaryKey + "|" + primaryKeyTablepos + "\n").getBytes());
+    memFile.write("PRIMARY_KEY_LATEST|null\n".getBytes());
     memFile.write("NUM_ROWS|0\n".getBytes());
 
     // Close the file

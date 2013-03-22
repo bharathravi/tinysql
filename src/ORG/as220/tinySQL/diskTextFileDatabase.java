@@ -22,15 +22,11 @@
 
 package ORG.as220.tinySQL;
 
-import ORG.as220.tinySQL.sqlparser.ColumnDefinition;
-import ORG.as220.tinySQL.sqlparser.CreateTableStatement;
-import ORG.as220.tinySQL.textFileDatabase;
 import ORG.as220.tinySQL.util.Log;
 
 import java.io.*;
 import java.lang.String;
 import java.sql.Types;
-import java.util.Hashtable;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -43,7 +39,7 @@ public class diskTextFileDatabase extends textFileDatabase
   @Override
   public tinySQLTable openTable(String table_name) throws tinySQLException {
     Log.debug("Disk TextFile-Engine: Opening table " + table_name);
-    return (tinySQLTable) new textFileTable(dataDir, table_name, this);
+    return (tinySQLTable) new DiskTextFileTable(dataDir, table_name, this);
   }
 
   /*
@@ -136,7 +132,7 @@ public class diskTextFileDatabase extends textFileDatabase
   }
 
   @Override
-  protected void db_createIndex(String table_name, String primaryKey) throws IOException, tinySQLException {
+  protected void db_createIndex(String table_name, String primaryKey, int primaryKeyTablepos) throws IOException, tinySQLException {
     // Create Index file
     BufferedOutputStream fdef =
         new BufferedOutputStream(
@@ -147,8 +143,8 @@ public class diskTextFileDatabase extends textFileDatabase
     //
     DataOutputStream def = new DataOutputStream(fdef);
 
-    System.out.println(primaryKey + " is PRIMKEY");
-    def.write(("PRIMARY_KEY|" + primaryKey + "\n").getBytes());
+    def.write(("PRIMARY_KEY|" + primaryKey + "|" + primaryKeyTablepos + "\n").getBytes());
+    def.write("PRIMARY_KEY_LATEST|null\n".getBytes());
     def.write("NUM_ROWS|0\n".getBytes());
 
     // Close the file

@@ -22,6 +22,7 @@ package ORG.as220.tinySQL;
 
 import ORG.as220.tinySQL.util.Log;
 
+import java.math.BigDecimal;
 import java.util.Hashtable;
 
 /**
@@ -105,9 +106,11 @@ public class tinySQLTableView
       return integ.intValue();
 
     int size = getColumnCount();
+    System.out.println("NOW WHAT" + size);
     for (int i = 0; i < size; i++)
     {
       tsColumn column = getColumnDefinition(i);
+      System.out.println("OK" + column.getDisplayName());
       if (column.isValidName(name))
       {
         colcache.put(name, new Integer(i));
@@ -155,6 +158,17 @@ public class tinySQLTableView
       throws tinySQLException
   {
     if (isClosed) throw new tinySQLException("table is closed");
+
+    if (table.isHasPrimaryKey()) {
+      Object primkeyval = table.getLatestPrimaryKey();
+      Object thisdata = data.get(table.getPrimaryKeyTablePos());
+      System.out.println("PARSED " + primkeyval);
+      if (!table.getConverter().compare(thisdata, primkeyval)) {
+        throw new tinySQLException("Primary key out of order insert");
+      }
+
+      table.setLatestPrimaryKey(thisdata);
+    }
 
     int row = table.insertRow(convertRowToNative(data, table.getInsertRow()));
     loadRow(row);

@@ -25,6 +25,7 @@ package ORG.as220.tinySQL;
 
 import ORG.as220.tinySQL.util.Log;
 
+import java.io.*;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -47,6 +48,13 @@ public abstract class tinySQLTable
   private String table; // the name of the table
   private tinySQLConverter converter = null;
   private Vector views;
+
+  // Table statistics
+  private String primaryKey = "";
+  private Object latestPrimaryKey = null;
+  private int numRows = 0;
+  private boolean hasPrimaryKey;
+  private int primaryKeyTablePos;
 
   /**
    * creates a new tinySQLTable with the name <code>tablename</code>
@@ -216,5 +224,110 @@ public abstract class tinySQLTable
   {
     return getRow(row);
   }
+
+  public boolean isHasPrimaryKey() {
+    return hasPrimaryKey;
+  }
+
+  public void setHasPrimaryKey(boolean hasPrimaryKey) {
+    this.hasPrimaryKey = hasPrimaryKey;
+  }
+
+  public String getPrimaryKey() {
+    return primaryKey;
+  }
+
+  public void setPrimaryKey(String primaryKey) {
+    this.primaryKey = primaryKey;
+  }
+
+  public Object getLatestPrimaryKey() {
+    return latestPrimaryKey;
+  }
+
+  public void setLatestPrimaryKey(Object latestPrimaryKey) {
+    this.latestPrimaryKey = latestPrimaryKey;
+  }
+
+  public int getNumRows() {
+    return numRows;
+  }
+
+  public void setNumRows(int numRows) {
+    this.numRows = numRows;
+  }
+
+  protected void readIndexInputStream(InputStream fdef) throws IOException, tinySQLException {
+    // use a StreamTokenizer to break up the stream.
+    //
+    Reader r = new BufferedReader(
+        new InputStreamReader(fdef));
+    StreamTokenizer def = new StreamTokenizer(r);
+
+    // set the | as a delimiter, and set everything between
+    // 0 and z as word characters. Let it know that eol is
+    // *not* significant, and that it should parse numbers.
+    //
+    def.whitespaceChars('|', '|');
+    def.wordChars('0', 'z');
+    def.eolIsSignificant(false);
+    def.parseNumbers();
+
+    // Read primary key column
+    def.nextToken();
+
+    if (def.sval.equals("PRIMARY_KEY"))
+    {
+      def.nextToken();
+      setPrimaryKey(def.sval);
+      def.nextToken();
+      setPrimaryKeyTablePos((int) def.nval);
+    } else {
+      throw new tinySQLException("Bad Index");
+    }
+
+    // Read the latest primary key in
+    def.nextToken();
+    Object nativeval = null;
+    if (def.sval.equals("PRIMARY_KEY_LATEST")) {
+      def.nextToken();
+      nativeval = new Double(def.nval).toString().getBytes();
+    } else {
+      System.out.println(def.sval);
+      throw new tinySQLException("Bad Index: No latest prim key");
+    }
+
+    // Read the number of rows
+    def.nextToken();
+    if (def.sval.equals("NUM_ROWS")) {
+      def.nextToken();
+      setNumRows((int) def.nval);
+    } else {
+      throw new tinySQLException("Bad Index: No latest num rows");
+    }
+
+    if (getNumRows() > 0) {
+      Object val = getConverter().convertNativeToJDBC(
+          getColumnDefinition(primaryKeyTablePos), nativeval);
+      setLatestPrimaryKey(val);
+    }
+
+    setHasPrimaryKey(true);
+  }
+
+  public int getPrimaryKeyTablePos() {
+    return primaryKeyTablePos;
+  }
+
+  public void setPrimaryKeyTablePos(int primaryKeyTablePos) {
+    this.primaryKeyTablePos = primaryKeyTablePos;
+  }
+
+  protected byte[] getIndexString() throws tinySQLException {
+    return ("PRIMARY_KEY|" + getPrimaryKey() + "|" + getPrimaryKeyTablePos() + "\n"
+        + "PRIMARY_KEY_LATEST|" + getLatestPrimaryKey() + "\n"
+        +"NUM_ROWS|" + getNumRows() + "\n").getBytes();
+  }
+
 
 }

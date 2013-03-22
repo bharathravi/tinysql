@@ -58,13 +58,13 @@ public class TestInMemoryText
             System.out.println("");
             System.out.println("CREATE TABLE party ...");
             System.out.println("=====================");
-            executeUpdate(stmt, "CREATE TABLE party (birthday DATE, age INT, PRIMARY KEY (birthday))");
+            executeUpdate(stmt, "CREATE TABLE party (birthday DATE, age INT, PRIMARY KEY (age))");
 
 
             System.out.println("");
             System.out.println("CREATE TABLE cars ...");
             System.out.println("=====================");
-            executeUpdate(stmt, "CREATE TABLE cars (name CHAR(25), id NUMERIC(4,0))");
+            executeUpdate(stmt, "CREATE TABLE cars (name CHAR(25), id NUMERIC(4,0), PRIMARY KEY(id))");
 
             System.out.println("");
             System.out.println("CREATE TABLE people ...");
@@ -89,6 +89,7 @@ public class TestInMemoryText
             executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Rangerover', 6)");
             executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Jeep', 7)");
             executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Hummer', 8)");
+          executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus', 9)");
 
             System.out.println("");
             System.out.println("INSERT INTO people ...");

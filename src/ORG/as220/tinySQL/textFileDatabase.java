@@ -237,7 +237,7 @@ public abstract class textFileDatabase extends tinySQL
           v.add(col);
         } else {
           // Primary key found, create index
-          db_createIndex(table_name, coldef.getName());
+          db_createIndex(table_name, coldef.getName(), i - 1);
         }
       }
 
@@ -337,7 +337,8 @@ public abstract class textFileDatabase extends tinySQL
   /**
    * Create the INDEX files for the table.
    */
-  protected abstract void db_createIndex(String table_name, String primaryKey)
+  protected abstract void db_createIndex(String table_name, String primaryKey,
+                                         int primaryKeyTablePos)
       throws IOException, tinySQLException;
 
 

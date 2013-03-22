@@ -90,8 +90,10 @@ public class InsertStatement implements SQLStatement
         throw new tinySQLException("The specified table [" + tablename + "] is not defined in this statement");
       }
     }
+
     String name = col.getColumn();
-    tsColumn tablecol = table.getColumnDefinition(table.findColumn(name));
+    int columnId = table.findColumn(name);
+    tsColumn tablecol = table.getColumnDefinition(columnId);
     columns.add(tablecol);
   }
 

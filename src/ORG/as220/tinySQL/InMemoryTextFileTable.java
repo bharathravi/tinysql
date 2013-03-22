@@ -75,6 +75,7 @@ public class InMemoryTextFileTable extends tinySQLTable
   private static final byte[] IS_DELETED = new byte[]{(byte) 'Y'};
 
   private String defext;
+  private String indext;
   private String tableext;
 
   private static final int ROW_UNREAD = 0;
@@ -102,7 +103,7 @@ public class InMemoryTextFileTable extends tinySQLTable
 
   /**
    *
-   * Constructs a textFileTable. This is only called by getTable()
+   * Constructs a DiskTextFileTable. This is only called by getTable()
    * in textFileDatabase.java.
    *
    * @param dDir data directory
@@ -120,6 +121,7 @@ public class InMemoryTextFileTable extends tinySQLTable
     ignoreLast = engine.isIgnoringLastColumnPostfix();
 
     defext = engine.getDefinitionExtension();
+    indext = engine.getIndexExtension();
     tableext = engine.getTableExtension();
 
     dataDir = dDir;      // set the data directory
@@ -158,8 +160,9 @@ public class InMemoryTextFileTable extends tinySQLTable
     try
     {
       // read in the table definition
-      //
+      // and index
       readColumnInfo();
+      readIndex();
     }
     catch (tinySQLException e)
     {
@@ -172,8 +175,47 @@ public class InMemoryTextFileTable extends tinySQLTable
       }
       throw e;
     }
+
     prototype = createInsertRowPrototype();
   }
+
+  private void readIndex() throws tinySQLException {
+    boolean fdef_open = false;
+    InputStream fdef = null;
+    try {
+      // Open an FileInputStream to the .def (table
+      // definition) file
+      //
+
+      try {
+        fdef = MemoryFile.getInputStream(dataDir + "/" + getName() + indext);
+      } catch (FileNotFoundException e1) {
+        // No index file
+        setHasPrimaryKey(false);
+        setPrimaryKey("");
+        return;
+      }
+
+      fdef_open = true;
+      readIndexInputStream(fdef);
+
+      fdef.close(); // close the file
+      fdef_open = false;
+    }
+    catch (Exception e)
+    {
+      try
+      {
+        if (fdef_open)
+          fdef.close();
+      }
+      catch (IOException ioe)
+      {
+      }
+      throw new tinySQLException(e);
+    }
+  }
+
 
   public void setRecordLength(int rl)
   {
@@ -211,6 +253,7 @@ public class InMemoryTextFileTable extends tinySQLTable
         throw new tinySQLException(e);
       }
     }
+    System.out.println("NEW CONV");
     return converter;
   }
 
@@ -257,6 +300,10 @@ public class InMemoryTextFileTable extends tinySQLTable
     }
     Log.info("Closing table " + getName());
 
+    if (isHasPrimaryKey()) {
+      writeIndex();
+    }
+
     try
     {
       ftbl.close();
@@ -266,6 +313,24 @@ public class InMemoryTextFileTable extends tinySQLTable
       throw new tinySQLException(ioe);
     }
     return true;
+  }
+
+  private void writeIndex() throws tinySQLException {
+    MemoryFile.delFile(dataDir + "/" + getName() + indext);
+    //
+    MemoryFile memFile = null;
+    try {
+      memFile = new MemoryFile(dataDir + "/" + getName() + indext, "rw");
+
+      memFile.write(getIndexString());
+
+      // Close the file
+      memFile.close();
+    } catch (FileNotFoundException e) {
+      throw new tinySQLException(e);
+    } catch (IOException e) {
+      throw new tinySQLException(e);
+    }
   }
 
   private int findDeletedRow()
@@ -449,6 +514,7 @@ public class InMemoryTextFileTable extends tinySQLTable
       throw new tinySQLException("Database is readonly");
     }
     int insertRow = 0;
+
     synchronized (ftbl)
     {
       try
@@ -460,7 +526,7 @@ public class InMemoryTextFileTable extends tinySQLTable
         //
         insertRow = getNextInsertRow();
 
-        Log.debug("Insering in row : " + insertRow + " -> " + getRowCount());
+        Log.debug("Inserting in row : " + insertRow + " -> " + getRowCount());
         ftbl.seek(calcRowPosition(insertRow));
 
         // write out the record
@@ -472,8 +538,10 @@ public class InMemoryTextFileTable extends tinySQLTable
         ftbl.write(tablepost);
 
         // if this was a newly inserted row, update the rowcount
-        if (insertRow == getRowCount())
+        if (insertRow == getRowCount()) {
           setRowCount(insertRow + 1);
+          setNumRows(getNumRows() + 1);
+        }
       }
       catch (Exception e)
       {
@@ -661,7 +729,7 @@ public class InMemoryTextFileTable extends tinySQLTable
 
   // end methods implemented from tinySQLTable.java
   // the rest of this stuff is internal methods
-  // for textFileTable
+  // for DiskTextFileTable
   //
 
   /*
@@ -822,9 +890,9 @@ public class InMemoryTextFileTable extends tinySQLTable
     {
       if (
           ((deleteMode == textFileDatabase.DELETE_DEFAULT) && (tablePos == 1))
-          ||
-          (tablePos == 0)
-      )
+              ||
+              (tablePos == 0)
+          )
       {
         columnPosition = record_length;
       }
@@ -866,4 +934,6 @@ public class InMemoryTextFileTable extends tinySQLTable
   {
     return _record_length;
   }
+
+
 }

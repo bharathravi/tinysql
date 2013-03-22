@@ -57,18 +57,18 @@ public class TestText
             System.out.println("");
             System.out.println("CREATE TABLE party ...");
             System.out.println("=====================");
-            executeUpdate(stmt, "CREATE TABLE party (birthday DATE, age INT, PRIMARY KEY (birthday))");
+            executeUpdate(stmt, "CREATE TABLE party (birthday DATE, age INT, PRIMARY KEY (age))");
 
 
             System.out.println("");
             System.out.println("CREATE TABLE cars ...");
             System.out.println("=====================");
-            executeUpdate(stmt, "CREATE TABLE cars (name CHAR(25), id NUMERIC(4,0))");
+            executeUpdate(stmt, "CREATE TABLE cars (name CHAR(25), id NUMERIC(4,0), PRIMARY KEY (id))");
 
             System.out.println("");
             System.out.println("CREATE TABLE people ...");
             System.out.println("=======================");
-            executeUpdate(stmt, 
+            executeUpdate(stmt,
                 "CREATE TABLE people (pe_name CHAR(25), pe_id NUMERIC(8,0), car_id NUMERIC(4,0))");
             System.err.println("Created the tables.");
 
@@ -88,6 +88,7 @@ public class TestText
             executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Rangerover', 6)");
             executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Jeep', 7)");
             executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Hummer', 8)");
+            executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus', 9)");
 
             System.out.println("");
             System.out.println("INSERT INTO people ...");

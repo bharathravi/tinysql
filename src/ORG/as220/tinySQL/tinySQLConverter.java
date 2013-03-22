@@ -203,11 +203,14 @@ public class tinySQLConverter
    */
   public Object convertNativeToJDBC(tsColumn coldef, Object o) throws tinySQLException
   {
+    System.out.println("BBBBBBB");
     int type = coldef.getType();
     if (o == null)
     {
       return convertNativeToNull(coldef);
     }
+
+    System.out.println("OOK");
 
     try
     {
@@ -239,6 +242,8 @@ public class tinySQLConverter
           return convertNativeToDouble(coldef, o);
 
         case Types.NUMERIC:
+          System.out.println("SO FAR");
+
           return convertNativeToNumber(coldef, o);
 
         case Types.DECIMAL:
@@ -262,7 +267,7 @@ public class tinySQLConverter
         case Types.TIMESTAMP:
           return convertNativeToTimestamp(coldef, o);
 
-          // if we don't know how to handle a object, return it unchanged
+        // if we don't know how to handle a object, return it unchanged
         default:
           Log.warn("Unknown type, returning object unchanged.");
 
@@ -274,6 +279,90 @@ public class tinySQLConverter
       Log.error("Convert Failed for column " + coldef, e);
     }
     return o;
+  }
+
+  public boolean compare(Object first, Object second) {
+
+    System.out.println("A:" + first + "B:" + second);
+    if (second == null) {
+      System.out.println("Hello");
+      return true;
+    }
+
+    System.out.println("1");
+    if (first instanceof Byte) {
+      Byte a = (Byte) first;
+      Byte b = (Byte) second;
+      return a > b;
+    }
+
+    System.out.println("2");
+    if (first instanceof Short) {
+      short a = (Short) first;
+      short b = (Short) second;
+      return a > b;
+    }
+
+    System.out.println("3");
+    if (first instanceof Integer) {
+      Integer a = (Integer) first;
+      Integer b = (Integer) second;
+      return a > b;
+    }
+
+    System.out.println("4");
+    if (first instanceof BigInteger) {
+      BigInteger a = (BigInteger) first;
+      BigInteger b = (BigInteger) second;
+      return (a.compareTo(b) == 1);
+    }
+
+    if (first instanceof BigDecimal) {
+          BigDecimal a = (BigDecimal) first;
+          BigDecimal b = (BigDecimal) second;
+          return (a.compareTo(b) == 1);
+        }
+
+    System.out.println("5");
+    if (first instanceof Float) {
+      Float a = (Float) first;
+      Float b = (Float) second;
+      return a > b;
+    }
+
+    if (first instanceof Double) {
+      Double a = (Double) first;
+      Double b = (Double) second;
+      return a > b;
+    }
+    if (first instanceof String) {
+      String a = (String) first;
+      String b = (String) second;
+      return (a.compareTo(b) == 1);
+    }
+
+    if (first instanceof Date) {
+      Date a = (Date) first;
+      Date b = (Date) second;
+      return (a.after(b));
+    }
+
+    if (first instanceof Time) {
+      Time a = (Time) first;
+      Time b = (Time) second;
+      return (a.after(b));
+    }
+    if (first instanceof Timestamp) {
+      Timestamp a = (Timestamp) first;
+      Timestamp b = (Timestamp) second;
+      return (a.after(b));
+    }
+
+
+      System.out.println(first.getClass().getCanonicalName());
+
+    System.out.println("XX");
+    return false;
   }
 
   /**

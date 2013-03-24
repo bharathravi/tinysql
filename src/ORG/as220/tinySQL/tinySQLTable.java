@@ -291,7 +291,13 @@ public abstract class tinySQLTable
     Object nativeval = null;
     if (def.sval.equals("PRIMARY_KEY_LATEST")) {
       def.nextToken();
-      nativeval = new Double(def.nval).toString().getBytes();
+      if (def.sval == null) {
+
+        nativeval = new Double(def.nval).toString().getBytes();
+
+      } else {
+        nativeval = new String(def.sval);
+      }
     } else {
       System.out.println(def.sval);
       throw new tinySQLException("Bad Index: No latest prim key");
@@ -311,6 +317,8 @@ public abstract class tinySQLTable
           getColumnDefinition(primaryKeyTablePos), nativeval);
       setLatestPrimaryKey(val);
     }
+
+
 
     setHasPrimaryKey(true);
   }

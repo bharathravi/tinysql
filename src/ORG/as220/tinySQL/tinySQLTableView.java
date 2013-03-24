@@ -177,7 +177,7 @@ public class tinySQLTableView
 
     if (table.isHasPrimaryKey()) {
       Object primkeyval = table.getLatestPrimaryKey();
-      Object thisdata = data.get(table.getPrimaryKeyTablePos() - 1);
+      Object thisdata = data.get(table.getPrimaryKeyTablePos());
       if (!table.getConverter().compare(thisdata, primkeyval)) {
         throw new tinySQLException("Primary key out of order insert");
       }

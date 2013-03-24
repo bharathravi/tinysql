@@ -902,8 +902,10 @@ public class TinySQLParser implements TinySQLParserConstants {
     String primaryKeyName = "";
     for (int i = 0; i < size; i++)
     {
+
       ColumnDefinition coldef = (ColumnDefinition) coldefs.elementAt (i);
-      stmt.addColumnDefinition (coldef);
+      System.out.println("PRIM PARSE " + i + " " + coldef.getName());
+
       if (coldef.isPrimaryKey()) {
         if (!checkForPrimaryKey) {
           checkForPrimaryKey = true;
@@ -911,15 +913,23 @@ public class TinySQLParser implements TinySQLParserConstants {
         } else {
           {if (true) throw new tinySQLException("Too many Primary keys");}
         }
+
+        // remove the primary key definition from the columns list
+        coldefs.remove(i);
+      } else {
+        stmt.addColumnDefinition (coldef);
       }
     }
 
+    // If we found a primary key def, then resolve it to the real
+    // Primary key column and set it as the primary key
     if (checkForPrimaryKey) {
       boolean found = false;
       for (int i = 0; i < size; i++) {
         ColumnDefinition thisdef = (ColumnDefinition) coldefs.elementAt (i);
         if (thisdef.getName().equals(primaryKeyName)) {
           found = true;
+          thisdef.setPrimaryKey(true);
           break;
         }
       }
@@ -928,10 +938,6 @@ public class TinySQLParser implements TinySQLParserConstants {
         {if (true) throw new tinySQLException("Primary Key Column does not exist!");}
       }
 
-      stmt.setHasPrimaryKey(true);
-      stmt.setPrimaryKey(primaryKeyName);
-    } else {
-      stmt.setHasPrimaryKey(false);
     }
 
     {if (true) return stmt;}

@@ -1,69 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="b1ee9880-1661-48a8-854b-0f139f6a98ef" name="Default" comment="" />
+    <list default="true" id="c27cbe51-8201-4fad-9a0d-c8f6b4cf18cb" name="Default" comment="" />
     <ignored path="tinySQL.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/dbfFileConnection.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1360168838807" ignored="false" />
-    <file path="$PROJECT_DIR$/../../hotspot/hbase-source/trunk/hbase-server/src/main/java/org/apache/hadoop/hbase/io/hfile/HFileReaderV2.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361288507461" ignored="false" />
-    <file path="/HFileReaderV2.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1360199833557" ignored="false" />
-    <file path="$PROJECT_DIR$/../../hotspot/hbase-source/trunk/hbase-server/src/main/java/org/apache/hadoop/hbase/io/hfile/CachedBlock.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361495783574" ignored="false" />
-    <file path="/CachedBlock.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361467266573" ignored="false" />
-    <file path="$PROJECT_DIR$/../../hotspot/hbase-source/trunk/hbase-server/src/main/java/org/apache/hadoop/hbase/io/hfile/LruBlockCache.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1362086378912" ignored="false" />
-    <file path="/LruBlockCache.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1362086377910" ignored="false" />
-    <file path="/a.dummy" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1364092685254" ignored="false" />
-    <file path="/tinySQLtest.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361308375352" ignored="false" />
-    <file path="/textFileDriver.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361309454593" ignored="false" />
-    <file path="$PROJECT_DIR$/../../hotspot/hbase-source/trunk/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361499745137" ignored="false" />
-    <file path="/HRegionServer.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361499742866" ignored="false" />
-    <file path="$PROJECT_DIR$/../../hotspot/hbase-source/trunk/hbase-server/src/main/java/org/apache/hadoop/hbase/client/Scan.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361489407837" ignored="false" />
-    <file path="/Scan.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361484515565" ignored="false" />
-    <file path="$PROJECT_DIR$/../../hotspot/hbase-source/trunk/hbase-server/src/main/java/org/apache/hadoop/hbase/client/ClientScanner.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361489407837" ignored="false" />
-    <file path="$PROJECT_DIR$/../../hotspot/hbase-source/trunk/hbase-protocol/src/main/protobuf/Client.proto" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361489931515" ignored="false" />
-    <file path="/Client.proto" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361489929693" ignored="false" />
-    <file path="$PROJECT_DIR$/../../hotspot/hbase-source/trunk/hbase-protocol/src/main/java/org/apache/hadoop/hbase/protobuf/generated/AccessControlProtos.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361490381269" ignored="false" />
-    <file path="/tinySQL.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1364062102439" ignored="false" />
-    <file path="$PROJECT_DIR$/../../hotspot/hbase-source/trunk/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegion.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361500080122" ignored="false" />
-    <file path="/SelectStatement.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363983129488" ignored="false" />
-    <file path="/textFile.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361762368589" ignored="false" />
-    <file path="/fragment.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1364059517832" ignored="false" />
-    <file path="/memoryTable.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361655004912" ignored="false" />
-    <file path="/memMappedTextFileTable.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361656005628" ignored="false" />
-    <file path="/MemoryFile.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1364080409260" ignored="false" />
-    <file path="/textFileConnection.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361760147087" ignored="false" />
-    <file path="/TestText.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361658752845" ignored="false" />
-    <file path="/TestInMemoryText.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361658929297" ignored="false" />
-    <file path="/InMemoryTextFileTable.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363966876448" ignored="false" />
-    <file path="/CreateTableStatement.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363894250083" ignored="false" />
-    <file path="/MemoryFileInputStream.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361756956485" ignored="false" />
-    <file path="/TextFileDatabaseConstructor.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361760252507" ignored="false" />
-    <file path="/memoryTextFileDatabase.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363962577707" ignored="false" />
-    <file path="/diskTextFileDatabase.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363962594471" ignored="false" />
-    <file path="/textFileTable.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363964955466" ignored="false" />
-    <file path="/textFileDatabase.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363962543493" ignored="false" />
-    <file path="/TestInMemoryTextHuge.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363818427561" ignored="false" />
-    <file path="/TestTextHuge.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1361940421862" ignored="false" />
-    <file path="$PROJECT_DIR$/src/ORG/as220/tinySQL/util/CharacterEntityParser.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1364092694643" ignored="false" />
-    <file path="$PROJECT_DIR$/src/ORG/as220/tinySQL/util/ArrayEnumeration.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363116581102" ignored="false" />
-    <file path="/tinySQL.jj" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363894372942" ignored="false" />
-    <file path="/ColumnDefinition.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363893829139" ignored="false" />
-    <file path="/TinySQLParser.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363894086822" ignored="false" />
-    <file path="/dbfFile.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363894834187" ignored="false" />
-    <file path="/tinySQLTableView.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1364069045663" ignored="false" />
-    <file path="/tinySQLTable.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363967381939" ignored="false" />
-    <file path="/InsertStatement.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363922854670" ignored="false" />
-    <file path="/tinySQLConverter.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363966205550" ignored="false" />
-    <file path="/diskTextFileTable.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363966864599" ignored="false" />
-    <file path="/ParserUtils.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363983320219" ignored="false" />
-    <file path="/WhereClause.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1364052562204" ignored="false" />
-    <file path="/DeleteStatement.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363979494389" ignored="false" />
-    <file path="/UpdateStatement.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1363979537798" ignored="false" />
-    <file path="/Expression.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1364052670431" ignored="false" />
-    <file path="/Operator.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1364053951338" ignored="false" />
-    <file path="/StaticValue.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1364052494500" ignored="false" />
-    <file path="/TestTextPrimKey.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1364066228675" ignored="false" />
-    <file path="/TestInMemoryTextPrimKey.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1364066252778" ignored="false" />
-    <file path="$PROJECT_DIR$/src/ORG/as220/tinySQL/sqlparser/Expression.java" changelist="b1ee9880-1661-48a8-854b-0f139f6a98ef" time="1364092694643" ignored="false" />
+    <file path="/tinySQLTable.java" changelist="c27cbe51-8201-4fad-9a0d-c8f6b4cf18cb" time="1364165274631" ignored="false" />
+    <file path="/textFileDatabase.java" changelist="c27cbe51-8201-4fad-9a0d-c8f6b4cf18cb" time="1364163750715" ignored="false" />
+    <file path="/TinySQLParser.java" changelist="c27cbe51-8201-4fad-9a0d-c8f6b4cf18cb" time="1364164435552" ignored="false" />
+    <file path="/InsertStatement.java" changelist="c27cbe51-8201-4fad-9a0d-c8f6b4cf18cb" time="1364164071689" ignored="false" />
+    <file path="/tinySQLTableView.java" changelist="c27cbe51-8201-4fad-9a0d-c8f6b4cf18cb" time="1364164118856" ignored="false" />
+    <file path="/tinySQL.jj" changelist="c27cbe51-8201-4fad-9a0d-c8f6b4cf18cb" time="1364164942710" ignored="false" />
+    <file path="$PROJECT_DIR$/src/ORG/as220/tinySQL/parser/SimpleCharStream.java" changelist="c27cbe51-8201-4fad-9a0d-c8f6b4cf18cb" time="1364165004317" ignored="false" />
+    <file path="$PROJECT_DIR$/src/ORG/as220/tinySQL/parser/ParseException.java" changelist="c27cbe51-8201-4fad-9a0d-c8f6b4cf18cb" time="1364165004317" ignored="false" />
+    <file path="$PROJECT_DIR$/src/ORG/as220/tinySQL/parser/Token.java" changelist="c27cbe51-8201-4fad-9a0d-c8f6b4cf18cb" time="1364165004317" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,11 +20,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
-  <component name="Commander">
-    <leftPanel />
-    <rightPanel />
-    <splitter proportion="0.5" />
-  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -83,6 +27,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -117,7 +62,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -127,38 +71,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TestInMemoryTextPrimKey.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/TestInMemoryTextPrimKey.java">
+      <file leaf-file-name="InsertStatement.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/sqlparser/InsertStatement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="92" selection-start="2963" selection-end="2963" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MemoryFile.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/MemoryFile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="23" selection-start="1670" selection-end="1670" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DiskTextFileTable.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/DiskTextFileTable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="187" column="5" selection-start="5055" selection-end="5055" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Utils.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/Utils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="138" column="10" selection-start="3308" selection-end="3308" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="94" column="30" selection-start="3086" selection-end="3086" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#8658#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -166,7 +86,16 @@
       <file leaf-file-name="tinySQLTableView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQLTableView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="556" column="6" selection-start="14975" selection-end="14975" vertical-scroll-proportion="0.0">
+            <state line="178" column="36" selection-start="5103" selection-end="5103" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tinySQLTable.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQLTable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="300" column="31" selection-start="8124" selection-end="8124" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -175,25 +104,52 @@
       <file leaf-file-name="TestTextPrimKey.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/examples/TestTextPrimKey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="29" selection-start="2759" selection-end="2759" vertical-scroll-proportion="0.19499105">
+            <state line="61" column="63" selection-start="2097" selection-end="2097" vertical-scroll-proportion="0.2549575">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestInMemoryText.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/TestInMemoryText.java">
+      <file leaf-file-name="memoryTextFileDatabase.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/memoryTextFileDatabase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="33" selection-start="4172" selection-end="4172" vertical-scroll-proportion="0.0">
+            <state line="97" column="27" selection-start="2638" selection-end="2638" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestText.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/TestText.java">
+      <file leaf-file-name="textFileDatabase.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/textFileDatabase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="33" selection-start="4137" selection-end="4137" vertical-scroll-proportion="0.0">
+            <state line="208" column="43" selection-start="6363" selection-end="6363" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CreateTableStatement.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/sqlparser/CreateTableStatement.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="2" selection-start="1285" selection-end="1285" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TinySQLParser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/parser/TinySQLParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="920" column="36" selection-start="24108" selection-end="24108" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tinySQL.jj" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/parser/tinySQL.jj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="951" column="18" selection-start="19396" selection-end="19396" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -202,17 +158,10 @@
       <file leaf-file-name="InMemoryTextFileTable.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/InMemoryTextFileTable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="231" column="14" selection-start="5976" selection-end="5976" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Log.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/util/Log.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="119" column="67" selection-start="2947" selection-end="2947" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="199" column="15" selection-start="5469" selection-end="5469" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#23473#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -227,33 +176,23 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/sqlparser/Expression.java" />
-        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/sqlparser/WhereClause.java" />
-        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/sqlparser/Operator.java" />
-        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQLConverter.java" />
-        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/textFileDatabase.java" />
-        <option value="$PROJECT_DIR$/examples/QueryDbf.java" />
-        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQL.java" />
-        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQLTableView.java" />
-        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/InMemoryTextFileTable.java" />
-        <option value="$PROJECT_DIR$/examples/TestInMemoryText.java" />
-        <option value="$PROJECT_DIR$/examples/TestText.java" />
-        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/MemoryFile.java" />
-        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/DiskTextFileTable.java" />
-        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/Utils.java" />
         <option value="$PROJECT_DIR$/examples/TestInMemoryTextPrimKey.java" />
+        <option value="$PROJECT_DIR$/examples/TestText.java" />
+        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/sqlparser/InsertStatement.java" />
+        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/parser/TinySQLParser.java" />
+        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/textFileDatabase.java" />
+        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/parser/tinySQL.jj" />
+        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/sqlparser/CreateTableStatement.java" />
+        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQLTableView.java" />
+        <option value="$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQLTable.java" />
         <option value="$PROJECT_DIR$/examples/TestTextPrimKey.java" />
       </list>
     </option>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState />
-  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2" />
-    <option name="y" value="-3" />
-    <option name="width" value="1370" />
-    <option name="height" value="727" />
+    <option name="x" value="10" />
+    <option name="width" value="1346" />
+    <option name="height" value="720" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -281,8 +220,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -301,93 +238,27 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tinySQL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tinySQL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tinySQL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tinySQL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tinySQL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tinySQL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tinySQL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tinySQL" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="OverrideImplement.combined" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="preferences.pluginManager" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../hotspot/hbase-source" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="ORG.as220.tinySQL" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/examples" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="ORG.as220.tinySQL" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.COnfig">
+  <component name="RunManager">
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -410,16 +281,16 @@
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="testTextFile" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="tinySQL" />
+      <module name="" />
       <envs />
       <method />
     </configuration>
@@ -443,86 +314,43 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="COnfig" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="testTextFile" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="tinySQL" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Application.COnfig" />
-    </list>
+    <list size="0" />
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SliceManager">
-    <option name="analysisUIOptions">
-      <AnalysisUIOptions />
-    </option>
-  </component>
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="DETECT_NESTED_COPIES" value="true" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <option name="IGNORE_EXTERNALS" value="false" />
-    <configuration useDefault="true">$USER_HOME$/.subversion</configuration>
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
-    <supportedVersion>125</supportedVersion>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b1ee9880-1661-48a8-854b-0f139f6a98ef" name="Default" comment="" />
-      <created>1360101370066</created>
-      <updated>1360101370066</updated>
+      <changelist id="c27cbe51-8201-4fad-9a0d-c8f6b4cf18cb" name="Default" comment="" />
+      <created>1364143437929</created>
+      <updated>1364143437929</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="-3" width="1370" height="727" extended-state="6" />
-    <editor active="false" />
+    <frame x="10" y="0" width="1346" height="720" extended-state="5" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32998326" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34557596" sideWeight="0.5007752" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.6567657" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2159091" sideWeight="0.6567657" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.67001677" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34323433" sideWeight="0.49379843" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24961948" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -558,7 +386,7 @@
     <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
-    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
     <option name="LIMIT_HISTORY" value="true" />
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
@@ -581,21 +409,33 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
-  <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="FILTER_TARGETS" value="false" />
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/tsRawRow.java">
+    <entry file="file://$PROJECT_DIR$/examples/TestText.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="16" selection-start="2096" selection-end="2096" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/memoryTextFileDatabase.java">
+    <entry file="file://$PROJECT_DIR$/examples/TestTextPrimKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="17" selection-start="3186" selection-end="3186" vertical-scroll-proportion="0.0">
+        <state line="68" column="53" selection-start="2627" selection-end="2627" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/TestInMemoryTextPrimKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="29" selection-start="2808" selection-end="2808" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/TestInMemoryTextPrimKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="90" selection-start="2156" selection-end="2156" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -604,98 +444,89 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQL.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="561" column="32" selection-start="18160" selection-end="18160" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/textFileDatabase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="319" column="26" selection-start="8361" selection-end="8361" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/diskTextFileDatabase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="155" column="63" selection-start="4360" selection-end="4360" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQLTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="231" column="20" selection-start="6373" selection-end="6373" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQLTableView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="556" column="6" selection-start="14975" selection-end="14975" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/MemoryFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="23" selection-start="1670" selection-end="1670" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/TestInMemoryText.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="33" selection-start="4172" selection-end="4172" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="10" selection-start="3308" selection-end="3308" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/DiskTextFileTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="187" column="5" selection-start="5055" selection-end="5055" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/util/Log.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="119" column="67" selection-start="2947" selection-end="2947" vertical-scroll-proportion="0.0">
+        <state line="509" column="18" selection-start="16724" selection-end="16724" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/TestText.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="33" selection-start="4137" selection-end="4137" vertical-scroll-proportion="0.0">
+        <state line="52" column="26" selection-start="1804" selection-end="1804" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/sqlparser/InsertStatement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="94" column="30" selection-start="3086" selection-end="3086" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#8658#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/parser/TinySQLParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="920" column="36" selection-start="24108" selection-end="24108" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/memoryTextFileDatabase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="97" column="27" selection-start="2638" selection-end="2638" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/textFileDatabase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="208" column="43" selection-start="6363" selection-end="6363" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/parser/tinySQL.jj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="951" column="18" selection-start="19396" selection-end="19396" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/sqlparser/CreateTableStatement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="2" selection-start="1285" selection-end="1285" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQLTableView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="178" column="36" selection-start="5103" selection-end="5103" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/InMemoryTextFileTable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="231" column="14" selection-start="5976" selection-end="5976" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="199" column="15" selection-start="5469" selection-end="5469" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#23473#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/TestInMemoryTextPrimKey.java">
+    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQLTable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="92" selection-start="2963" selection-end="2963" vertical-scroll-proportion="0.0">
+        <state line="300" column="31" selection-start="8124" selection-end="8124" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/TestTextPrimKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="29" selection-start="2759" selection-end="2759" vertical-scroll-proportion="0.19499105">
+        <state line="61" column="63" selection-start="2097" selection-end="2097" vertical-scroll-proportion="0.2549575">
           <folding />
         </state>
       </provider>

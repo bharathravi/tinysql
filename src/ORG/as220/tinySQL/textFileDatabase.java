@@ -228,15 +228,18 @@ public abstract class textFileDatabase extends tinySQL
 
 
       Vector v = new Vector();
-      for (int i = 0; i < numCols; i++)
-      {
+      for (int i = 0; i < numCols; i++) {
         ColumnDefinition coldef = (ColumnDefinition) coldefs.elementAt(i);
 
-        if (!coldef.isPrimaryKey()) {
-          tsColumn col = coldef.getColumn();
-          v.add(col);
-        } else {
+        System.out.println("PRIM " + i + " " + coldef.getName());
+
+
+        tsColumn col = coldef.getColumn();
+        v.add(col);
+
+        if (coldef.isPrimaryKey()) {
           // Primary key found, create index
+          System.out.println("PRIMKEY FOUND " + coldef.getName() + " " + i);
           db_createIndex(table_name, coldef.getName(), i);
         }
       }

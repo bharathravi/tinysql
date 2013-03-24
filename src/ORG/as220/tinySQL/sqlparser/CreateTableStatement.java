@@ -37,24 +37,6 @@ public class CreateTableStatement implements SQLStatement
   private tinySQL db;
   private String table;
   private Vector columnDefinitions;
-  private boolean hasPrimaryKey;
-  private String primaryKey;
-
-  public boolean isHasPrimaryKey() {
-    return hasPrimaryKey;
-  }
-
-  public void setHasPrimaryKey(boolean hasPrimaryKey) {
-    this.hasPrimaryKey = hasPrimaryKey;
-  }
-
-  public String getPrimaryKey() {
-    return primaryKey;
-  }
-
-  public void setPrimaryKey(String primaryKey) {
-    this.primaryKey = primaryKey;
-  }
 
   /**
    * creates a new CreateTableStatement.

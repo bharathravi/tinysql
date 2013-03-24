@@ -20,6 +20,7 @@
  */
 package ORG.as220.tinySQL;
 
+import ORG.as220.tinySQL.sqlparser.Operator;
 import ORG.as220.tinySQL.util.Log;
 
 import java.math.BigDecimal;
@@ -44,6 +45,10 @@ public class tinySQLTableView
   private tsColumn[] tsColumnCache;
   private boolean isClosed;
   private tinySQLIndex index;
+
+  // Binary search begin and end
+  private int end = -1;
+  private int begin = -1;
 
   /**
    * create a new tinySQLTableView with the tables name as alias
@@ -70,7 +75,12 @@ public class tinySQLTableView
     this.alias = alias;
     colcache = new Hashtable();
     _currentRowNumber = -1;
+    end = getNumRows();
+    begin = 0;
+  }
 
+  public int getNumRows() {
+    return table.getNumRows();
   }
 
   /**
@@ -94,6 +104,14 @@ public class tinySQLTableView
     return coldef.getPhysicalName();
   }
 
+  public boolean hasPrimaryKey() {
+    return table.isHasPrimaryKey();
+  }
+
+  public String getPrimaryKeyColName() {
+    return table.getPrimaryKey();
+  }
+
   /**
    * searches the available column definitions and returns the position
    * of the column or -1 if no column with this name, alias or fullqualified
@@ -106,11 +124,9 @@ public class tinySQLTableView
       return integ.intValue();
 
     int size = getColumnCount();
-    System.out.println("NOW WHAT" + size);
     for (int i = 0; i < size; i++)
     {
       tsColumn column = getColumnDefinition(i);
-      System.out.println("OK" + column.getDisplayName());
       if (column.isValidName(name))
       {
         colcache.put(name, new Integer(i));
@@ -161,8 +177,7 @@ public class tinySQLTableView
 
     if (table.isHasPrimaryKey()) {
       Object primkeyval = table.getLatestPrimaryKey();
-      Object thisdata = data.get(table.getPrimaryKeyTablePos());
-      System.out.println("PARSED " + primkeyval);
+      Object thisdata = data.get(table.getPrimaryKeyTablePos() - 1);
       if (!table.getConverter().compare(thisdata, primkeyval)) {
         throw new tinySQLException("Primary key out of order insert");
       }
@@ -320,6 +335,9 @@ public class tinySQLTableView
     if (isClosed) throw new tinySQLException("table is closed");
 
     setCurrentRow(-1, null);
+    binsearched = false;
+    end = getNumRows();
+    begin = 0;
     return table.getRowCount() > 0;
   }
 
@@ -518,4 +536,50 @@ public class tinySQLTableView
     return index;
   }
 
+  // Do a Binary Search on the Primary Key for a certain value.
+
+  // Indicates whether a binary search was already done on this table.
+  // Must be reset to true each time you want to binary search.
+  private boolean binsearched = false;
+
+  public boolean nextPrimaryKeyBinSearch(Object binarySearchValue) throws tinySQLException {
+    if (end > getRowCount() ||
+        begin < 0 || end < begin) {
+      throw new tinySQLException("Binary Search beyond row count");
+    }
+
+    if (binsearched) {
+      return false;
+    }
+
+    while(begin < end || begin < 0 || end > getRowCount()) {
+      int rowNum = (begin + end)/2;
+      if (loadRow(rowNum)) {
+        Object thisValue = _currentRow.get(table.getPrimaryKeyTablePos());
+        int comp = Operator.compareTo(thisValue, binarySearchValue);
+
+        if (comp == 0) {
+          if (!table.isDeleted(getCurrentRecordNumber())) {
+            binsearched = true;
+            return true;
+          } else {
+            binsearched = true;
+            return false;
+          }
+        } else if (comp < 0) {
+          begin = rowNum + 1;
+          continue;
+        } else if (comp > 0) {
+          end = rowNum - 1;
+          continue;
+        }
+      } else {
+        binsearched = true;
+        return false;
+      }
+    }
+
+    binsearched = true;
+    return false;
+  }
 }

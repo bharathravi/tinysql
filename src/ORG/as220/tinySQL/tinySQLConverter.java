@@ -203,14 +203,11 @@ public class tinySQLConverter
    */
   public Object convertNativeToJDBC(tsColumn coldef, Object o) throws tinySQLException
   {
-    System.out.println("BBBBBBB");
     int type = coldef.getType();
     if (o == null)
     {
       return convertNativeToNull(coldef);
     }
-
-    System.out.println("OOK");
 
     try
     {
@@ -242,8 +239,6 @@ public class tinySQLConverter
           return convertNativeToDouble(coldef, o);
 
         case Types.NUMERIC:
-          System.out.println("SO FAR");
-
           return convertNativeToNumber(coldef, o);
 
         case Types.DECIMAL:

@@ -49,15 +49,15 @@ public class SelectStatement implements ConditionalStatement
   /**
    * All Columns as they will show up in tsResultSet
    */
-  private Vector resultColumns;
+  private Vector<tsColumn> resultColumns;
 
   /**
    * All ColumnValue-Elements. They define, which TableRows
    * to query. Every ColumnElement is only filled once.
    */
-  private Vector tableColumns;
+  private Vector<tsColumn> tableColumns;
 
-  private Vector tables;
+  private Vector<tinySQLTableView> tables;
 
   private tinySQLStatement statement;
   private tinySQLResultSet myResult;
@@ -70,9 +70,9 @@ public class SelectStatement implements ConditionalStatement
   {
     mod = MOD_NONE;
     this.statement = statement;
-    resultColumns = new Vector();
-    tableColumns = new Vector();
-    tables = new Vector();
+    resultColumns = new Vector<tsColumn>();
+    tableColumns = new Vector<tsColumn>();
+    tables = new Vector<tinySQLTableView>();
     whereC = new WhereClause(this);
     orderC = new OrderByClause(this);
   }
@@ -153,7 +153,7 @@ public class SelectStatement implements ConditionalStatement
     String tablename = column.getTable();
     if (tablename == null)
     {
-      Enumeration tables = getTables();
+      Enumeration<tinySQLTableView> tables = getTables();
       while (tables.hasMoreElements())
       {
         tinySQLTableView table = (tinySQLTableView) tables.nextElement();
@@ -221,9 +221,9 @@ public class SelectStatement implements ConditionalStatement
    * Vector of tsColumn-Objects. These columns may not contain expressions
    * or aliased table-columns. The columns in this Vector must exist.
    */
-  public Vector getTableColumns()
+  public Vector<tsColumn> getTableColumns()
   {
-    Vector v = new Vector(tableColumns);
+    Vector<tsColumn> v = new Vector<tsColumn>(tableColumns);
     v.addAll(whereC.getColumns());
     v.addAll(orderC.getColumns());
     return v;
@@ -235,7 +235,7 @@ public class SelectStatement implements ConditionalStatement
    */
   public Vector getResultColumns()
   {
-    return new Vector(resultColumns);
+    return new Vector<tsColumn>(resultColumns);
   }
 
   /**
@@ -363,9 +363,9 @@ public class SelectStatement implements ConditionalStatement
    * returns the parameters used in this statement's expressions and
    * in the whereClause.
    */
-  public Vector getParameters()
+  public Vector<LValue> getParameters()
   {
-    Vector v = new Vector();
+    Vector<LValue> v = new Vector<LValue>();
     Enumeration valenum = getResultColumns().elements();
     while (valenum.hasMoreElements())
     {

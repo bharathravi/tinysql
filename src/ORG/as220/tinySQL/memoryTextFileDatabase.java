@@ -22,7 +22,7 @@ public class memoryTextFileDatabase extends textFileDatabase {
 
   @Override
   public tinySQLTable openTable(String table_name) throws tinySQLException {
-    Log.debug("InMemory TextFile-Engine: Opening table " + table_name);
+    //Log.debug("InMemory TextFile-Engine: Opening table " + table_name);
     return (tinySQLTable) new InMemoryTextFileTable(dataDir, table_name, this);
   }
 

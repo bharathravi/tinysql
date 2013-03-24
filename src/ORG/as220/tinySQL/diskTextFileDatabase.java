@@ -38,7 +38,7 @@ public class diskTextFileDatabase extends textFileDatabase
 
   @Override
   public tinySQLTable openTable(String table_name) throws tinySQLException {
-    Log.debug("Disk TextFile-Engine: Opening table " + table_name);
+    //Log.debug("Disk TextFile-Engine: Opening table " + table_name);
     return (tinySQLTable) new DiskTextFileTable(dataDir, table_name, this);
   }
 

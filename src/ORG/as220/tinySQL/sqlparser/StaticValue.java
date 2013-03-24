@@ -31,7 +31,7 @@ import java.util.Enumeration;
  */
 public class StaticValue implements LValue
 {
-  private Object value;
+  public Object value;
 
   public StaticValue(Object value)
   {

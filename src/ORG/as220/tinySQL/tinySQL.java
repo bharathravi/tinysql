@@ -156,18 +156,18 @@ public abstract class tinySQL
      * All Tables needed for the Query
      */
     Enumeration tableEnum = select.getTables();
-    Vector tables = new Vector();
+    Vector<tinySQLTableView> tables = new Vector<tinySQLTableView>();
     while (tableEnum.hasMoreElements())
     {
       tinySQLTableView table = (tinySQLTableView) tableEnum.nextElement();
       tables.add(table);
-//      Log.debug ("Added Table: " + table);
+//      //Log.debug ("Added Table: " + table);
     }
 
     /**
      * All Columns to be queried.
      */
-    Vector tableColumnVector = select.getTableColumns();
+    Vector<tsColumn> tableColumnVector = select.getTableColumns();
 
     /**
      * WhereClause limits resulting Rows
@@ -186,14 +186,14 @@ public abstract class tinySQL
     int size = tableColumnVector.size();
     for (int i = 0; i < size; i++)
     {
-      tsColumn column = (tsColumn) tableColumnVector.elementAt(i);
-//      Log.debug ("Processing Column: " + column);
+      tsColumn column = tableColumnVector.elementAt(i);
+//      //Log.debug ("Processing Column: " + column);
       tinySQLTableView table = column.getTable();
 
-      Vector v = (Vector) tableColumns.get(table);
+      Vector<tsColumn> v = (Vector<tsColumn>) tableColumns.get(table);
       if (v == null)
       {
-        v = new Vector();
+        v = new Vector<tsColumn>();
       }
       v.add(column);
       tableColumns.put(table, v);
@@ -223,24 +223,18 @@ public abstract class tinySQL
    * read the query result. The current state is taken from
    * tsResultSet. Proceed until maxFetchSize or eof has reached.
    */
-  public int continueQuery(tsResultSet res)
-      throws tinySQLException
-  {
+  public int continueQuery(tsResultSet res) throws tinySQLException {
     // the table scan here is an iterative tree expansion, similar to
     // the algorithm shown in the outline example in Chapter 5.
-    //
 
     // A Vector containing all tsTable Objects needed.
-    //
     Vector tables = res.getTables();
     if (tables.size() == 0)
     {
       Log.info("No Tables in select, signaling end-of-file");
       return -1;
     }
-    // A Hashtable containing all column Objects needed to complete
-    // a row.
-    //
+    // A Hashtable containing all column Objects needed to complete a row.
     Hashtable tableColumns = res.getColumns();
 
     // which table level are we on?
@@ -248,45 +242,34 @@ public abstract class tinySQL
     // the count. The Level is used as index to the current table
     // in Vector tables.
     int level = res.getLevel();
-
+    System.out.println("GOT LEVEL " + level);
     // create a row object; this is added to the
     // result set. The resultSet is a clone of the Prototype
     // created in SelectStatement()
-    //
     tsPhysicalRow record = res.createPhysicalRow();
 
     // Initialize the state to the first table of the query
-    //
     tinySQLTableView currentTable = null;
     Stack state = new Stack();
-    for (int i = 0; i <= level; i++)
-    {
+    for (int i = 0; i <= level; i++) {
       currentTable = (tinySQLTableView) tables.elementAt(i);
 
       Vector columns = (Vector) tableColumns.get(currentTable);
-      if (currentTable.isBeforeFirst() == false)
-      {
+      if (!currentTable.isBeforeFirst()) {
         addColumnsToRow(columns, record, currentTable);
       }
 
       state.push(currentTable);
     }
 
-    // keep retrieving rows until we run out of rows to
-    // process.
-    //
+    // keep retrieving rows until we run out of rows to process.
     // Level should be direct proportional to the stacksize
-    //
-    while (level > -1)
-    {
+    while (level > -1) {
       boolean levelFound = false;
-
       /**
        * Retrieve the next Table
        */
       currentTable = (tinySQLTableView) state.peek();
-
-
       // skip to the next undeleted record; at some point,
       // this will run out of records, and found will be
       // false.
@@ -297,86 +280,66 @@ public abstract class tinySQL
 
       // TODO(bharath): nextNonDeleted is the row iterator in the physical table
       // (eventually). Binary search will need to be done here.
-      if (currentTable.nextNonDeleted())
-      {
-        // add each column for this table to
-        // the record; record is a tsRow object that
-        // is used to hold the values of the current
-        // row. It represents every row in every table,
-        // and is not added to the result set Vector
-        // until we have read a row in the last table
-        // in the table list.
-        //
+      boolean nextRowExists = false;
+
+      if (res.getWhereClause().binarySearchableTable!= null
+          && currentTable == res.getWhereClause().binarySearchableTable) {
+        // Can be bin searched
+        nextRowExists = currentTable.nextPrimaryKeyBinSearch(
+            res.getWhereClause().binarySearchValue);
+      } else {
+        nextRowExists = currentTable.nextNonDeleted();
+      }
+      if (nextRowExists) {
+        // add each column for this table to the record; record is a tsRow
+        // object that is used to hold the values of the current row. It
+        // represents every row in every table, and is not added to the result
+        // set Vector until we have read a row in the last table in the table list.
 
         Vector columns = (Vector) tableColumns.get(currentTable);
         addColumnsToRow(columns, record, currentTable);
-        // since we were just able to get a row, then
-        // we are not at the end of file
-        //
+        // since we were just able to get a row, then we are not at the end of file
         eof = false;
 
-        // If the table we are processing is not the last in
-        // the list, then we should increment level and loop
-        // to the top.
-        //
-        if ((level + 1) < tables.size())
-        {
-
+        // If the table we are processing is not the last in the list, then we
+        // should increment level and loop to the top.
+        if ((level + 1) < tables.size()) {
           // increment level
-          //
           level++;
 
-          // add the next table in the list of tables to
-          // the tbl_list, the Hashtable of "to be processed"
-          // tables.
-          //
+          // add the next table in the list of tables to the tbl_list,
+          // the Hashtable of "to be processed" tables.
+          tinySQLTableView tab = (tinySQLTableView) tables.elementAt(level);
           state.push(tables.elementAt(level));
-
-        }
-        else
-        {
-
-          // if the table that was just processed is the last in
-          // the list, then we have drilled down to the bottom;
-          // all columns have values, and we can add it to the
-          // result set. The next time through, the program
-          // will try to read another row at this level; if it's
-          // found, only columns for the table being read will
-          // be overwritten in the tsRow.
+        } else {
+          // if the table that was just processed is the last in the list, then
+          // we have drilled down to the bottom; all columns have values, and we
+          // can add it to the result set. The next time through, the program
+          // will try to read another row at this level; if it's found, only
+          // columns for the table being read will be overwritten in the tsRow.
           //
-          // Columns for the other table will be left alone, and
-          // another row will be added to the result set. Here
-          // is the essence of the Cartesian Product which is
-          // being built here.
-          //
+          // Columns for the other table will be left alone, and another row
+          // will be added to the result set. Here is the essence of the
+          // Cartesian Product which is being built here.
           haveRecord = true;
         }
-      }
-      else
-      {
-        // we didn't find any more records at this level.
-        // Reset the record pointer to the top of the table,
-        // and decrement level. We have hit end of file here.
-        //
+      } else {
+        // we didn't find any more records at this level. Reset the record
+        // pointer to the top of the table, and decrement level. We have hit end
+        // of file here.
         level--;
         eof = true;
         currentTable.beforeFirst();
-        state.pop();
+        tinySQLTableView tab = (tinySQLTableView) state.pop();
       }
 
       // if we got a record, then add it to the result set.
-      //
-      if (haveRecord)
-      {
+      if (haveRecord) {
         // Patch submitted by Todd McNeill <toddm@tngi.com>
         // If the record evaluates correctly, add it to the final result set.
-        //
-        if (res.getWhereClause().isMatch(record))
-        {
-
+        if (res.getWhereClause().isMatch(record)) {
           boolean addOK = res.addPhysicalRow(new tsPhysicalRow(record));
-          if (addOK == false)
-          {
+          if (addOK == false) {
             return level;
           }
         }
@@ -389,7 +352,6 @@ public abstract class tinySQL
   /**
    * add all columns of vector <code>columns</code> to the physical row <code>record</code>.
    * The values for the record are contained in the current row of tableview <code>jtbl</code>.
-   *
    */
   protected void addColumnsToRow(Vector columns, tsPhysicalRow record, tinySQLTableView jtbl)
       throws tinySQLException
@@ -1008,7 +970,7 @@ public abstract class tinySQL
     {
       if (table.close() == true)
         tables.remove(table_name);
-      Log.debug("TinySQL: Table " + table_name + " closed.");
+      //Log.debug("TinySQL: Table " + table_name + " closed.");
     }
   }
 
@@ -1044,7 +1006,7 @@ public abstract class tinySQL
     {
       table = openTable(table_name);
       tables.put(table_name, table);
-      Log.debug("TinySQL: Table " + table_name + " opened.");
+      //Log.debug("TinySQL: Table " + table_name + " opened.");
     }
     tinySQLTableView view = new tinySQLTableView(table);
     return view;
@@ -1135,7 +1097,6 @@ public abstract class tinySQL
     {
       throw new tinySQLException(e);
     }
-
   }
 }
 

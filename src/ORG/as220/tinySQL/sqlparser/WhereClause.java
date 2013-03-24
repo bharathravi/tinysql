@@ -21,6 +21,7 @@
 package ORG.as220.tinySQL.sqlparser;
 
 import ORG.as220.tinySQL.tinySQLException;
+import ORG.as220.tinySQL.tinySQLTableView;
 import ORG.as220.tinySQL.tsColumn;
 import ORG.as220.tinySQL.tsRow;
 
@@ -35,7 +36,13 @@ import java.util.Vector;
 public class WhereClause
 {
   private LValue expression;
-  private Vector tableColumns;
+  private Vector<tsColumn> tableColumns;
+
+  // Tables that can be bin-searched because their primary key
+  // is present in the where clause, along with the binary search value and the operatore.
+  public tinySQLTableView binarySearchableTable = null;
+  public Object binarySearchValue = null;
+
   private ConditionalStatement parent;
   private boolean lastReturnValue;
   private boolean evaluatedOnce;
@@ -57,12 +64,32 @@ public class WhereClause
     if (ex == null)
       throw new NullPointerException();
 
-    Vector cols = ParserUtils.resolveTableColumns(
+    Vector<tsColumn> cols = ParserUtils.resolveTableColumns(
         ex,
-        ParserUtils.buildVector(parent.getTables())
+        (Vector<tinySQLTableView>) ParserUtils.buildVector(parent.getTables())
     );
 
-    tableColumns = new Vector(cols);
+    // Check for basic binary search option.
+    if (ex instanceof Expression) {
+      Expression expression = (Expression) ex;
+      if (expression.isSimpleEquality()) {
+        // If the expression is simple equality, the number of columns MUST be 1
+        if (cols.size() == 1) {
+          tsColumn thiscolumn = cols.elementAt(0);
+          tinySQLTableView thistable = thiscolumn.getTable();
+          if (thistable.hasPrimaryKey()) {
+            if (thiscolumn.getPhysicalName()
+                .equalsIgnoreCase(thistable.getPrimaryKeyColName())) {
+              binarySearchableTable = thistable;
+              binarySearchValue = expression.staticvalue;
+              System.out.println("SIMPLE EQ FOUND " + expression.column + " " + expression.staticvalue);
+            }
+          }
+        }
+      }
+    }
+
+    tableColumns = new Vector<tsColumn>(cols);
 
     expression = ex;
     cache = null;
@@ -90,7 +117,7 @@ public class WhereClause
         int size = cache.length;
         for (int i = 0; i < size; i++)
         {
-          tsColumn col = (tsColumn) tableColumns.elementAt(i);
+          tsColumn col = tableColumns.elementAt(i);
           int idx = matchRow.findColumn(col.getPhysicalName());
 
           cachePos[i] = idx;
@@ -108,30 +135,21 @@ public class WhereClause
           Object rowObject = matchRow.get(idx);
 
           // O1 and O2 should be the same type, so try an equals
-          if (rowObject != null)
-          {
-            if (myObject != null)
-            {
-
-              if ((rowObject != myObject) && (rowObject.equals(myObject) == false))
-              {
+          if (rowObject != null) {
+            if (myObject != null) {
+              if ((rowObject != myObject) && (rowObject.equals(myObject) == false)) {
                 cache[i] = rowObject;
                 reevaluate = true;
               }
-            }
-            else
-            {
+            } else {
               cache[i] = rowObject;
               reevaluate = true;
             }
           }
         }
       }
-    }
-    else
-    {
-      if (!evaluatedOnce)
-      {
+    } else {
+      if (!evaluatedOnce) {
         reevaluate = true;
       }
     }
@@ -157,9 +175,9 @@ public class WhereClause
   /**
    * returns the parameters used in the expressions of the whereClause.
    */
-  public Vector getParameters()
+  public Vector<LValue> getParameters()
   {
-    Vector v = new Vector();
+    Vector<LValue> v = new Vector<LValue>();
     ParserUtils.getParameterElements(v, getExpression());
     return v;
   }

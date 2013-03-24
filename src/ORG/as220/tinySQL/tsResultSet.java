@@ -236,7 +236,7 @@ public class tsResultSet
         }
         else
         {
-          Log.debug("SELECT returned on level: " + level);
+          //Log.debug("SELECT returned on level: " + level);
         }
       }
       catch (tinySQLException e)
@@ -246,7 +246,7 @@ public class tsResultSet
     }
     eof = true;
     rowsMax = windowStart + rows.size();
-    Log.debug("ResultSet: Max Rows reached: " + rowsMax);
+    //Log.debug("ResultSet: Max Rows reached: " + rowsMax);
     return eof;
   }
 
@@ -401,7 +401,7 @@ public class tsResultSet
     if (tables == null)
       return;
 
-    Log.debug("ResultSet.close(): Closing " + tables.size() + " views");
+    //Log.debug("ResultSet.close(): Closing " + tables.size() + " views");
     Enumeration elementEnum = tables.elements();
     while (elementEnum.hasMoreElements())
     {

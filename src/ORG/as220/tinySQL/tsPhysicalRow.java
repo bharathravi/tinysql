@@ -157,7 +157,7 @@ public class tsPhysicalRow extends tsRow
       }
       else
       {
-        Log.debug("Refresh: Ignoring row:" + currColDef + " - not a data row");
+        //Log.debug("Refresh: Ignoring row:" + currColDef + " - not a data row");
       }
     }
   }

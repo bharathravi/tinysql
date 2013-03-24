@@ -96,18 +96,18 @@ public class MemoryFile {
 
     if (location + line.length > myFileContents.size()) {
       Byte[] bytes = new Byte[line.length];
-      myFileContents.subList(location, myFileContents.size()).toArray(bytes);
+      //myFileContents.subList(location, myFileContents.size()).toArray(bytes);
       for (int i = 0; i < bytes.length; ++i) {
-        line[i]  = bytes[i];
+        line[i] = myFileContents.get(location + i);
       }
 
      throw new EOFException();
     }
 
     Byte[] bytes = new Byte[line.length];
-    myFileContents.subList(location, location + line.length).toArray(bytes);
+    //myFileContents.subList(location, location + line.length).toArray(bytes);
     for (int i = 0; i < line.length; ++i) {
-      line[i] = bytes[i];
+      line[i] = myFileContents.get(location + i);
     }
   }
 
@@ -136,7 +136,7 @@ public class MemoryFile {
     if (memFiles.containsKey(myFilename)) {
       memFiles.remove(myFilename);
     } else {
-      Log.debug("File: " + myFilename + " does not exist. No action taken on delete.");
+      //Log.debug("File: " + myFilename + " does not exist. No action taken on delete.");
     }
   }
 

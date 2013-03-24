@@ -37,8 +37,10 @@ import java.util.Vector;
 public class Expression implements LValue
 {
   private LValue value;
-  private Vector addValues;
+  private Vector<ValueContainer> addValues;
   private boolean transformed;
+  public String column;
+  public Object staticvalue;
 
   /**
    * The value container is used to concat a previous (base)
@@ -134,6 +136,27 @@ public class Expression implements LValue
     return retval;
   }
 
+  public boolean isSimpleEquality() throws tinySQLException {
+    if (value instanceof ColumnValue) {
+      this.column = value.getName();
+
+      if (addValues.size() == 1) {
+        ValueContainer valcon = addValues.get(0);
+        if (valcon.op instanceof Operator.EqualOperator) {
+          if (valcon.value instanceof StaticValue) {
+            StaticValue staticValue = (StaticValue) valcon.value;
+            if (staticValue.value instanceof  Comparable) {
+              this.staticvalue = staticValue.value;
+              return true;
+            }
+          }
+        }
+      }
+    }
+
+    return false;
+  }
+
   /**
    * Is this expression a wrapper to simulate parantheses?
    */
@@ -149,10 +172,10 @@ public class Expression implements LValue
    */
   public String getName()
   {
-    Log.debug("About to transform: " + transformed);
+    //Log.debug("About to transform: " + transformed);
     if (transformed == false)
     {
-      Log.debug("About to transform");
+      //Log.debug("About to transform");
       transformExpression();
       transformed = true;
     }

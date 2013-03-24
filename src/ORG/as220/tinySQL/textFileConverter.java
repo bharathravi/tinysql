@@ -106,7 +106,7 @@ public class textFileConverter extends tinySQLConverter
       int year = cal.get(cal.YEAR);
       int mon = cal.get(cal.MONTH);
       int day = cal.get(cal.DAY_OF_MONTH);
-      Log.debug("Converting. DATE: " + d);
+      //Log.debug("Converting. DATE: " + d);
       StringBuffer b = new StringBuffer(10);
       b.append(Utils.forceToSizeLeft(String.valueOf(year), 4, '0'));
       b.append('-');

@@ -303,8 +303,9 @@ public class Utils
         throw new IOException("Could not delete file: " + fname + ".");
       }
     }
-    else
-      Log.debug("File: " + fname + " does not exist. No action taken on delete.");
+    else {
+      //Log.debug("File: " + fname + " does not exist. No action taken on delete.");
+    }
   }
 
   public final static void delFile(String dataDir, String fname) throws NullPointerException, IOException

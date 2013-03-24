@@ -253,7 +253,7 @@ public class InMemoryTextFileTable extends tinySQLTable
         throw new tinySQLException(e);
       }
     }
-    System.out.println("NEW CONV");
+
     return converter;
   }
 
@@ -351,14 +351,14 @@ public class InMemoryTextFileTable extends tinySQLTable
     }
 
     int delrow = findDeletedRow();
-    Log.debug("FindDeletedRow returned : " + delrow);
+    //Log.debug("FindDeletedRow returned : " + delrow);
 
     if (delrow != -1)
       return delrow;
 
     if (insertMode == textFileDatabase.INSERT_DEFAULT)
     {
-      Log.debug("RowCount: " + getRowCount());
+      //Log.debug("RowCount: " + getRowCount());
       return getRowCount();
     }
     for (int i = 0; i < deletedRows.length; i++)
@@ -526,7 +526,7 @@ public class InMemoryTextFileTable extends tinySQLTable
         //
         insertRow = getNextInsertRow();
 
-        Log.debug("Inserting in row : " + insertRow + " -> " + getRowCount());
+        //Log.debug("Inserting in row : " + insertRow + " -> " + getRowCount());
         ftbl.seek(calcRowPosition(insertRow));
 
         // write out the record
@@ -663,7 +663,7 @@ public class InMemoryTextFileTable extends tinySQLTable
     if (row >= getRowCount())
       throw new tinySQLException("No such record");
 
-    Log.debug("DeleteMode : " + deleteMode + " DELETE ROW " + row);
+    //Log.debug("DeleteMode : " + deleteMode + " DELETE ROW " + row);
 
     if (deleteMode == textFileDatabase.DELETE_NONE)
       throw new tinySQLException("Deletion of records has been disabled");
@@ -802,7 +802,7 @@ public class InMemoryTextFileTable extends tinySQLTable
         int size = (int) def.nval;
 
         record_length = addColumnDefinition(column, datatype, size, record_length, tablePos);
-        Log.debug("RecordLength [" + tablePos + "] : " + record_length);
+        //Log.debug("RecordLength [" + tablePos + "] : " + record_length);
         // this is the start position of the next column
         //
 
@@ -833,9 +833,9 @@ public class InMemoryTextFileTable extends tinySQLTable
         setRowCount((int) (datalength / record_length));
       }
 
-//      Log.debug ("TextFileTable " + getName() + ": RecordLength=" + record_length);
-//      Log.debug ("TextFileTable " + getName() + ": RowCount=" + getRowCount());
-//      Log.debug ("TextFileTable " + getName() + ": ColCount=" + column_info.size());
+//      //Log.debug ("TextFileTable " + getName() + ": RecordLength=" + record_length);
+//      //Log.debug ("TextFileTable " + getName() + ": RowCount=" + getRowCount());
+//      //Log.debug ("TextFileTable " + getName() + ": ColCount=" + column_info.size());
 
     }
     catch (Exception e)

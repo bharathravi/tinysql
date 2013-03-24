@@ -233,7 +233,7 @@ public class tinySQLStatement implements Statement
    */
   public void onCreateResultSet(tinySQLResultSet result)
   {
-    Log.debug("Statement: ResultSet opened");
+    //Log.debug("Statement: ResultSet opened");
     results.add(result);
   }
 
@@ -243,7 +243,7 @@ public class tinySQLStatement implements Statement
    */
   public void onCloseResultSet(tinySQLResultSet result)
   {
-    Log.debug("Statement: ResultSet close");
+    //Log.debug("Statement: ResultSet close");
     results.remove(result);
   }
 

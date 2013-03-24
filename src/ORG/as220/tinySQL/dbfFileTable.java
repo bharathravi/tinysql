@@ -303,7 +303,7 @@ public class dbfFileTable extends tinySQLTable
       //
       ftbl.write(row.getData());
 
-      Log.debug("Insert row written on position : " + insertRow);
+      //Log.debug("Insert row written on position : " + insertRow);
       // if this was a newly inserted row, update the rowcount
       if (insertRow == getRowCount())
         setRowCount(insertRow + 1);

@@ -196,7 +196,7 @@ public class DeleteStatement implements ConditionalStatement
    *
    * returns the parameters of the whereClause if any.
    */
-  public Vector getParameters()
+  public Vector<LValue> getParameters()
   {
     return whereC.getParameters();
   }

@@ -233,9 +233,9 @@ public class UpdateStatement implements ConditionalStatement
    * returns the parameters used in this statement's expressions and
    * in the whereClause.
    */
-  public Vector getParameters()
+  public Vector<LValue> getParameters()
   {
-    Vector v = new Vector();
+    Vector<LValue> v = new Vector<LValue>();
     tsResultRow row = getValues();
     for (int i = 0; i < row.size(); i++)
     {
@@ -282,5 +282,4 @@ public class UpdateStatement implements ConditionalStatement
     b.append("");
     return b.toString();
   }
-
 }

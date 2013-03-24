@@ -206,7 +206,7 @@ public class Operator
     }
   }
 
-  private static class EqualOperator extends Operator
+  public static class EqualOperator extends Operator
   {
     public Object evaluate(Object ob1, Object ob2)
     {
@@ -411,7 +411,7 @@ public class Operator
     }
   }
 
-  public final int compareTo(Object op1, Object op2)
+  public static final int compareTo(Object op1, Object op2)
   {
     if (op1 == null && op2 == null)
     {

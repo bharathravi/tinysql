@@ -183,7 +183,7 @@ public abstract class textFileDatabase extends tinySQL
    */
   public int getDeleteMode()
   {
-    Log.debug("Default DeleteMode : " + deleteMode);
+    //Log.debug("Default DeleteMode : " + deleteMode);
 
     return deleteMode;
   }
@@ -237,7 +237,7 @@ public abstract class textFileDatabase extends tinySQL
           v.add(col);
         } else {
           // Primary key found, create index
-          db_createIndex(table_name, coldef.getName(), i - 1);
+          db_createIndex(table_name, coldef.getName(), i);
         }
       }
 

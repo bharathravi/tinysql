@@ -35,14 +35,14 @@ public class CharacterEntityParser
   {
     entities = CharEntityTable.createTable();
     chars = new Hashtable();
-    Log.debug("Entities.size " + entities.size());
+    //Log.debug("Entities.size " + entities.size());
 
     Enumeration keyEnum = entities.keys();
     while (keyEnum.hasMoreElements())
     {
       String key = (String) keyEnum.nextElement();
       String value = (String) entities.get(key);
-      Log.debug(key + " = " + value);
+      //Log.debug(key + " = " + value);
       chars.put(new Character(value.charAt(0)), key);
     }
   }
@@ -52,7 +52,7 @@ public class CharacterEntityParser
     if (parser == null)
     {
       parser = new CharacterEntityParser();
-      Log.debug("Parser created: " + chars);
+      //Log.debug("Parser created: " + chars);
     }
 
     String val = (String) entities.getProperty(key.toLowerCase());
@@ -108,7 +108,7 @@ public class CharacterEntityParser
     if (parser == null)
     {
       parser = new CharacterEntityParser();
-      Log.debug("Parser created: " + chars);
+      //Log.debug("Parser created: " + chars);
     }
 
     StringBuffer retval = new StringBuffer(nat.length());

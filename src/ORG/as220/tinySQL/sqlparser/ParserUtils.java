@@ -46,7 +46,7 @@ public class ParserUtils
    * them in the vector v. ColumnValues represent a value read from
    * column of a table.
    */
-  public static void getColumnElements(Vector v, LValue root)
+  public static void getColumnElements(Vector<ColumnValue> v, LValue root)
   {
     if (root.getChildCount() > 0)
     {
@@ -60,7 +60,7 @@ public class ParserUtils
 
     if (root instanceof ColumnValue)
     {
-      v.add(root);
+      v.add((ColumnValue) root);
     }
   }
 
@@ -69,7 +69,7 @@ public class ParserUtils
    * them in the vector v. Parameter values are placeholders for PreparedStatement
    * sql-strings.
    */
-  public static void getParameterElements(Vector v, LValue root)
+  public static void getParameterElements(Vector<LValue> v, LValue root)
   {
     if (root.getChildCount() > 0)
     {
@@ -96,22 +96,22 @@ public class ParserUtils
    * @param db the database to use when searching tables
    * @param tables the known tables for the statement
    */
-  public static Vector resolveTableColumns(LValue column, Vector tables)
+  public static Vector<tsColumn> resolveTableColumns(LValue column, Vector<tinySQLTableView> tables)
       throws tinySQLException
   {
-    Vector tableColumns = new Vector();
+    Vector<tsColumn> tableColumns = new Vector<tsColumn>();
 
     /**
      * Find all needed columns and check if they exist.
      */
-    Vector checkColumns = new Vector();
+    Vector<ColumnValue> checkColumns = new Vector<ColumnValue>();
     getColumnElements(checkColumns, column);
     int size = checkColumns.size();
 
     // now seek the tables for the columns
     for (int i = 0; i < size; i++)
     {
-      ColumnValue colElement = (ColumnValue) checkColumns.get(i);
+      ColumnValue colElement = checkColumns.get(i);
       String name = colElement.getColumn();
       String tablename = colElement.getTable();
 

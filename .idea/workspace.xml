@@ -74,17 +74,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="tinySQLPreparedStatement.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQLPreparedStatement.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="704" column="72" selection-start="23650" selection-end="23650" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#24306#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="textFileDriver.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/textFileDriver.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -162,12 +151,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tinySQLResultSet.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="tinySQLResultSet.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQLResultSet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2893" column="4" selection-start="88118" selection-end="88209" vertical-scroll-proportion="0.9432892">
+            <state line="2878" column="30" selection-start="87565" selection-end="87565" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#0#88724#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="diskTextFileDatabase.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/diskTextFileDatabase.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="26" selection-start="1471" selection-end="1471" vertical-scroll-proportion="0.33333334">
+              <folding>
+                <element signature="e#0#5189#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -491,11 +491,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/examples/TestTextPrimKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="63" selection-start="2097" selection-end="2097" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQL.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="509" column="18" selection-start="16724" selection-end="16724" vertical-scroll-proportion="0.0">
@@ -608,9 +603,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/tinySQLResultSet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2893" column="4" selection-start="88118" selection-end="88209" vertical-scroll-proportion="0.9432892">
+        <state line="2878" column="30" selection-start="87565" selection-end="87565" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#0#88724#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ORG/as220/tinySQL/diskTextFileDatabase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="26" selection-start="1471" selection-end="1471" vertical-scroll-proportion="0.33333334">
+          <folding>
+            <element signature="e#0#5189#0" expanded="true" />
           </folding>
         </state>
       </provider>

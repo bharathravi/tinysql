@@ -349,6 +349,14 @@ public class textFileDatabaseMetaData extends tinySqlDatabaseMetaData
     return null;  //To change body of implemented methods use File | Settings | File Templates.
   }
 
+  public ResultSet getPseudoColumns(String s, String s2, String s3, String s4) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  public boolean generatedKeyAlwaysReturned() throws SQLException {
+    return false;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
   /**
    * Gets a description of tables available in a catalog.
    *

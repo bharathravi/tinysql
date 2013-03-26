@@ -37,6 +37,7 @@ package ORG.as220.tinySQL;
 
 import java.sql.*;
 import java.util.Properties;
+import java.util.concurrent.Executor;
 
 /**
 dBase read/write access <br>
@@ -215,6 +216,26 @@ public class dbfFileConnection extends tinySQLConnection
 
   public Struct createStruct(String s, Object[] objects) throws SQLException {
     return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  public void setSchema(String s) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  public String getSchema() throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  public void abort(Executor executor) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  public void setNetworkTimeout(Executor executor, int i) throws SQLException {
+    //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  public int getNetworkTimeout() throws SQLException {
+    return 0;  //To change body of implemented methods use File | Settings | File Templates.
   }
 
   public <T> T unwrap(Class<T> tClass) throws SQLException {

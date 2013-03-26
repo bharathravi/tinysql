@@ -36,7 +36,9 @@ package ORG.as220.tinySQL;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 
 /**
@@ -144,6 +146,10 @@ public class dbfFileDriver extends tinySQLDriver
     //
     return url.substring(5, 12).equals("dbfFile");
 
+  }
+
+  public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
   }
 
 }

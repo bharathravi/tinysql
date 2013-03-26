@@ -2890,6 +2890,14 @@ public class tinySQLResultSet implements java.sql.ResultSet
     //To change body of implemented methods use File | Settings | File Templates.
   }
 
+  public <T> T getObject(int i, Class<T> tClass) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
+  public <T> T getObject(String s, Class<T> tClass) throws SQLException {
+    return null;  //To change body of implemented methods use File | Settings | File Templates.
+  }
+
   public <T> T unwrap(Class<T> tClass) throws SQLException {
     return null;  //To change body of implemented methods use File | Settings | File Templates.
   }

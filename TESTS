@@ -1,0 +1,10 @@
+1. Test primary key variants
+   Non existent prim key
+   Test multiple prim key definitions 
+
+2. Inserts
+DONE  Test inserting prim key out of order
+  Test deleting last primary key
+DONE  Test biggest primary key should be updated
+DONE  Test num rows should be updated
+DONE  Test duplicates not allowed

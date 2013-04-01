@@ -70,15 +70,14 @@ public class TestInMemoryTextPrimKey
       executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Hummer', 8)");
       executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus', 9)");
 
-      for (int i = 10; i < 200000; ++i) {
+      for (int i = 10; i < 80000; ++i) {
         executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus"+ i + "', " + i + ")");
       }
 
-      for (int i  = 10; i < 20; ++i) {
+      for (int i = 10; i < 100; ++i) {
         ResultSet rs = executeQuery(stmt, "SELECT * FROM cars WHERE id = " + i);
         System.out.println ("No Of Recs: " + QueryDbf.displayResults(rs));
-      }
-      // Execute a query and get the result set.
+      }      // Execute a query and get the result set.
 
       stmt.close();
       con.close();

@@ -231,15 +231,12 @@ public abstract class textFileDatabase extends tinySQL
       for (int i = 0; i < numCols; i++) {
         ColumnDefinition coldef = (ColumnDefinition) coldefs.elementAt(i);
 
-        System.out.println("PRIM " + i + " " + coldef.getName());
-
-
         tsColumn col = coldef.getColumn();
         v.add(col);
 
         if (coldef.isPrimaryKey()) {
           // Primary key found, create index
-          System.out.println("PRIMKEY FOUND " + coldef.getName() + " " + i);
+          System.out.println("PRM KEY FOUND " + coldef.getName());
           db_createIndex(table_name, coldef.getName(), i);
         }
       }

@@ -37,6 +37,20 @@ public class ColumnDefinition
   private int decimals;
   private boolean nullable;
 
+  // This column is a primary key.
+  private boolean isPrimaryKey;
+
+  // This column is a primary key definition.
+  private boolean isPrimaryKeyDef;
+
+  public boolean isPrimaryKeyDef() {
+    return isPrimaryKeyDef;
+  }
+
+  public void setPrimaryKeyDef(boolean primaryKeyDef) {
+    isPrimaryKeyDef = primaryKeyDef;
+  }
+
   public boolean isPrimaryKey() {
     return isPrimaryKey;
   }
@@ -45,7 +59,6 @@ public class ColumnDefinition
     isPrimaryKey = primaryKey;
   }
 
-  private boolean isPrimaryKey;
 
   /**
    * creates a new column definition for a column with the specified name.

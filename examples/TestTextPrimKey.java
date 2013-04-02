@@ -54,7 +54,7 @@ public class TestTextPrimKey
       System.out.println("");
       System.out.println("CREATE TABLE cars ...");
       System.out.println("=====================");
-      executeUpdate(stmt, "CREATE TABLE cars (name CHAR(25), id NUMERIC(4,0), PRIMARY KEY (id))");
+      executeUpdate(stmt, "CREATE TABLE cars (name CHAR(25), id NUMERIC(4,0) PRIMARY KEY)");
 
       System.out.println("");
       System.out.println("INSERT INTO cars ...");
@@ -69,14 +69,14 @@ public class TestTextPrimKey
       executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Hummer', 8)");
       executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus', 9)");
 
-      for (int i = 10; i < 80000; ++i) {
-        executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus"+ i + "', " + i + ")");
-      }
-
-      for (int i = 10; i < 100; ++i) {
-        ResultSet rs = executeQuery(stmt, "SELECT * FROM cars WHERE id = " + i);
+//      for (int i = 10; i < 80000; ++i) {
+//        executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus"+ i + "', " + i + ")");
+//      }
+//
+//      for (int i = 10; i < 100; ++i) {
+        ResultSet rs = executeQuery(stmt, "SELECT * FROM cars WHERE id = 4");
         System.out.println ("No Of Recs: " + QueryDbf.displayResults(rs));
-      }
+ //     }
 
       // Execute a query and get the result set.
 

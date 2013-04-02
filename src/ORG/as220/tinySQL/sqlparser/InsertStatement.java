@@ -93,7 +93,6 @@ public class InsertStatement implements SQLStatement
 
     String name = col.getColumn();
     int columnId = table.findColumn(name);
-    System.out.println("PRIM " + name + " " + columnId);
     tsColumn tablecol = table.getColumnDefinition(columnId);
     columns.add(tablecol);
   }

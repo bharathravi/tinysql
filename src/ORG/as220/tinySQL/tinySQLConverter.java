@@ -278,34 +278,28 @@ public class tinySQLConverter
 
   public boolean compare(Object first, Object second) {
 
-    System.out.println("A:" + first + "B:" + second);
     if (second == null) {
-      System.out.println("Hello");
       return true;
     }
 
-    System.out.println("1");
     if (first instanceof Byte) {
       Byte a = (Byte) first;
       Byte b = (Byte) second;
       return a > b;
     }
 
-    System.out.println("2");
     if (first instanceof Short) {
       short a = (Short) first;
       short b = (Short) second;
       return a > b;
     }
 
-    System.out.println("3");
     if (first instanceof Integer) {
       Integer a = (Integer) first;
       Integer b = (Integer) second;
       return a > b;
     }
 
-    System.out.println("4");
     if (first instanceof BigInteger) {
       BigInteger a = (BigInteger) first;
       BigInteger b = (BigInteger) second;
@@ -318,7 +312,6 @@ public class tinySQLConverter
           return (a.compareTo(b) == 1);
         }
 
-    System.out.println("5");
     if (first instanceof Float) {
       Float a = (Float) first;
       Float b = (Float) second;
@@ -353,10 +346,6 @@ public class tinySQLConverter
       return (a.after(b));
     }
 
-
-      System.out.println(first.getClass().getCanonicalName());
-
-    System.out.println("XX");
     return false;
   }
 

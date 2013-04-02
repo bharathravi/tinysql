@@ -242,7 +242,6 @@ public abstract class tinySQL
     // the count. The Level is used as index to the current table
     // in Vector tables.
     int level = res.getLevel();
-    System.out.println("GOT LEVEL " + level);
     // create a row object; this is added to the
     // result set. The resultSet is a clone of the Prototype
     // created in SelectStatement()

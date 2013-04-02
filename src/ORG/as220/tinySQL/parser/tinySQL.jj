@@ -1,6 +1,6 @@
 options 
 {
-  LOOKAHEAD=1;
+  LOOKAHEAD=3;
 //  UNICODE_INPUT=true;
   //IGNORE_CASE=true;
   FORCE_LA_CHECK=true;
@@ -926,14 +926,17 @@ SQLStatement CreateTable (tinySQLStatement statement) throws tinySQLException :
       ColumnDefinition coldef = (ColumnDefinition) coldefs.elementAt (i);
       System.out.println("PRIM PARSE " + i + " " + coldef.getName());
 
-      if (coldef.isPrimaryKey()) {
+      if (coldef.isPrimaryKeyDef() || coldef.isPrimaryKey()) {
         if (!checkForPrimaryKey) {
           checkForPrimaryKey = true;
           primaryKeyName = coldef.getName();
         } else {
           throw new tinySQLException("Too many Primary keys");
         }
+      }
 
+      if (coldef.isPrimaryKeyDef() ) {
+        // If this is only a PrmKey definitions,
         // remove the primary key definition from the columns list
         coldefs.remove(i);
       } else {
@@ -1013,6 +1016,7 @@ void getNormalColumn (ColumnDefinition coldef) throws tinySQLException :
   (
       (<NULL>) { coldef.setNullable (true); }
     | (<NOT> <NULL>) { coldef.setNullable (false); }
+    | (<PRIMARY_KEY>) { coldef.setPrimaryKey (true); }
   )?
 }
 
@@ -1030,7 +1034,7 @@ void getPrimaryKeyDef (ColumnDefinition coldef) throws tinySQLException :
     }
   )
   {
-    coldef.setPrimaryKey (true);
+    coldef.setPrimaryKeyDef (true);
   }
 }
 

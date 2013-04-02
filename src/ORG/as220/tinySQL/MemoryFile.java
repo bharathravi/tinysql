@@ -17,12 +17,13 @@ import java.util.Vector;
 public class MemoryFile {
   // A mem file is simply a string stored in memory
   // TODO(bharath): Is this sufficient or do we need a ByteString?
-  private static HashMap<String, Vector<Byte>> memFiles = new HashMap<String, Vector<Byte>>();
+  private static HashMap<String, byte[] > memFiles = new HashMap<String, byte[]>();
   private static HashMap<String, String> filePermissions = new HashMap<String, String>();
   private int location = 0;
 
   private String myFilename = new String("");
-  private Vector<Byte> myFileContents = new Vector<Byte>();
+
+  private byte[] myFileContents = new byte[0];
   private String myPermissions = "";
 
   public MemoryFile(String filename, String permissions) throws FileNotFoundException {
@@ -36,8 +37,8 @@ public class MemoryFile {
       }
 
       if (permissions.contains("rw")) {
-       // System.out.println("Creating non existent file" + myFilename);
-        memFiles.put(myFilename, new Vector<Byte>());
+        // System.out.println("Creating non existent file" + myFilename);
+        memFiles.put(myFilename, new byte[0]);
       }
 
     } else {
@@ -60,8 +61,8 @@ public class MemoryFile {
       throw new IOException("Seek position less than 0");
     }
 
-    if (location >= myFileContents.size()) {
-      this.location = myFileContents.size();
+    if (location >= myFileContents.length) {
+      this.location = myFileContents.length;
     } else {
       this.location = location;
     }
@@ -73,60 +74,50 @@ public class MemoryFile {
 
   public void write(byte[] ovalue) throws IOException {
     checkFileOpen();
-    int i = 0;
 
-    while (location < myFileContents.size() && i < ovalue.length) {
-      myFileContents.set(location, ovalue[i]);
-      ++location;
-      ++i;
+    while (location + ovalue.length > myFileContents.length) {
+      byte[] temp = new byte[location + ovalue.length];
+      System.arraycopy(myFileContents, 0, temp, 0, location);
+      myFileContents = temp;
     }
 
-    if (i < ovalue.length) {
-      // Still have more to write
-      while (i < ovalue.length) {
-        myFileContents.add(ovalue[i]);
-        location++;
-        i++;
-      }
-    }
+    System.arraycopy(ovalue, 0, myFileContents, location, ovalue.length);
+    location += ovalue.length;
   }
 
   public void readFully(byte[] line) throws IOException {
     checkFileOpen();
 
-    if (location + line.length > myFileContents.size()) {
-      Byte[] bytes = new Byte[line.length];
-      //myFileContents.subList(location, myFileContents.size()).toArray(bytes);
-      for (int i = 0; i < bytes.length; ++i) {
-        line[i] = myFileContents.get(location + i);
-      }
+    if (location + line.length > myFileContents.length) {
+//      Byte[] bytes = new Byte[line.length];
+//      //myFileContents.subList(location, myFileContents.size()).toArray(bytes);
+//      for (int i = 0; i < bytes.length; ++i) {
+//        line[i] = myFileContents.get(location + i);
+//      }
 
-     throw new EOFException();
+      throw new EOFException();
     }
 
-    Byte[] bytes = new Byte[line.length];
-    //myFileContents.subList(location, location + line.length).toArray(bytes);
-    for (int i = 0; i < line.length; ++i) {
-      line[i] = myFileContents.get(location + i);
-    }
+    System.arraycopy(myFileContents, location, line, 0, line.length);
+    location += line.length;
   }
 
   public int length() throws IOException {
     checkFileOpen();
 
-    return memFiles.get(myFilename).size();
+    return memFiles.get(myFilename).length;
   }
 
   public static InputStream getInputStream(String filename) throws FileNotFoundException {
     if (memFiles.containsKey(filename)) {
-      Byte[] bytes = new Byte[memFiles.get(filename).size()];
-      memFiles.get(filename).toArray(bytes);
-
-      byte[] primitive = new byte[bytes.length];
-      for (int i = 0 ; i < bytes.length; ++i) {
-        primitive[i] = bytes[i];
-      }
-      return new ByteArrayInputStream(primitive);
+//      Byte[] bytes = new Byte[memFiles.get(filename).size()];
+//      memFiles.get(filename).toArray(bytes);
+//
+//      byte[] primitive = new byte[bytes.length];
+//      for (int i = 0 ; i < bytes.length; ++i) {
+//        primitive[i] = bytes[i];
+//      }
+      return new ByteArrayInputStream(memFiles.get(filename));
     } else {
       throw new FileNotFoundException(filename);
     }

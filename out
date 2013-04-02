@@ -1,298 +1,179 @@
 DriverManager.getConnection("jdbc:tinySQL:./test")
     trying ORG.as220.tinySQL.textFileDriver
 getConnection returning ORG.as220.tinySQL.textFileDriver
-{user=me, encoding=Cp850}
+{user=me, encoding=Cp850, inmemory=true}
   DROP TABLE IF EXISTS cars
-DEBUG: Disk TextFile-Engine: Opening table cars
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 30
-RecordLength: 31
-    -> Elapsed time: 26 msecs: -1
+./test/cars
+    -> Elapsed time: 11 msecs: -1
   DROP TABLE IF EXISTS people
-ORG.as220.tinySQL.tinySQLException: Array index out of range: 3
-	at ORG.as220.tinySQL.DiskTextFileTable.readIndex(DiskTextFileTable.java:934)
-	at ORG.as220.tinySQL.DiskTextFileTable.<init>(DiskTextFileTable.java:163)
-	at ORG.as220.tinySQL.diskTextFileDatabase.openTable(diskTextFileDatabase.java:42)
-	at ORG.as220.tinySQL.tinySQL.getTable(tinySQL.java:1007)
-	at ORG.as220.tinySQL.sqlparser.DropTableStatement.setTable(DropTableStatement.java:68)
-	at ORG.as220.tinySQL.parser.TinySQLParser.DropTable(TinySQLParser.java:873)
-	at ORG.as220.tinySQL.parser.TinySQLParser.getStatement(TinySQLParser.java:75)
-	at ORG.as220.tinySQL.tinySQL.parse(tinySQL.java:123)
-	at ORG.as220.tinySQL.tinySQLStatement.execute(tinySQLStatement.java:195)
-	at ORG.as220.tinySQL.tinySQLStatement.executeUpdate(tinySQLStatement.java:169)
-	at TestText.executeUpdate(TestText.java:11)
-	at TestText.main(TestText.java:53)
-DEBUG: Disk TextFile-Engine: Opening table people
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
-RecordLength: 39
-___38
-DEBUG: TinySQL: Table people opened.
-INFO:  About to close table people
-WARN:  Table people: Open Views left: 0
-INFO:  Closing table people
-DEBUG: TinySQL: Table people closed.
-DEBUG: File: ./test/people.ind does not exist. No action taken on delete.
-    -> Elapsed time: 4 msecs: -1
+./test/people
+./test/cars
+    -> Elapsed time: 0 msecs: -1
   DROP TABLE IF EXISTS party
-DEBUG: Disk TextFile-Engine: Opening table party
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 11
-DEBUG: RecordLength [2] : 21
-RecordLength: 22
+./test/party
+./test/people
+./test/cars
     -> Elapsed time: 1 msecs: -1
 
 CREATE TABLE party ...
 =====================
-  CREATE TABLE party (birthday DATE, age INT, PRIMARY KEY (age))
+  CREATE TABLE party (birthday DATE, age INT)
     -> Elapsed time: 2 msecs: 0
 
 CREATE TABLE cars ...
 =====================
-  CREATE TABLE cars (name CHAR(25), id NUMERIC(4,0), PRIMARY KEY (id))
+  CREATE TABLE cars (name CHAR(25), id NUMERIC(4,0))
     -> Elapsed time: 1 msecs: 0
 
 CREATE TABLE people ...
 =======================
   CREATE TABLE people (pe_name CHAR(25), pe_id NUMERIC(8,0), car_id NUMERIC(4,0))
-    -> Elapsed time: 1 msecs: 0
+    -> Elapsed time: 0 msecs: 0
 
 INSERT INTO party ...
 ====================
   INSERT INTO party (birthday, age) VALUES('2000-12-01', 1)
-ORG.as220.tinySQL.tinySQLException: Array index out of range: 3
-	at ORG.as220.tinySQL.DiskTextFileTable.readIndex(DiskTextFileTable.java:934)
-	at ORG.as220.tinySQL.DiskTextFileTable.<init>(DiskTextFileTable.java:163)
-	at ORG.as220.tinySQL.diskTextFileDatabase.openTable(diskTextFileDatabase.java:42)
-	at ORG.as220.tinySQL.tinySQL.getTable(tinySQL.java:1007)
+RecordLength: 22
+I
+./test/party.def
+./test/cars.def
+./test/party
+./test/people
+./test/cars
+./test/people.def
+___21
+Quoting: ORG.as220.tinySQL.textFileQuoting@5e5fada2
+ORG.as220.tinySQL.tinySQLException: ./test/cars.def
+	at ORG.as220.tinySQL.InMemoryTextFileTable.readColumnInfo(InMemoryTextFileTable.java:851)
+	at ORG.as220.tinySQL.InMemoryTextFileTable.<init>(InMemoryTextFileTable.java:164)
+	at ORG.as220.tinySQL.memoryTextFileDatabase.openTable(memoryTextFileDatabase.java:26)
+	at ORG.as220.tinySQL.tinySQL.getTable(tinySQL.java:1006)
 	at ORG.as220.tinySQL.sqlparser.DropTableStatement.setTable(DropTableStatement.java:68)
 	at ORG.as220.tinySQL.parser.TinySQLParser.DropTable(TinySQLParser.java:873)
 	at ORG.as220.tinySQL.parser.TinySQLParser.getStatement(TinySQLParser.java:75)
 	at ORG.as220.tinySQL.tinySQL.parse(tinySQL.java:123)
 	at ORG.as220.tinySQL.tinySQLStatement.execute(tinySQLStatement.java:195)
 	at ORG.as220.tinySQL.tinySQLStatement.executeUpdate(tinySQLStatement.java:169)
-	at TestText.executeUpdate(TestText.java:11)
-	at TestText.main(TestText.java:55)
-DEBUG: Disk TextFile-Engine: Opening table party
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 11
-DEBUG: RecordLength [2] : 21
-RecordLength: 22
-___21
-DEBUG: TinySQL: Table party opened.
-A:1B:null
-Hello
-DEBUG: Converting. DATE: 2001-01-01
-Quoting: ORG.as220.tinySQL.textFileQuoting@6c07125
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 0
-DEBUG: Insering in row : 0 -> 0
+	at TestInMemoryText.executeUpdate(TestInMemoryText.java:11)
+	at TestInMemoryText.main(TestInMemoryText.java:54)
+ORG.as220.tinySQL.tinySQLException: ./test/people.def
+	at ORG.as220.tinySQL.InMemoryTextFileTable.readColumnInfo(InMemoryTextFileTable.java:851)
+	at ORG.as220.tinySQL.InMemoryTextFileTable.<init>(InMemoryTextFileTable.java:164)
+	at ORG.as220.tinySQL.memoryTextFileDatabase.openTable(memoryTextFileDatabase.java:26)
+	at ORG.as220.tinySQL.tinySQL.getTable(tinySQL.java:1006)
+	at ORG.as220.tinySQL.sqlparser.DropTableStatement.setTable(DropTableStatement.java:68)
+	at ORG.as220.tinySQL.parser.TinySQLParser.DropTable(TinySQLParser.java:873)
+	at ORG.as220.tinySQL.parser.TinySQLParser.getStatement(TinySQLParser.java:75)
+	at ORG.as220.tinySQL.tinySQL.parse(tinySQL.java:123)
+	at ORG.as220.tinySQL.tinySQLStatement.execute(tinySQLStatement.java:195)
+	at ORG.as220.tinySQL.tinySQLStatement.executeUpdate(tinySQLStatement.java:169)
+	at TestInMemoryText.executeUpdate(TestInMemoryText.java:11)
+	at TestInMemoryText.main(TestInMemoryText.java:55)
+ORG.as220.tinySQL.tinySQLException: ./test/party.def
+	at ORG.as220.tinySQL.InMemoryTextFileTable.readColumnInfo(InMemoryTextFileTable.java:851)
+	at ORG.as220.tinySQL.InMemoryTextFileTable.<init>(InMemoryTextFileTable.java:164)
+	at ORG.as220.tinySQL.memoryTextFileDatabase.openTable(memoryTextFileDatabase.java:26)
+	at ORG.as220.tinySQL.tinySQL.getTable(tinySQL.java:1006)
+	at ORG.as220.tinySQL.sqlparser.DropTableStatement.setTable(DropTableStatement.java:68)
+	at ORG.as220.tinySQL.parser.TinySQLParser.DropTable(TinySQLParser.java:873)
+	at ORG.as220.tinySQL.parser.TinySQLParser.getStatement(TinySQLParser.java:75)
+	at ORG.as220.tinySQL.tinySQL.parse(tinySQL.java:123)
+	at ORG.as220.tinySQL.tinySQLStatement.execute(tinySQLStatement.java:195)
+	at ORG.as220.tinySQL.tinySQLStatement.executeUpdate(tinySQLStatement.java:169)
+	at TestInMemoryText.executeUpdate(TestInMemoryText.java:11)
+	at TestInMemoryText.main(TestInMemoryText.java:56)
 WARN:  Table party: Open Views left: 0
-    -> Elapsed time: 17 msecs: 1
+    -> Elapsed time: 33 msecs: 1
 
 INSERT INTO cars ...
 ====================
   INSERT INTO cars (name, id) VALUES('Fiat', 1)
-DEBUG: Disk TextFile-Engine: Opening table cars
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 30
 RecordLength: 31
+I
+./test/party.def
+./test/cars.def
+./test/party
+./test/people
+./test/cars
+./test/people.def
 ___30
-DEBUG: TinySQL: Table cars opened.
-A:1B:null
-Hello
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 0
-DEBUG: Insering in row : 0 -> 0
 WARN:  Table cars: Open Views left: 0
     -> Elapsed time: 1 msecs: 1
   insert into cars (name, id) values('Pinto', 2)
-A:2B:1
-1
-2
-3
-4
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 1
-DEBUG: Insering in row : 1 -> 1
 WARN:  Table cars: Open Views left: 0
-    -> Elapsed time: 1 msecs: 1
+    -> Elapsed time: 0 msecs: 1
   INSerT inTO cars (name, id) VALueS('Thing', 3)
-A:3B:2
-1
-2
-3
-4
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 2
-DEBUG: Insering in row : 2 -> 2
 WARN:  Table cars: Open Views left: 0
     -> Elapsed time: 1 msecs: 1
   INSERT INTO cars (name, id) VALUES('Bug', 4)
-A:4B:3
-1
-2
-3
-4
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 3
-DEBUG: Insering in row : 3 -> 3
 WARN:  Table cars: Open Views left: 0
     -> Elapsed time: 0 msecs: 1
   INSERT INTO cars (name, id) VALUES('Newport', 5)
-A:5B:4
-1
-2
-3
-4
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 4
-DEBUG: Insering in row : 4 -> 4
 WARN:  Table cars: Open Views left: 0
     -> Elapsed time: 1 msecs: 1
   INSERT INTO cars (name, id) VALUES('Rangerover', 6)
-A:6B:5
-1
-2
-3
-4
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 5
-DEBUG: Insering in row : 5 -> 5
 WARN:  Table cars: Open Views left: 0
-    -> Elapsed time: 1 msecs: 1
+    -> Elapsed time: 0 msecs: 1
   INSERT INTO cars (name, id) VALUES('Jeep', 7)
-A:7B:6
-1
-2
-3
-4
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 6
-DEBUG: Insering in row : 6 -> 6
 WARN:  Table cars: Open Views left: 0
     -> Elapsed time: 0 msecs: 1
   INSERT INTO cars (name, id) VALUES('Hummer', 8)
-A:8B:7
-1
-2
-3
-4
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 7
-DEBUG: Insering in row : 7 -> 7
 WARN:  Table cars: Open Views left: 0
     -> Elapsed time: 1 msecs: 1
   INSERT INTO cars (name, id) VALUES('Lexus', 9)
-A:9B:8
-1
-2
-3
-4
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 8
-DEBUG: Insering in row : 8 -> 8
 WARN:  Table cars: Open Views left: 0
     -> Elapsed time: 0 msecs: 1
 
 INSERT INTO people ...
 ======================
   INSERT INTO people (pe_name, pe_id, car_id) VALUES('Irwin Garden', 1, 2)
-DEBUG: Disk TextFile-Engine: Opening table people
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
 RecordLength: 39
+I
+./test/party.def
+./test/cars.def
+./test/party
+./test/people
+./test/cars
+./test/people.def
 ___38
-DEBUG: TinySQL: Table people opened.
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 0
-DEBUG: Insering in row : 0 -> 0
 WARN:  Table people: Open Views left: 0
     -> Elapsed time: 1 msecs: 1
   INSERT INTO people (pe_name, pe_id, car_id) VALUES('Mr. Fiction', 2, 7)
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 1
-DEBUG: Insering in row : 1 -> 1
 WARN:  Table people: Open Views left: 0
     -> Elapsed time: 2 msecs: 1
   INSERT INTO people (pe_name, pe_id, car_id) VALUES('Sal Paradise', 3, 8)
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 2
-DEBUG: Insering in row : 2 -> 2
 WARN:  Table people: Open Views left: 0
     -> Elapsed time: 0 msecs: 1
   INSERT INTO people (pe_name, pe_id, car_id) VALUES('Dean Moriarty', 4, 3)
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 3
-DEBUG: Insering in row : 3 -> 3
 WARN:  Table people: Open Views left: 0
     -> Elapsed time: 1 msecs: 1
   INSERT INTO people (pe_name, pe_id, car_id) VALUES('Bull Lee', 5, 7)
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 4
-DEBUG: Insering in row : 4 -> 4
 WARN:  Table people: Open Views left: 0
     -> Elapsed time: 0 msecs: 1
   INSERT INTO people (pe_name, pe_id, car_id) VALUES('Jack Chip', 6, 1)
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 5
-DEBUG: Insering in row : 5 -> 5
 WARN:  Table people: Open Views left: 0
     -> Elapsed time: 1 msecs: 1
   INSERT INTO people (pe_name, pe_id, car_id) VALUES('Glen Runciter', 7, 4)
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 6
-DEBUG: Insering in row : 6 -> 6
 WARN:  Table people: Open Views left: 0
     -> Elapsed time: 0 msecs: 1
   INSERT INTO people (pe_name, pe_id, car_id) VALUES('Horselover Fat', 8, 2)
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 7
-DEBUG: Insering in row : 7 -> 7
 WARN:  Table people: Open Views left: 0
-    -> Elapsed time: 0 msecs: 1
+    -> Elapsed time: 1 msecs: 1
   INSERT INTO people (pe_name, pe_id, car_id) VALUES('Gnossos Pappadopoulos', 9, 7)
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 8
-DEBUG: Insering in row : 8 -> 8
 WARN:  Table people: Open Views left: 0
-    -> Elapsed time: 1 msecs: 1
+    -> Elapsed time: 0 msecs: 1
   INSERT INTO people (pe_name, pe_id, car_id) VALUES('Hef', 10, 6)
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 9
-DEBUG: Insering in row : 9 -> 9
 WARN:  Table people: Open Views left: 0
-    -> Elapsed time: 0 msecs: 1
+    -> Elapsed time: 1 msecs: 1
   INSERT INTO people (pe_name, pe_id, car_id) VALUES('Matty Groves', 11, 7)
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 10
-DEBUG: Insering in row : 10 -> 10
-WARN:  Table people: Open Views left: 0
-    -> Elapsed time: 1 msecs: 1
-  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Raoul Frodus', 12, 5)
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 11
-DEBUG: Insering in row : 11 -> 11
 WARN:  Table people: Open Views left: 0
     -> Elapsed time: 0 msecs: 1
-  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Hogar Boo', 12, 5)
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 12
-DEBUG: Insering in row : 12 -> 12
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Raoul Frodus', 12, 5)
 WARN:  Table people: Open Views left: 0
     -> Elapsed time: 1 msecs: 1
+  INSERT INTO people (pe_name, pe_id, car_id) VALUES('Hogar Boo', 12, 5)
+WARN:  Table people: Open Views left: 0
+    -> Elapsed time: 0 msecs: 1
 
 UPDATE Mr. Garden ...
 =====================
@@ -300,506 +181,27 @@ UPDATE Mr. Garden ...
 WARN:  Table people: Open Views left: 0
     -> Elapsed time: 9 msecs: 1
 
-SELECT cars, people ...
+SELECT cars ...
 =======================
-  SELECT pe_name, name FROM cars, people WHERE car_id = id
-ERROR: Column : pe_name not found in this table
-ERROR: Column : pe_name not found in this table
-ERROR: Column : car_id not found in this table
-DEBUG: Statement: ResultSet opened
+  SELECT * FROM cars
     -> Elapsed time: 5 msecs
-pe_name                   name                      
-------------------------- ------------------------- 
-GOT LEVEL 0
-DEBUG: SELECT returned on level: -1
-DEBUG: ResultSet: Max Rows reached: 13
-Irwin Garden              Rangerover                
-Mr. Fiction               Jeep                      
-Sal Paradise              Hummer                    
-Dean Moriarty             Thing                     
-Bull Lee                  Jeep                      
-Jack Chip                 Fiat                      
-Glen Runciter             Bug                       
-Horselover Fat            Pinto                     
-Gnossos Pappadopoulos     Jeep                      
-Hef                       Rangerover                
-Matty Groves              Jeep                      
-Raoul Frodus              Newport                   
-Hogar Boo                 Newport                   
-DEBUG: ResultSet.close(): Closing 2 views
-WARN:  Table people: Open Views left: 0
+name                      id   
+------------------------- ---- 
+Fiat                      1    
+Pinto                     2    
+Thing                     3    
+Bug                       4    
+Newport                   5    
+Rangerover                6    
+Jeep                      7    
+Hummer                    8    
+Lexus                     9    
 WARN:  Table cars: Open Views left: 0
-DEBUG: Statement: ResultSet close
-  SELECT name FROM cars WHERE id = 8
-SIMPLE EQ FOUND id 8
-DEBUG: Statement: ResultSet opened
-    -> Elapsed time: 1 msecs
-name                      
-------------------------- 
-GOT LEVEL 0
-DEBUG: SELECT returned on level: -1
-DEBUG: ResultSet: Max Rows reached: 1
-Hummer                    
-No Of Recs: 1
-
-SELECT party ...
-=======================
-  SELECT * FROM party
-DEBUG: Statement: ResultSet opened
-    -> Elapsed time: 1 msecs
-birthday   age        
----------- ---------- 
-GOT LEVEL 0
-DEBUG: SELECT returned on level: -1
-DEBUG: ResultSet: Max Rows reached: 1
-2001-01-01 1          
-No Of Recs: 1
-
-ALTER TABLE ...
-===============
-  ALTER TABLE people ADD (nation CHAR(25), age NUMERIC(4,0))
-ERROR: Column : nation not found in this table
-ERROR: Column : age not found in this table
-INFO:  About to close table people
-WARN:  Table people: Open Views left: 0
-INFO:  Closing table people
-DEBUG: TinySQL: Table people closed.
-DEBUG: File: ./test/people_tmp_ATAC_ORG does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC_ORG.def does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC_ORG.ind does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC.def does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC.ind does not exist. No action taken on delete.
-DEBUG: Disk TextFile-Engine: Opening table people
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
-RecordLength: 39
-___38
-INFO:  About to close table people
-INFO:  Closing table people
-DEBUG: Disk TextFile-Engine: Opening table people_tmp_ATAC
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
-DEBUG: RecordLength [4] : 63
-DEBUG: RecordLength [5] : 67
-RecordLength: 68
-___67
-DEBUG: TinySQL: Table people_tmp_ATAC opened.
-DEBUG: Disk TextFile-Engine: Opening table people
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
-RecordLength: 39
-___38
-DEBUG: TinySQL: Table people opened.
-DEBUG: Statement: ResultSet opened
-GOT LEVEL 0
-DEBUG: SELECT returned on level: -1
-DEBUG: ResultSet: Max Rows reached: 13
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 0
-DEBUG: Insering in row : 0 -> 0
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 1
-DEBUG: Insering in row : 1 -> 1
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 2
-DEBUG: Insering in row : 2 -> 2
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 3
-DEBUG: Insering in row : 3 -> 3
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 4
-DEBUG: Insering in row : 4 -> 4
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 5
-DEBUG: Insering in row : 5 -> 5
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 6
-DEBUG: Insering in row : 6 -> 6
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 7
-DEBUG: Insering in row : 7 -> 7
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 8
-DEBUG: Insering in row : 8 -> 8
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 9
-DEBUG: Insering in row : 9 -> 9
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 10
-DEBUG: Insering in row : 10 -> 10
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 11
-DEBUG: Insering in row : 11 -> 11
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 12
-DEBUG: Insering in row : 12 -> 12
-DEBUG: ResultSet.close(): Closing 1 views
-WARN:  Table people: Open Views left: 0
-DEBUG: Statement: ResultSet close
-WARN:  Table people_tmp_ATAC: Open Views left: 0
-INFO:  About to close table people
-INFO:  Closing table people
-DEBUG: TinySQL: Table people closed.
-INFO:  About to close table people_tmp_ATAC
-INFO:  Closing table people_tmp_ATAC
-DEBUG: TinySQL: Table people_tmp_ATAC closed.
-WARN:  [Rename] ./test/people to ./test/people_tmp_ATAC_ORG
-WARN:  [Rename] ./test/people.def to ./test/people_tmp_ATAC_ORG.def
-WARN:  [Rename] ./test/people_tmp_ATAC to ./test/people
-WARN:  [Rename] ./test/people_tmp_ATAC.def to ./test/people.def
-DEBUG: File: ./test/people_tmp_ATAC_ORG.ind does not exist. No action taken on delete.
-    -> Elapsed time: 8 msecs: 13
-  SELECT * FROM people
-DEBUG: Disk TextFile-Engine: Opening table people
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
-DEBUG: RecordLength [4] : 63
-DEBUG: RecordLength [5] : 67
-RecordLength: 68
-___67
-DEBUG: TinySQL: Table people opened.
-DEBUG: Statement: ResultSet opened
-    -> Elapsed time: 1 msecs
-pe_name                   pe_id    car_id nation                    age  
-------------------------- -------- ------ ------------------------- ---- 
-GOT LEVEL 0
-DEBUG: SELECT returned on level: -1
-DEBUG: ResultSet: Max Rows reached: 13
-Irwin Garden              1        6                                0    
-Mr. Fiction               2        7                                0    
-Sal Paradise              3        8                                0    
-Dean Moriarty             4        3                                0    
-Bull Lee                  5        7                                0    
-Jack Chip                 6        1                                0    
-Glen Runciter             7        4                                0    
-Horselover Fat            8        2                                0    
-Gnossos Pappadopoulos     9        7                                0    
-Hef                       10       6                                0    
-Matty Groves              11       7                                0    
-Raoul Frodus              12       5                                0    
-Hogar Boo                 12       5                                0    
-DEBUG: ResultSet.close(): Closing 1 views
-WARN:  Table people: Open Views left: 0
-DEBUG: Statement: ResultSet close
-
-  ALTER TABLE people DROP COLUMN age
-INFO:  About to close table people
-WARN:  Table people: Open Views left: 0
-INFO:  Closing table people
-DEBUG: TinySQL: Table people closed.
-DEBUG: File: ./test/people_tmp_ATAC_ORG does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC_ORG.def does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC_ORG.ind does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC.def does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC.ind does not exist. No action taken on delete.
-DEBUG: Disk TextFile-Engine: Opening table people
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
-DEBUG: RecordLength [4] : 63
-DEBUG: RecordLength [5] : 67
-RecordLength: 68
-___67
-INFO:  About to close table people
-INFO:  Closing table people
-DEBUG: Disk TextFile-Engine: Opening table people_tmp_ATAC
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
-DEBUG: RecordLength [4] : 63
-RecordLength: 64
-___63
-DEBUG: TinySQL: Table people_tmp_ATAC opened.
-DEBUG: Disk TextFile-Engine: Opening table people
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
-DEBUG: RecordLength [4] : 63
-DEBUG: RecordLength [5] : 67
-RecordLength: 68
-___67
-DEBUG: TinySQL: Table people opened.
-DEBUG: Statement: ResultSet opened
-GOT LEVEL 0
-DEBUG: SELECT returned on level: -1
-DEBUG: ResultSet: Max Rows reached: 13
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 0
-DEBUG: Insering in row : 0 -> 0
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 1
-DEBUG: Insering in row : 1 -> 1
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 2
-DEBUG: Insering in row : 2 -> 2
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 3
-DEBUG: Insering in row : 3 -> 3
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 4
-DEBUG: Insering in row : 4 -> 4
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 5
-DEBUG: Insering in row : 5 -> 5
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 6
-DEBUG: Insering in row : 6 -> 6
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 7
-DEBUG: Insering in row : 7 -> 7
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 8
-DEBUG: Insering in row : 8 -> 8
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 9
-DEBUG: Insering in row : 9 -> 9
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 10
-DEBUG: Insering in row : 10 -> 10
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 11
-DEBUG: Insering in row : 11 -> 11
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 12
-DEBUG: Insering in row : 12 -> 12
-DEBUG: ResultSet.close(): Closing 1 views
-WARN:  Table people: Open Views left: 0
-DEBUG: Statement: ResultSet close
-WARN:  Table people_tmp_ATAC: Open Views left: 0
-INFO:  About to close table people
-INFO:  Closing table people
-DEBUG: TinySQL: Table people closed.
-INFO:  About to close table people_tmp_ATAC
-INFO:  Closing table people_tmp_ATAC
-DEBUG: TinySQL: Table people_tmp_ATAC closed.
-WARN:  [Rename] ./test/people to ./test/people_tmp_ATAC_ORG
-WARN:  [Rename] ./test/people.def to ./test/people_tmp_ATAC_ORG.def
-WARN:  [Rename] ./test/people_tmp_ATAC to ./test/people
-WARN:  [Rename] ./test/people_tmp_ATAC.def to ./test/people.def
-DEBUG: File: ./test/people_tmp_ATAC_ORG.ind does not exist. No action taken on delete.
-    -> Elapsed time: 10 msecs: 13
-  SELECT * FROM people
-DEBUG: Disk TextFile-Engine: Opening table people
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
-DEBUG: RecordLength [4] : 63
-RecordLength: 64
-___63
-DEBUG: TinySQL: Table people opened.
-DEBUG: Statement: ResultSet opened
-    -> Elapsed time: 1 msecs
-pe_name                   pe_id    car_id nation                    
-------------------------- -------- ------ ------------------------- 
-GOT LEVEL 0
-DEBUG: SELECT returned on level: -1
-DEBUG: ResultSet: Max Rows reached: 13
-Irwin Garden              1        6                                
-Mr. Fiction               2        7                                
-Sal Paradise              3        8                                
-Dean Moriarty             4        3                                
-Bull Lee                  5        7                                
-Jack Chip                 6        1                                
-Glen Runciter             7        4                                
-Horselover Fat            8        2                                
-Gnossos Pappadopoulos     9        7                                
-Hef                       10       6                                
-Matty Groves              11       7                                
-Raoul Frodus              12       5                                
-Hogar Boo                 12       5                                
-DEBUG: ResultSet.close(): Closing 1 views
-WARN:  Table people: Open Views left: 0
-DEBUG: Statement: ResultSet close
-
-  ALTER TABLE people DROP nation
-INFO:  About to close table people
-WARN:  Table people: Open Views left: 0
-INFO:  Closing table people
-DEBUG: TinySQL: Table people closed.
-DEBUG: File: ./test/people_tmp_ATAC_ORG does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC_ORG.def does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC_ORG.ind does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC.def does not exist. No action taken on delete.
-DEBUG: File: ./test/people_tmp_ATAC.ind does not exist. No action taken on delete.
-DEBUG: Disk TextFile-Engine: Opening table people
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
-DEBUG: RecordLength [4] : 63
-RecordLength: 64
-___63
-INFO:  About to close table people
-INFO:  Closing table people
-DEBUG: Disk TextFile-Engine: Opening table people_tmp_ATAC
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
-RecordLength: 39
-___38
-DEBUG: TinySQL: Table people_tmp_ATAC opened.
-DEBUG: Disk TextFile-Engine: Opening table people
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
-DEBUG: RecordLength [4] : 63
-RecordLength: 64
-___63
-DEBUG: TinySQL: Table people opened.
-DEBUG: Statement: ResultSet opened
-GOT LEVEL 0
-DEBUG: SELECT returned on level: -1
-DEBUG: ResultSet: Max Rows reached: 13
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 0
-DEBUG: Insering in row : 0 -> 0
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 1
-DEBUG: Insering in row : 1 -> 1
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 2
-DEBUG: Insering in row : 2 -> 2
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 3
-DEBUG: Insering in row : 3 -> 3
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 4
-DEBUG: Insering in row : 4 -> 4
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 5
-DEBUG: Insering in row : 5 -> 5
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 6
-DEBUG: Insering in row : 6 -> 6
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 7
-DEBUG: Insering in row : 7 -> 7
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 8
-DEBUG: Insering in row : 8 -> 8
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 9
-DEBUG: Insering in row : 9 -> 9
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 10
-DEBUG: Insering in row : 10 -> 10
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 11
-DEBUG: Insering in row : 11 -> 11
-DEBUG: FindDeletedRow returned : -1
-DEBUG: RowCount: 12
-DEBUG: Insering in row : 12 -> 12
-DEBUG: ResultSet.close(): Closing 1 views
-WARN:  Table people: Open Views left: 0
-DEBUG: Statement: ResultSet close
-WARN:  Table people_tmp_ATAC: Open Views left: 0
-INFO:  About to close table people
-INFO:  Closing table people
-DEBUG: TinySQL: Table people closed.
-INFO:  About to close table people_tmp_ATAC
-INFO:  Closing table people_tmp_ATAC
-DEBUG: TinySQL: Table people_tmp_ATAC closed.
-WARN:  [Rename] ./test/people to ./test/people_tmp_ATAC_ORG
-WARN:  [Rename] ./test/people.def to ./test/people_tmp_ATAC_ORG.def
-WARN:  [Rename] ./test/people_tmp_ATAC to ./test/people
-WARN:  [Rename] ./test/people_tmp_ATAC.def to ./test/people.def
-DEBUG: File: ./test/people_tmp_ATAC_ORG.ind does not exist. No action taken on delete.
-    -> Elapsed time: 7 msecs: 13
-  SELECT * FROM people
-DEBUG: Disk TextFile-Engine: Opening table people
-DEBUG: Default DeleteMode : -1
-DEBUG: RecordLength [0] : 1
-DEBUG: RecordLength [1] : 26
-DEBUG: RecordLength [2] : 34
-DEBUG: RecordLength [3] : 38
-RecordLength: 39
-___38
-DEBUG: TinySQL: Table people opened.
-DEBUG: Statement: ResultSet opened
-    -> Elapsed time: 1 msecs
-pe_name                   pe_id    car_id 
-------------------------- -------- ------ 
-GOT LEVEL 0
-DEBUG: SELECT returned on level: -1
-DEBUG: ResultSet: Max Rows reached: 13
-Irwin Garden              1        6      
-Mr. Fiction               2        7      
-Sal Paradise              3        8      
-Dean Moriarty             4        3      
-Bull Lee                  5        7      
-Jack Chip                 6        1      
-Glen Runciter             7        4      
-Horselover Fat            8        2      
-Gnossos Pappadopoulos     9        7      
-Hef                       10       6      
-Matty Groves              11       7      
-Raoul Frodus              12       5      
-Hogar Boo                 12       5      
-DEBUG: ResultSet.close(): Closing 1 views
-WARN:  Table people: Open Views left: 0
-DEBUG: Statement: ResultSet close
-
-Checking Meta data ...
-======================
-
-*** Type Info: [DATA_TYPE is from java.sql.Types]
-TYPE_NAME  DATA_TYPE PRECISION LITERAL_PREFIX LITERAL_SUFFIX CREATE_PARAMS        NULLABLE CASE_SENSITIVE SEARCHABLE 
----------- --------- --------- -------------- -------------- -------------------- -------- -------------- ---------- 
-CHAR       1         254       '              '              0                    1        Y              3          
-NUMERIC    6         19                                      0                    1        N              3          
-BOOLEAN    -7        1                                       0                    1        N              3          
-DATE       91        10        '              '              0                    1        N              3          
-DEBUG: ResultSet: Max Rows reached: 4
-
-*** Table Info:
-TABLE_CAT  TABLE_SCHEM TABLE_NAME                                                                                                                                                                                                                                                 TABLE_TYPE                               TABLE_REMARKS                                                                                                                                                                                                                                                  
----------- ----------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-                       cars                                                                                                                                                                                                                                                       TABLE                                                                                                                                                                                                                                                                                                   
-                       party                                                                                                                                                                                                                                                      TABLE                                                                                                                                                                                                                                                                                                   
-                       people                                                                                                                                                                                                                                                     TABLE                                                                                                                                                                                                                                                                                                   
-DEBUG: ResultSet: Max Rows reached: 3
-DEBUG: ResultSet.close(): Closing 1 views
-WARN:  Table cars: Open Views left: 0
-DEBUG: Statement: ResultSet close
-DEBUG: ResultSet.close(): Closing 1 views
-WARN:  Table party: Open Views left: 0
-DEBUG: Statement: ResultSet close
 INFO:  About to close table party
 INFO:  Closing table party
-DEBUG: TinySQL: Table party closed.
 INFO:  About to close table people
 INFO:  Closing table people
-DEBUG: TinySQL: Table people closed.
 INFO:  About to close table cars
 INFO:  Closing table cars
-DEBUG: TinySQL: Table cars closed.
 
 Good bye

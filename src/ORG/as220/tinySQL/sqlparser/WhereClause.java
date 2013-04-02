@@ -82,7 +82,6 @@ public class WhereClause
                 .equalsIgnoreCase(thistable.getPrimaryKeyColName())) {
               binarySearchableTable = thistable;
               binarySearchValue = expression.staticvalue;
-              System.out.println("SIMPLE EQ FOUND " + expression.column + " " + expression.staticvalue);
             }
           }
         }

@@ -299,7 +299,6 @@ public abstract class tinySQLTable
         nativeval = new String(def.sval);
       }
     } else {
-      System.out.println(def.sval);
       throw new tinySQLException("Bad Index: No latest prim key");
     }
 

@@ -752,7 +752,6 @@ public class InMemoryTextFileTable extends tinySQLTable
       // definition) file
       //
       fdef = MemoryFile.getInputStream(dataDir + "/" + getName() + defext);
-
       fdef_open = true;
 
       // use a StreamTokenizer to break up the stream.
@@ -769,6 +768,7 @@ public class InMemoryTextFileTable extends tinySQLTable
       def.wordChars('0', 'z');
       def.eolIsSignificant(false);
       def.parseNumbers();
+
 
       int tablePos = 0;
       int record_length = rowpref.length;
@@ -823,7 +823,7 @@ public class InMemoryTextFileTable extends tinySQLTable
       setRecordLength(record_length);
 
       long datalength = ftbl.length() - tablepref.length - tablepost.length;
-
+      System.out.println("I");
       if (datalength < 0)
       {
         throw new tinySQLException("TableError negative data size: " + datalength);

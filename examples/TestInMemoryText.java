@@ -123,7 +123,7 @@ public class TestInMemoryText
             System.out.println("");
             System.out.println("SELECT cars ...");
             System.out.println("=======================");
-            ResultSet rs = executeQuery(stmt, "SELECT * FROM cars");
+            rs = executeQuery(stmt, "SELECT * FROM cars");
             QueryDbf.displayResults(rs);
             rs.close ();
 //

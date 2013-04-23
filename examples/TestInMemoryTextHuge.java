@@ -1,7 +1,7 @@
 import java.util.*;
 import java.sql.*;
 
-public class TestInMemoryText
+public class TestInMemoryTextHuge
 {
 
     static void executeUpdate(Statement stmt, String sql) throws SQLException

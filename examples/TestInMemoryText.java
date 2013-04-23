@@ -90,15 +90,12 @@ public class TestInMemoryText
             executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Jeep', 7)");
             executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Hummer', 8)");
           executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus', 9)");
-          for (int i = 10; i < 10000; ++i) {
-                       executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus"+ i + "', " + i + ")");
-                     }
 
 
-          for (int i = 10; i < 100; ++i) {
-                 ResultSet rs = executeQuery(stmt, "SELECT * FROM cars WHERE id = " + i);
+//          for (int i = 10; i < 100; ++i) {
+                 ResultSet rs = executeQuery(stmt, "SELECT * FROM cars WHERE id = " + 4);
                  System.out.println ("No Of Recs: " + QueryDbf.displayResults(rs));
-               }
+//               }
 
             System.out.println("");
             System.out.println("INSERT INTO people ...");

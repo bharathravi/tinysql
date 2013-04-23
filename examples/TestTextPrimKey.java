@@ -68,15 +68,17 @@ public class TestTextPrimKey
       executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Jeep', 7)");
       executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Hummer', 8)");
       executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus', 9)");
+      executeUpdate(stmt, "DELETE FROM cars WHERE id=5");
+      executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus3333', 5)");
 
-//      for (int i = 10; i < 80000; ++i) {
+//      for (int i = 10; i < 5000; ++i) {
 //        executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus"+ i + "', " + i + ")");
 //      }
 //
-//      for (int i = 10; i < 100; ++i) {
+//     for (int i = 10; i < 100; ++i) {
         ResultSet rs = executeQuery(stmt, "SELECT * FROM cars WHERE id = 4");
         System.out.println ("No Of Recs: " + QueryDbf.displayResults(rs));
- //     }
+//      }
 
       // Execute a query and get the result set.
 

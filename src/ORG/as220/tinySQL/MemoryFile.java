@@ -3,9 +3,7 @@ package ORG.as220.tinySQL;
 import ORG.as220.tinySQL.util.Log;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Vector;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,13 +16,18 @@ public class MemoryFile {
   // A mem file is simply a string stored in memory
   // TODO(bharath): Is this sufficient or do we need a ByteString?
   private static HashMap<String, byte[] > memFiles = new HashMap<String, byte[]>();
+  private static HashMap<String, Integer> memFileLength = new HashMap<String, Integer>();
   private static HashMap<String, String> filePermissions = new HashMap<String, String>();
   private int location = 0;
 
   private String myFilename = new String("");
+  private Integer myFileLength = 0;
 
   private byte[] myFileContents = new byte[0];
   private String myPermissions = "";
+
+  private static int FILE_BLOCK_SIZE = 65535;
+  private int fileBlockCount = 1;
 
   public MemoryFile(String filename, String permissions) throws FileNotFoundException {
 
@@ -38,12 +41,17 @@ public class MemoryFile {
 
       if (permissions.contains("rw")) {
         // System.out.println("Creating non existent file" + myFilename);
-        memFiles.put(myFilename, new byte[0]);
+
+        myFileContents = new byte[FILE_BLOCK_SIZE * fileBlockCount];
+        memFiles.put(myFilename, myFileContents);
+        memFileLength.put(myFilename, 0);
       }
 
     } else {
       myFileContents = memFiles.get(myFilename);
+      myFileLength = memFileLength.get(myFilename);
       myPermissions = filePermissions.get(myFilename);
+      fileBlockCount = myFileContents.length/FILE_BLOCK_SIZE;
     }
 
   }
@@ -51,6 +59,7 @@ public class MemoryFile {
   public void close() throws IOException {
     checkFileOpen();
     memFiles.put(myFilename, myFileContents);
+    memFileLength.put(myFilename, myFileLength);
     filePermissions.put(myFilename, myPermissions);
   }
 
@@ -75,14 +84,22 @@ public class MemoryFile {
   public void write(byte[] ovalue) throws IOException {
     checkFileOpen();
 
-    while (location + ovalue.length > myFileContents.length) {
-      byte[] temp = new byte[location + ovalue.length];
+    boolean  expand = false;
+    while (location + ovalue.length > FILE_BLOCK_SIZE * fileBlockCount) {
+      fileBlockCount++;
+      expand = true;
+    }
+
+    if (expand) {
+      byte[] temp = new byte[FILE_BLOCK_SIZE * fileBlockCount];
       System.arraycopy(myFileContents, 0, temp, 0, location);
       myFileContents = temp;
     }
 
+    System.out.println("LIMIT " + myFileContents.length);
     System.arraycopy(ovalue, 0, myFileContents, location, ovalue.length);
     location += ovalue.length;
+    myFileLength += ovalue.length;
   }
 
   public void readFully(byte[] line) throws IOException {
@@ -105,7 +122,7 @@ public class MemoryFile {
   public int length() throws IOException {
     checkFileOpen();
 
-    return memFiles.get(myFilename).length;
+    return memFileLength.get(myFilename);
   }
 
   public static InputStream getInputStream(String filename) throws FileNotFoundException {
@@ -126,6 +143,7 @@ public class MemoryFile {
   public static void delFile(String myFilename) {
     if (memFiles.containsKey(myFilename)) {
       memFiles.remove(myFilename);
+      memFileLength.remove(myFilename);
     } else {
       //Log.debug("File: " + myFilename + " does not exist. No action taken on delete.");
     }
@@ -143,7 +161,9 @@ public class MemoryFile {
     }
 
     memFiles.put(newFileName, memFiles.get(filename));
+    memFileLength.put(newFileName, memFileLength.get(filename));
     memFiles.remove(filename);
+    memFileLength.remove(filename);
     return true;
   }
 }

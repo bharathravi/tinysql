@@ -1,103 +1,98 @@
 import java.util.*;
 import java.sql.*;
 
-public class TestText 
+public class TestText
 {
 
-    static void executeUpdate(Statement stmt, String sql) throws java.sql.SQLException
-    {
-      System.out.println("  " + sql);
-      long startTime = System.currentTimeMillis();
-      int res = stmt.executeUpdate(sql);
-      System.out.println("    -> Elapsed time: "+ (System.currentTimeMillis() - startTime) + " msecs: " + res);
+  static void executeUpdate(Statement stmt, String sql) throws java.sql.SQLException
+  {
+    System.out.println("  " + sql);
+    long startTime = System.currentTimeMillis();
+    int res = stmt.executeUpdate(sql);
+    System.out.println("    -> Elapsed time: "+ (System.currentTimeMillis() - startTime) + " msecs: " + res);
+  }
+
+  static ResultSet executeQuery(Statement stmt, String sql) throws java.sql.SQLException
+  {
+    System.out.println("  " + sql);
+    long startTime = System.currentTimeMillis();
+    ResultSet rs = stmt.executeQuery(sql);
+    System.out.println("    -> Elapsed time: "+ (System.currentTimeMillis() - startTime) + " msecs");
+    return rs;
+  }
+
+  public static void main(String argv[]) {
+
+    try {
+      // Register the textFileDriver.
+      //
+      Class.forName("ORG.as220.tinySQL.textFileDriver");
+    } catch (ClassNotFoundException e) {
+      System.err.println(
+          "I could not find the tinySQL classes. Did you install\n" +
+              "them as directed in the README file?");
+      e.printStackTrace();
     }
 
-    static ResultSet executeQuery(Statement stmt, String sql) throws java.sql.SQLException
-    {
-      System.out.println("  " + sql);
-      long startTime = System.currentTimeMillis();
-      ResultSet rs = stmt.executeQuery(sql);
-      System.out.println("    -> Elapsed time: "+ (System.currentTimeMillis() - startTime) + " msecs");
-      return rs;
-    }
+    try { // watch out for SQLExceptions!
 
-    public static void main(String argv[]) {
+      // Make a connection to the tinySQL Driver.
+      //
+      Properties p = new Properties ();
+      p.setProperty ("user" , "me");
+      p.setProperty ("encoding", "Cp850");
 
-        try {
-            // Register the textFileDriver.
-            //
-            Class.forName("ORG.as220.tinySQL.textFileDriver");
-        } catch (ClassNotFoundException e) {
-            System.err.println(
-                "I could not find the tinySQL classes. Did you install\n" +
-                "them as directed in the README file?");
-            e.printStackTrace();
-        }
+      DriverManager.setLogStream (System.out);
+      Connection con = DriverManager.getConnection("jdbc:tinySQL:./test", p);
+      System.out.println (p);
 
-        try { // watch out for SQLExceptions!
+      // get a Statement object from the Connection
+      //
+      Statement stmt = con.createStatement();
 
-            // Make a connection to the tinySQL Driver.
-            //
-            Properties p = new Properties ();
-            p.setProperty ("user" , "me");
-            p.setProperty ("encoding", "Cp850");
+      executeUpdate(stmt, "DROP TABLE IF EXISTS cars");
+      executeUpdate(stmt, "DROP TABLE IF EXISTS people");
+      executeUpdate(stmt, "DROP TABLE IF EXISTS party");
 
-            DriverManager.setLogStream (System.out);      
-            Connection con = DriverManager.getConnection("jdbc:tinySQL:./test", p);
-            System.out.println (p);
-            
-            // get a Statement object from the Connection
-            //
-            Statement stmt = con.createStatement();
-
-            executeUpdate(stmt, "DROP TABLE IF EXISTS cars");
-            executeUpdate(stmt, "DROP TABLE IF EXISTS people");
-            executeUpdate(stmt, "DROP TABLE IF EXISTS party");
-
-            System.out.println("");
-            System.out.println("CREATE TABLE party ...");
-            System.out.println("=====================");
-            executeUpdate(stmt, "CREATE TABLE party (birthday DATE, age INT)");
+      System.out.println("");
+      System.out.println("CREATE TABLE party ...");
+      System.out.println("=====================");
+      executeUpdate(stmt, "CREATE TABLE party (birthday DATE, age INT)");
 
 
-            System.out.println("");
-            System.out.println("CREATE TABLE cars ...");
-            System.out.println("=====================");
-            executeUpdate(stmt, "CREATE TABLE cars (name CHAR(25), id NUMERIC(4,0))");
+      System.out.println("");
+      System.out.println("CREATE TABLE cars ...");
+      System.out.println("=====================");
+      executeUpdate(stmt, "CREATE TABLE cars (name CHAR(25), id NUMERIC(4,0))");
 
-            System.out.println("");
-            System.out.println("CREATE TABLE people ...");
-            System.out.println("=======================");
-            executeUpdate(stmt,
-                "CREATE TABLE people (pe_name CHAR(25), pe_id NUMERIC(8,0), car_id NUMERIC(4,0))");
-            System.err.println("Created the tables.");
+      System.out.println("");
+      System.out.println("CREATE TABLE people ...");
+      System.out.println("=======================");
+      executeUpdate(stmt,
+          "CREATE TABLE people (pe_name CHAR(25), pe_id NUMERIC(8,0), car_id NUMERIC(4,0))");
+      System.err.println("Created the tables.");
 
-            System.out.println("");
-            System.out.println("INSERT INTO party ...");
-            System.out.println("====================");
-            executeUpdate(stmt, "INSERT INTO party (birthday, age) VALUES('2000-12-01', 1)");
+      System.out.println("");
+      System.out.println("INSERT INTO party ...");
+      System.out.println("====================");
+      executeUpdate(stmt, "INSERT INTO party (birthday, age) VALUES('2000-12-01', 1)");
 
-            System.out.println("");
-            System.out.println("INSERT INTO cars ...");
-            System.out.println("====================");
-            executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Fiat', 1)");
-            executeUpdate(stmt, "insert into cars (name, id) values('Pinto', 2)");
-            executeUpdate(stmt, "INSerT inTO cars (name, id) VALueS('Thing', 3)");
-            executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Bug', 4)");
-            executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Newport', 5)");
-            executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Rangerover', 6)");
-            executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Jeep', 7)");
-            executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Hummer', 8)");
-            executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus', 9)");
+      System.out.println("");
+      System.out.println("INSERT INTO cars ...");
+      System.out.println("====================");
+      executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Fiat', 1)");
+      executeUpdate(stmt, "insert into cars (name, id) values('Pinto', 2)");
+      executeUpdate(stmt, "INSerT inTO cars (name, id) VALueS('Thing', 3)");
+      executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Bug', 4)");
+      executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Newport', 5)");
+      executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Rangerover', 6)");
+      executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Jeep', 7)");
+      executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Hummer', 8)");
+      executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus', 9)");
 
-          for (int i = 10; i < 80000; ++i) {
-                       executeUpdate(stmt, "INSERT INTO cars (name, id) VALUES('Lexus"+ i + "', " + i + ")");
-                     }
 
-          for (int i = 10; i < 100; ++i) {
-                 ResultSet rs = executeQuery(stmt, "SELECT * FROM cars WHERE id = " + i);
-                 System.out.println ("No Of Recs: " + QueryDbf.displayResults(rs));
-               }
+      ResultSet rs = executeQuery(stmt, "SELECT * FROM cars WHERE id = " + 4);
+      System.out.println ("No Of Recs: " + QueryDbf.displayResults(rs));
 //
 //            System.out.println("");
 //            System.out.println("INSERT INTO people ...");
@@ -180,16 +175,16 @@ public class TestText
 //            QueryDbf.displayResults(rs);
 //            rs.close();
 
-            stmt.close();
-            con.close();
+      stmt.close();
+      con.close();
 
-            System.out.println("\nGood bye");
+      System.out.println("\nGood bye");
 
-        } catch( Exception e ) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
+    } catch( Exception e ) {
+      System.out.println(e.getMessage());
+      e.printStackTrace();
     }
+  }
 
 }
 

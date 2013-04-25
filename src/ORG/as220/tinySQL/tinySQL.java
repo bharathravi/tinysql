@@ -39,7 +39,9 @@ import ORG.as220.tinySQL.sqlparser.CompactTableStatement;
 import ORG.as220.tinySQL.sqlparser.CreateTableStatement;
 import ORG.as220.tinySQL.sqlparser.DeleteStatement;
 import ORG.as220.tinySQL.sqlparser.DropTableStatement;
+import ORG.as220.tinySQL.sqlparser.Expression;
 import ORG.as220.tinySQL.sqlparser.InsertStatement;
+import ORG.as220.tinySQL.sqlparser.LValue;
 import ORG.as220.tinySQL.sqlparser.SQLStatement;
 import ORG.as220.tinySQL.sqlparser.SelectStatement;
 import ORG.as220.tinySQL.sqlparser.UpdateStatement;
@@ -51,7 +53,10 @@ import java.io.StringReader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Stack;
 import java.util.Vector;
 
@@ -223,6 +228,11 @@ public abstract class tinySQL
    * read the query result. The current state is taken from
    * tsResultSet. Proceed until maxFetchSize or eof has reached.
    */
+  
+  //>>>From getMoreResults().
+  //>>>Checks where binary searchable table or not!
+  //>>>get nextNonDeletedRow and?
+  
   public int continueQuery(tsResultSet res) throws tinySQLException {
     // the table scan here is an iterative tree expansion, similar to
     // the algorithm shown in the outline example in Chapter 5.
@@ -261,8 +271,10 @@ public abstract class tinySQL
       state.push(currentTable);
     }
 
+    HashMap opHash = res.getWhereClause().getExpression().getRange();
     // keep retrieving rows until we run out of rows to process.
     // Level should be direct proportional to the stacksize
+    //>>> row retrieval here!
     while (level > -1) {
       boolean levelFound = false;
       /**
@@ -280,21 +292,55 @@ public abstract class tinySQL
       // TODO(bharath): nextNonDeleted is the row iterator in the physical table
       // (eventually). Binary search will need to be done here.
       boolean nextRowExists = false;
+      
+      /*
+      Enumeration tmp = res.getWhereClause().getExpression().getChildren();
+      //System.out.print(tmp.nextElement());
+      while(tmp.hasMoreElements())
+      {
+	      LValue lval = (Expression)tmp.nextElement();
+	      System.out.println("wc=" + lval.toString());
+      }
 
+       Map tmp = res.getWhereClause().getExpression().getRange();
+       //System.out.print(tmp);
+       Iterator iter = tmp.entrySet().iterator();
+ 
+			while (iter.hasNext()) {
+				Map.Entry mEntry = (Map.Entry) iter.next();
+				System.out.println(mEntry.getKey() + " : " + mEntry.getValue());
+			}
+       Object tobj = tmp.get(" >= ");
+       if(tobj != null)
+       {
+       int val = (Integer)tobj;
+	       }       
+       String stmp = ">=";
+       Object tobj2 = (Integer)tmp.get(stmp.toString());
+       if(tobj2 != null)
+       {
+       int val = (Integer)tobj2;
+	       }   
+  */    
       if (res.getWhereClause().binarySearchableTable!= null
           && currentTable == res.getWhereClause().binarySearchableTable) {
         // Can be bin searched
-        nextRowExists = currentTable.nextPrimaryKeyBinSearch(
-            res.getWhereClause().binarySearchValue);
+	//>>>should do binsearch only once for all adjacent rows!
+	//>>>
+        //nextRowExists = currentTable.nextPrimaryKeyBinSearch(res.getWhereClause().binarySearchValue);
+	nextRowExists = currentTable.rangeBinSearch(opHash);
       } else {
         nextRowExists = currentTable.nextNonDeleted();
       }
+      
+      //>>>nextRowExists check to see if row exists in the file. to exit out.
       if (nextRowExists) {
         // add each column for this table to the record; record is a tsRow
         // object that is used to hold the values of the current row. It
         // represents every row in every table, and is not added to the result
         // set Vector until we have read a row in the last table in the table list.
 
+	//>>> copy the retreived row into record in ASCII format from bytes.
         Vector columns = (Vector) tableColumns.get(currentTable);
         addColumnsToRow(columns, record, currentTable);
         // since we were just able to get a row, then we are not at the end of file
@@ -336,6 +382,8 @@ public abstract class tinySQL
       if (haveRecord) {
         // Patch submitted by Todd McNeill <toddm@tngi.com>
         // If the record evaluates correctly, add it to the final result set.
+	//>>> whereClause matching with records?!!
+	//>>> if record matched only add to res!!! otherwise is discarded.
         if (res.getWhereClause().isMatch(record)) {
           boolean addOK = res.addPhysicalRow(new tsPhysicalRow(record));
           if (addOK == false) {

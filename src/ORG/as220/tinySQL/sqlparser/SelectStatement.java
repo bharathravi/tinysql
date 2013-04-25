@@ -59,6 +59,7 @@ public class SelectStatement implements ConditionalStatement
 
   private Vector<tinySQLTableView> tables;
 
+  //>>> This below line forms a loop of tinySQLStatement objs?
   private tinySQLStatement statement;
   private tinySQLResultSet myResult;
   private int mod;

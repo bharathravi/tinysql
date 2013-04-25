@@ -21,9 +21,11 @@
 package ORG.as220.tinySQL;
 
 import ORG.as220.tinySQL.sqlparser.Operator;
+import ORG.as220.tinySQL.sqlparser.WhereClause;
 import ORG.as220.tinySQL.util.Log;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 /**
@@ -535,13 +537,113 @@ public class tinySQLTableView
   {
     return index;
   }
+  
+  //>>>RangeBinSearch. Search the conditional value using binSearch. 
+  //>>>Then move on accordingly to records beside it in the file.
+  //public boolean RangeBinSearch(WhereClause whereC) throws tinySQLException
+  public boolean rangeBinSearch(HashMap tmp) throws tinySQLException
+  {
+	  //HashMap tmp = whereC.getExpression().getRange();
+	  //>>>just print ranges first!
+	  //if(tmp.containsKey(">="))
+	  boolean fnRet=false;
+	  
+	  BigDecimal val = (BigDecimal) tmp.get(" == ");
+	  if(val != null)
+	  {
+		fnRet = nextPrimaryKeyBinSearch(val);		
+		lastReadRow = lastBinSearchedFileRow;
+		return fnRet;
+	  }
+	  
+	  
+	  val = (BigDecimal)tmp.get(" >= ");
+	  if(val != null)
+	  {
+		if(lastBinSearchedFileRow == -1)
+		{
+			fnRet = nextPrimaryKeyBinSearch(val);
+			lastReadRow = lastBinSearchedFileRow;
+			return fnRet;
+		}
+		else
+		{
+			lastReadRow = lastReadRow + 1;
+			if(lastReadRow < getRowCount())
+			return loadRow(lastReadRow);
+		}
+		
+		
+	  }
+	  
+	  
+	  val = (BigDecimal)tmp.get(" <= ");
+	  if(val != null)
+	  {
+		if(lastBinSearchedFileRow == -1)
+		{
+			fnRet = nextPrimaryKeyBinSearch(val);
+			lastReadRow = lastBinSearchedFileRow;
+			return fnRet;
+		}
+		else
+		{
+			lastReadRow = lastReadRow -1;
+			if(lastReadRow >=0)
+			return loadRow(lastReadRow);
+		}
+	  }
+	  
+	  val = (BigDecimal)tmp.get(" > ");
+	  if(val != null)
+	  {
+		if(lastBinSearchedFileRow == -1)
+		{
+			
+			fnRet = nextPrimaryKeyBinSearch(val.add(new BigDecimal(1)));
+			lastReadRow = lastBinSearchedFileRow;
+			return fnRet;
+		}
+		else
+		{
+			lastReadRow = lastReadRow + 1;
+			if(lastReadRow < getRowCount())
+			return loadRow(lastReadRow);
+		}
+		
+		
+	  }
+	  
+	  
+	  val = (BigDecimal)tmp.get(" < ");
+	  if(val != null)
+	  {
+		if(lastBinSearchedFileRow == -1)
+		{
+			fnRet = nextPrimaryKeyBinSearch(val.subtract(new BigDecimal(1)));
+			lastReadRow = lastBinSearchedFileRow;
+			return fnRet;
+		}
+		else
+		{
+			lastReadRow = lastReadRow -1;
+			if(lastReadRow >=0)
+			return loadRow(lastReadRow);
+		}
+	  }
+	  return false;
+  }
+	  
 
   // Do a Binary Search on the Primary Key for a certain value.
 
   // Indicates whether a binary search was already done on this table.
   // Must be reset to true each time you want to binary search.
   private boolean binsearched = false;
+  public int lastBinSearchedFileRow=-1;
+  public int lastReadRow=-1;
 
+  //>>>binarySearchValue is the primarykey row you want.
   public boolean nextPrimaryKeyBinSearch(Object binarySearchValue) throws tinySQLException {
     if (end > getRowCount() ||
         begin < 0 || end < begin) {
@@ -552,14 +654,17 @@ public class tinySQLTableView
       return false;
     }
 
-    while(begin < end || begin < 0 || end > getRowCount()) {
+    //>>>while(begin<end) can cause corner case issue! we want to search when begin=end=0 also.
+    //>>>Correct= while(begin<=end).
+    while(begin <= end || begin < 0 || end > getRowCount()) {
       int rowNum = (begin + end)/2;
       if (loadRow(rowNum)) {
-        Object thisValue = _currentRow.get(table.getPrimaryKeyTablePos());
+        Object thisValue = _currentRow.get(table.getPrimaryKeyTablePos()+1);
         int comp = Operator.compareTo(thisValue, binarySearchValue);
 
         if (comp == 0) {
           if (!table.isDeleted(getCurrentRecordNumber())) {
+	    lastBinSearchedFileRow = rowNum;
             binsearched = true;
             return true;
           } else {

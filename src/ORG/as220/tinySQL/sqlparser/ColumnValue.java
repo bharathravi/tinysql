@@ -25,6 +25,7 @@ import ORG.as220.tinySQL.tsRow;
 import ORG.as220.tinySQL.util.EmptyEnumeration;
 
 import java.util.Enumeration;
+import java.util.HashMap;
 
 /**
  * A column value is a LValue that returns the current value of the
@@ -90,6 +91,12 @@ public class ColumnValue implements LValue
   public Enumeration getChildren()
   {
     return EmptyEnumeration.getEnum();
+  }
+  
+   public HashMap getRange()
+  {
+	  HashMap v = new HashMap();
+	  return v;
   }
 
   /**

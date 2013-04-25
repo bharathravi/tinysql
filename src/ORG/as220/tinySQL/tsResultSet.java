@@ -215,6 +215,8 @@ public class tsResultSet
    * @param newPos the new row, from which to read
    * @param fetchsize the new fetchsize.
    */
+  
+  //>>>Fetch Results!
   private boolean getMoreResults(int newPos, int fetchsize) throws tinySQLException
   {
     this.fetchsize = fetchsize;

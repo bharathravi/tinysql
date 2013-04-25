@@ -24,6 +24,7 @@ import ORG.as220.tinySQL.tinySQLException;
 import ORG.as220.tinySQL.tsRow;
 
 import java.util.Enumeration;
+import java.util.HashMap;
 
 /**
  * an LValue is the supertype of all kinds of expressions and
@@ -63,4 +64,6 @@ public interface LValue
    * returns the number of children used in this LValue
    */
   public int getChildCount();
+  
+  public HashMap getRange();
 }

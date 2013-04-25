@@ -48,18 +48,24 @@ public class tinySQLtest {
             stmt.execute("DROP TABLE test");
             
             // Create a table (for real this time)
-            stmt.execute("CREATE TABLE test (name cHaR(25), id InT)");
+            //stmt.execute("CREATE TABLE test (name cHaR(25), id InT)");
+	    stmt.execute("CREATE TABLE test (name cHaR(25), id NUMERIC(4,0) PRIMARY KEY)");
             System.err.println("Created the test table.");
 
             // Insert a couple of rows.
             stmt.executeUpdate(
-                "INSERT INTO test (name, id) VALUES('Brian', 1)");
+                "INSERT INTO test (name, id) VALUES('Arian', 1)");
             stmt.executeUpdate(
-                "INSERT INTO test (name, id) VALUES('Cletus',  2)");
+                "INSERT INTO test (name, id) VALUES('Bletus',  2)");
+	    stmt.executeUpdate("INSERT INTO test (name, id) VALUES('Claus',  3)");
+	    
 
             // Execute a query and get the result set.
             //
-            ResultSet rs = stmt.executeQuery("SELECT * FROM test");
+	    ResultSet rs = stmt.executeQuery("SELECT * FROM test where id =2");
+	    //ResultSet rs = stmt.executeQuery("SELECT * FROM test where id <2");
+            //ResultSet rs = stmt.executeQuery("SELECT * FROM test where id >=2");	    
+	    //ResultSet rs = stmt.executeQuery("SELECT * FROM test where id >=1 and id <=2");
 
             // Display column headers
             //

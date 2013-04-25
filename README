@@ -5,7 +5,9 @@ Authors: Bharath Ravi, Benton Harris, Ishan Lal, Ashwin Kumble
 COMPILING THE CODE
 -------------------
 The code uses Apache Ant to compile.
-Please install 'ant' and simply run 'ant' from this directory to 
+First, edit "build.xml" and edit the "tinySQL_home" property
+to point to the appropriate root directory of this code.
+Next, please install Apache 'ant' and simply run 'ant' from this directory to 
 compile the code.
 
 

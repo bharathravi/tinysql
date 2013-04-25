@@ -24,6 +24,7 @@ import ORG.as220.tinySQL.tsRow;
 import ORG.as220.tinySQL.util.EmptyEnumeration;
 
 import java.util.Enumeration;
+import java.util.HashMap;
 
 /**
  * A Static value encapsulates a java-Object and returns this object
@@ -54,6 +55,12 @@ public class StaticValue implements LValue
   public Enumeration getChildren()
   {
     return EmptyEnumeration.getEnum();
+  }
+  
+   public HashMap getRange()
+  {
+	  HashMap v = new HashMap();
+	  return v;
   }
 
   public int getChildCount()

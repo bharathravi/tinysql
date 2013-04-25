@@ -25,8 +25,11 @@ import ORG.as220.tinySQL.tsRow;
 import ORG.as220.tinySQL.util.Log;
 
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.sql.DriverManager;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Vector;
 
 /**
@@ -37,7 +40,7 @@ import java.util.Vector;
 public class Expression implements LValue
 {
   private LValue value;
-  private Vector<ValueContainer> addValues;
+  public Vector<ValueContainer> addValues;
   private boolean transformed;
   public String column;
   public Object staticvalue;
@@ -142,7 +145,7 @@ public class Expression implements LValue
 
       if (addValues.size() == 1) {
         ValueContainer valcon = addValues.get(0);
-        if (valcon.op instanceof Operator.EqualOperator) {
+       // if (valcon.op instanceof Operator.EqualOperator) {
           if (valcon.value instanceof StaticValue) {
             StaticValue staticValue = (StaticValue) valcon.value;
             if (staticValue.value instanceof  Comparable) {
@@ -150,7 +153,7 @@ public class Expression implements LValue
               return true;
             }
           }
-        }
+        //}
       }
     }
 
@@ -220,6 +223,46 @@ public class Expression implements LValue
       v.add(valcon.value);
     }
     return v.elements();
+  }
+  
+  public HashMap getRange()
+  {
+    HashMap v = new HashMap();    
+    ///*
+    
+    if(value instanceof Expression)
+    {
+    Expression valcon0 = (Expression) value;
+    //v.put(value.addValues.get(0).op, value.addValues.get(0).value);
+    StaticValue stmp0 = (StaticValue)valcon0.addValues.get(0).value;
+    String op = valcon0.addValues.get(0).op.toString();
+    op.replaceAll("\\s","");
+    BigDecimal val0 = (BigDecimal)stmp0.value;
+    v.put(op, val0);
+    }
+    
+    for (int i = 0; i < addValues.size(); i++)
+    {
+      ValueContainer valcon = (ValueContainer) addValues.get(i);
+      
+      if(valcon.value instanceof Expression)
+      {
+      Expression valconi = (Expression) valcon.value;
+      StaticValue stmp = (StaticValue)valconi.addValues.get(0).value;
+      String op = valconi.addValues.get(0).op.toString(); 
+      op.replaceAll("\\s","");
+      BigDecimal val = (BigDecimal)stmp.value;
+      v.put(op, val);
+      }
+      else
+      {
+	      StaticValue stmp = (StaticValue)valcon.value;
+	      BigDecimal val = (BigDecimal)stmp.value;
+	      v.put(valcon.op.toString(), val);
+      }
+    }
+//*/
+    return v;
   }
 
   /**
@@ -345,6 +388,8 @@ public class Expression implements LValue
   {
     return getName();
   }
+  
+
 
   public static void main(String[] args)
   {
